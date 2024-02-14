@@ -22,10 +22,10 @@
     in
     {
 
-      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.uptown = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/default/configuration.nix
+            ./hosts/uptown/configuration.nix
             inputs.home-manager.nixosModules.default
           ];
         };
