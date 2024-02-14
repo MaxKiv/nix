@@ -1,9 +1,11 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 let
   email = "maxkivits42@gmail.com";
   gitName = "MaxKiv";
 in {
+  home.packages = with pkgs; [ git ];
+
   programs.git = {
     enable = true;
     extraConfig = {

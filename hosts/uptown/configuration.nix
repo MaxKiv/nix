@@ -110,9 +110,7 @@ in
       lshw # Detailed info on connected hardware
       kate
       libsForQt5.kdeconnect-kde # KDE connect
-      firefox
       google-chrome
-      git
       wget
       unzip
       cmake
