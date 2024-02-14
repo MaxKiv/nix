@@ -11,6 +11,7 @@ in
     "nvim/.stylua.toml" = { source = mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/nvim/.stylua.toml"; };
     "nvim/lua" = { source = mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/nvim/lua"; };
     "nvim/spell" = { source = mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/nvim/spell"; };
+    "nvim/after" = { source = mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/nvim/after"; };
   };
 
   home.packages = with pkgs; [ neovim ];
