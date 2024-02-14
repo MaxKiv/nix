@@ -28,6 +28,9 @@ in
     # Required for nix flakes
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+    # Automatic daily garbage collection
+    nix.gc.automatic = true;
+
     # Setup user
     main-user.enable = true;
     main-user.userName = userName;

@@ -72,9 +72,10 @@
   #
   #  /etc/profiles/per-user/max/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+
+  # home.sessionVariables = {
+    # EDITOR = "nvim";
+  # };
 
   # Setup XDG Config directory 
   #xdg.configFile."nvim" = {
