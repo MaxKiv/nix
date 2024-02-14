@@ -1,54 +1,53 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
-let
-  inherit (config.lib.file) mkOutOfStoreSymlink;
-  dotfiles = inputs.dotfiles;
-in
 {
-  home.packages = with pkgs; [ alacritty ];
+  home.packages = with pkgs; [ bashInteractive ];
 
   programs.bash = {
     enable = true;
+
+    bashrcExtra = ''
+      # Dotfiles management
+      alias dot='git --git-dir=${config.home.homeDirectory}/git/nix/dotfiles/.git --work-tree=${config.home.homeDirectory}/git/nix/dotfiles'
+      alias ds='dot status'
+      alias df='dot fetch'
+      alias dau='dot add -u'
+      alias dcam='dot commit --amend --no-edit'
+    '';
+
+    shellAliases = {
+      # ls
+      ls="ls --color=auto";
+      ll="ls -alF";
+      la="ls -A";
+      l="ls -CF";
+
+      grep="grep --color=auto";
+
+      fj="fg";
+      nv="nvim";
+      vim="nvim";
+
+      # git stuff
+      gs="git status";
+      gf="git fetch -p -t";
+      gl="git log --oneline --decorate --graph";
+      glp="git log -p";
+      gpf="git push --force-with-lease";
+      gau="git add -u";
+      gcam="git commit --amend --no-edit";
+      grc="git rebase --continue";
+
+      # Tmux
+      tms="tmux new-session -s";
+      tml="tmux list-session";
+    };
   };
 
-  home.shellAliases = {
-    # Dotfiles management
-    dot = "git --git-dir=${config.home.homeDirectory}/git/nix/dotfiles/.git --work-tree=${config.home.homeDirectory}/git/nix/dotfiles";
-    ds = "dot status";
-    df = "dot fetch";
+# Escape "$" in bash scripts using "''$"
+  programs.bash.initExtra = ''
+    export BASH_ENV="~/.bash_aliases"
 
-    # ls
-    ls="ls --color=auto";
-    ll="ls -alF";
-    la="ls -A";
-    l="ls -CF";
-
-    grep="grep --color=auto";
-
-    fj="fg";
-    nv="nvim";
-    vim="nvim";
-
-    # git stuff
-    gs="git status";
-    gf="git fetch -p -t";
-    gl="git log --oneline --decorate --graph";
-    glp="git log -p";
-    gpf="git push --force-with-lease";
-    gau="git add -u";
-    gcam="git commit --amend --no-edit";
-    grc="git rebase --continue";
-
-    # Tmux
-    alias="tmux new-session -s";
-    tml="tmux list-session";
-
-
-  };
-
-  # Escape "$" in bash scripts using "''$"
-  programs.bash.initExtra =
-  ''
     mkcd() {
       mkdir "$1" && cd "$_"
     }
@@ -152,11 +151,5 @@ in
     }
 
   '';
-
-  home.file = {
-    ".bash_aliases" = {
-      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.bash_aliases";
-    };
-  };
 
 }

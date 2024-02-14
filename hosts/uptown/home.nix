@@ -18,6 +18,8 @@
   imports = [
     ../../modules/home-manager/tmux.nix
     ../../modules/home-manager/nvim.nix
+    ../../modules/home-manager/alacritty.nix
+    ../../modules/home-manager/bash.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your
@@ -71,9 +73,10 @@
   #
   #  /etc/profiles/per-user/max/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+
+  #home.sessionVariables = {
+    #EDITOR = "nvim";
+  #};
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

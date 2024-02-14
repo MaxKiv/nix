@@ -37,7 +37,7 @@ in
       # pass inputs to home-manager modules
       extraSpecialArgs = { inherit inputs; };
       users = {
-         "${userName}" = import ./home.nix;
+       "${userName}" = import ./home.nix;
       };
     };
 
@@ -135,6 +135,8 @@ in
       discord
       #discordo # TUI discord client
       lm_sensors # Monitor temps, fans, voltages
+      lua
+      killall
     ];
 
     # Some programs need SUID wrappers, can be configured further or are
