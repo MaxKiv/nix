@@ -20,6 +20,7 @@
     ../../modules/home-manager/nvim.nix
     ../../modules/home-manager/alacritty.nix
     ../../modules/home-manager/bash.nix
+    ../../modules/home-manager/git.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your
