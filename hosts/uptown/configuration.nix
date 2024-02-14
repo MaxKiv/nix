@@ -132,6 +132,7 @@ in
       ripgrep # the better grep
       fd # the better find
       findutils # locate etc
+      tree
       glow # md reader
       coreutils
       discord
