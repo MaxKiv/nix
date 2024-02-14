@@ -2,11 +2,16 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-23.11";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:rycee/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dotfiles = {
+      url = "github:maxkiv/nix";
+      flake = false;
     };
   };
 
@@ -29,6 +34,17 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hosts/laptop/configuration.nix
+            inputs.home-manager.nixosModules.default
+          ];
+        };
+
+      nixosConfigurations.downtown = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+
+          specialArgs = { inherit inputs; };
+
+          modules = [
+            ./hosts/downtown/configuration.nix
             inputs.home-manager.nixosModules.default
           ];
         };

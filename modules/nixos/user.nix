@@ -23,7 +23,7 @@ in
       createHome = true;
       initialPassword = "Proverdi12";
       extraGroups = [ "networkmanager" "wheel" ];
-      description = "main user";
+      description = "${cfg.userName}";
       shell = pkgs.bashInteractive;
     };
 
