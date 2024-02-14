@@ -1,6 +1,7 @@
-{ pkgs, inputs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
+  inherit (config.lib.file) mkOutOfStoreSymlink;
   dotfiles = inputs.dotfiles;
 in
 {
@@ -17,7 +18,7 @@ in
   };
 
   xdg.configFile = {
-    # ".tmux.conf" = { source = ../../dotfiles/.tmux.conf; };
-    ".tmux.conf" = { source = "${dotfiles}/.tmux.conf"; };
+    ".tmux.conf" = { source = mkOutOfStoreSymlink ../../dotfiles/.tmux.conf; };
+    # ".tmux.conf" = { source = "${dotfiles}/.tmux.conf"; };
   };
 }
