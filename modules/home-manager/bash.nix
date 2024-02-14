@@ -8,7 +8,7 @@
 
     bashrcExtra = ''
       # Dotfiles management
-      alias dot='git --git-dir=${config.home.homeDirectory}/git/nix/dotfiles/.git --work-tree=${config.home.homeDirectory}/git/nix/dotfiles'
+      alias dot='${pkgs.git}/bin/git --git-dir=${config.home.homeDirectory}/git/nix/dotfiles/.git --work-tree=${config.home.homeDirectory}/git/nix/dotfiles'
       alias ds='dot status'
       alias df='dot fetch'
       alias dau='dot add -u'
@@ -29,14 +29,14 @@
       vim="nvim";
 
       # git stuff
-      gs="git status";
-      gf="git fetch -p -t";
-      gl="git log --oneline --decorate --graph";
-      glp="git log -p";
-      gpf="git push --force-with-lease";
-      gau="git add -u";
-      gcam="git commit --amend --no-edit";
-      grc="git rebase --continue";
+      gs="${pkgs.git}/bin/git status";
+      gf="${pkgs.git}/bin/git fetch -p -t";
+      gl="${pkgs.git}/bin/git log --oneline --decorate --graph";
+      glp="${pkgs.git}/bin/git log -p";
+      gpf="${pkgs.git}/bin/git push --force-with-lease";
+      gau="${pkgs.git}/bin/git add -u";
+      gcam="${pkgs.git}/bin/git commit --amend --no-edit";
+      grc="${pkgs.git}/bin/git rebase --continue";
 
       # Tmux
       tms="tmux new-session -s";
