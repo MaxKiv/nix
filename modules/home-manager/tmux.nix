@@ -17,6 +17,7 @@ in
   };
 
   xdg.configFile = {
-    ".tmux.conf" = { source = ../../dotfiles/.tmux.conf; };
+    # ".tmux.conf" = { source = ../../dotfiles/.tmux.conf; };
+    ".tmux.conf" = { source = "${dotfiles}/.tmux.conf"; };
   };
 }

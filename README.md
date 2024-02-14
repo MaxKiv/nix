@@ -15,3 +15,5 @@
 
 [ ] Expand nixos modules
 
+[ ] Seperate nixos and home-manager flake outputs, so that a user change doesnt
+require a new system
