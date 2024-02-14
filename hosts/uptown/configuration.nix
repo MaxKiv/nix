@@ -123,10 +123,7 @@ in
       python3
       ruby
       nodejs_21
-      alacritty
       xclip
-      neovim
-      tmux
       bat # the better cat
       fzf
       ripgrep # the better grep
