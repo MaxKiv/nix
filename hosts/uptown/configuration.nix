@@ -136,6 +136,7 @@ in
       coreutils
       discord
       #discordo # TUI discord client
+      lm_sensors # Monitor temps, fans, voltages
     ];
 
     # Some programs need SUID wrappers, can be configured further or are
