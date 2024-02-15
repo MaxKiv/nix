@@ -16,12 +16,12 @@
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   imports = [
-    ../../modules/home-manager/tmux.nix
-    ../../modules/home-manager/nvim.nix
-    ../../modules/home-manager/alacritty.nix
-    ../../modules/home-manager/bash.nix
-    ../../modules/home-manager/git.nix
-    ../../modules/home-manager/firefox.nix
+    ../../modules/home/tmux.nix
+    ../../modules/home/nvim.nix
+    ../../modules/home/alacritty.nix
+    ../../modules/home/bash.nix
+    ../../modules/home/git.nix
+    ../../modules/home/firefox.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your
