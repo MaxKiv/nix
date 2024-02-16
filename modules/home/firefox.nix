@@ -1,4 +1,4 @@
-{ inputs, osConfig, pkgs, ... }:
+{ inputs, lib, osConfig, pkgs, ... }:
 
 # I might have stolen this from
 # https://github.com/gvolpe/nix-config/blob/ba66185bb49f549f7ff5eef632a999016f912832/home/programs/browsers/firefox.nix
@@ -96,12 +96,19 @@ let
 
     # Disable password save prompts
     "signon.passwordEditCapture.enabled" = false;
+    "layout.forms.reveal-password-context-menu.enabled" = false;
     "services.sync.engine.passwords" = false;
-
+    "signon.rememberSignons" = false;
+    "general.config.obscure_value" = 0;
+  } // lib.optionalAttrs (osConfig.networking.hostName == "uptown") {
     # TODO use an option to inject this outside
     # Hardware video decoding support.
-    "gfx.webrender.all" = osConfig.networking.hostName == "uptown";
-    "media.ffmpeg.vaapi.enabled" = osConfig.networking.hostName == "uptown";
+    "media.ffmpeg.vaapi.enabled" = true;
+    "media.gpu-process-decoder" = true;
+    "dom.webgpu.enabled" = true;
+    "gfx.webrender.all" = true;
+    "layers.mlgpu.enabled" = true;
+    "layers.gpu-process.enabled" = true;
   };
 
   mimeTypes = [
@@ -189,10 +196,10 @@ let
 
       "Github" = {
         urls = [{
-          template = "https://github.com/";
+          template = "https://github.com/search/";
           params = [
-            { name = "type"; value = ""; }
-            { name = "query"; value = "{searchTerms}"; }
+            { name = "q"; value = "{searchTerms}"; }
+            { name = "type"; value = "code"; }
           ];
         }];
 
@@ -204,8 +211,7 @@ let
         urls = [{
           template = "https://www.youtube.com";
           params = [
-            { name = "type"; value = "video"; }
-            { name = "query"; value = "{searchTerms}"; }
+            { name = "search_query"; value = "{searchTerms}"; }
           ];
         }];
 
@@ -217,7 +223,7 @@ let
         urls = [{
           template = "https://open.spotify.com/";
           params = [
-            { name = "query"; value = "{searchTerms}"; }
+            { name = ""; value = "{searchTerms}"; }
           ];
         }];
 

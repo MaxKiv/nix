@@ -136,6 +136,8 @@ in
     coreutils
     discord
     #discordo # TUI discord client
+    killall
+    lua
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
