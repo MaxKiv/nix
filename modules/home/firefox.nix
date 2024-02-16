@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, osConfig, pkgs, ... }:
 
 # I might have stolen this from
 # https://github.com/gvolpe/nix-config/blob/ba66185bb49f549f7ff5eef632a999016f912832/home/programs/browsers/firefox.nix
@@ -34,7 +34,7 @@ let
     "browser.quitShortcut.disabled" = true; # Prevent C-Q to exit browser.
 
     "browser.feeds.showFirstRunUI" = false;
-
+    "browser.newtabpage.enabled" = false; # Make new tabs blank
     "browser.download.useDownloadDir" = false;
     "browser.download.viewableInternally.typeWasRegistered.svg" = true;
     "browser.download.viewableInternally.typeWasRegistered.webp" = true;
@@ -98,10 +98,10 @@ let
     "signon.passwordEditCapture.enabled" = false;
     "services.sync.engine.passwords" = false;
 
-    # TODO condition on GPU
+    # TODO use an option to inject this outside
     # Hardware video decoding support.
-    "gfx.webrender.all" = true;
-    "media.ffmpeg.vaapi.enabled" = true;
+    "gfx.webrender.all" = osConfig.networking.hostName == "uptown";
+    "media.ffmpeg.vaapi.enabled" = osConfig.networking.hostName == "uptown";
   };
 
   mimeTypes = [
@@ -174,7 +174,7 @@ let
         definedAliases = [ "@o" ];
       };
 
-      "Home Manager Packages" = {
+      "Home Manager Options" = {
         urls = [{
           template = "https://mipmip.github.io/home-manager-option-search/";
           params = [
@@ -185,6 +185,19 @@ let
 
         icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
         definedAliases = [ "@h" ];
+      };
+
+      "Github" = {
+        urls = [{
+          template = "https://github.com/";
+          params = [
+            { name = "type"; value = ""; }
+            { name = "query"; value = "{searchTerms}"; }
+          ];
+        }];
+
+        icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+        definedAliases = [ "@g" ];
       };
 
       "Youtube" = {
@@ -202,9 +215,8 @@ let
 
       "Spotify" = {
         urls = [{
-          template = "https://open.spotify.com/search";
+          template = "https://open.spotify.com/";
           params = [
-            { name = "type"; value = "song"; }
             { name = "query"; value = "{searchTerms}"; }
           ];
         }];

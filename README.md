@@ -1,4 +1,19 @@
 # The Big Nix Adventure
+Nix is cool stuff, this is my attempt at making the grand-unifying-config.
+
+This is the nix stuff you always forget:
+```bash
+# rebuild nixos configuration (substitute downtown for the system you want to
+build)
+sudo nixos-rebuild switch --flake ~/git/nix#downtown --show-trace
+
+# run nixos gc
+sudo nixos-collect-garbage -d
+
+# How to access nixos config in home-manager?
+# https://github.com/nix-community/home-manager/issues/393
+{ osConfig, ... }
+```
 
 ## TODO
 

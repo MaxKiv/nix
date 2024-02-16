@@ -41,7 +41,7 @@ in {
         light = false;       # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
         side-by-side = true; # side-by-side diff
         line-numbers = false; # show line numbers
-        syntax-theme = "zebra-dark";
+        #syntax-theme = "zebra-dark";
       };
     };
   };

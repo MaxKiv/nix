@@ -32,11 +32,13 @@
       gs="${pkgs.git}/bin/git status";
       gf="${pkgs.git}/bin/git fetch -p -t";
       gl="${pkgs.git}/bin/git log --oneline --decorate --graph";
+      glu="${pkgs.git}/bin/git log --oneline --decorate --graph \"@{u}\"";
       glp="${pkgs.git}/bin/git log -p";
       gpf="${pkgs.git}/bin/git push --force-with-lease";
       gau="${pkgs.git}/bin/git add -u";
       gcam="${pkgs.git}/bin/git commit --amend --no-edit";
       grc="${pkgs.git}/bin/git rebase --continue";
+      gru="${pkgs.git}/bin/git reset \"@{u}\"";
 
       # Tmux
       tms="tmux new-session -s";
