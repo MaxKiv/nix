@@ -1,10 +1,12 @@
-{ pkgs, libs, ... }:
+{ pkgs, libs, inputs, ... }:
 
 {
+  programs.hyprland.enable = true;
+  programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+
   wayland.windowManager.hyprland = {
     enable = true;
 
-    # TODO enable only for uptown
     wayland.windowManager.hyprland.enableNvidiaPatches = true;
 
     settings = {

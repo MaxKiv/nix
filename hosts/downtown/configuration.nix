@@ -112,7 +112,6 @@ in
   environment.systemPackages = with pkgs; [
     lshw # Detailed info on connected hardware
     kate
-    libsForQt5.kdeconnect-kde # KDE connect
     google-chrome
     git
     wget

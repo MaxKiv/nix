@@ -24,6 +24,7 @@
     okular
     #networkmanager-qt
     #pavucontrol-qt
+    libsForQt5.kdeconnect-kde # KDE connect
   ];
 
   # Exclude some default KDE plasma applications

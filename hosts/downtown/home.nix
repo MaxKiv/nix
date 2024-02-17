@@ -22,6 +22,8 @@
     ../../modules/home/bash.nix
     ../../modules/home/git.nix
     ../../modules/home/firefox.nix
+    ../../modules/home/gpg.nix
+    ../../modules/home/starship.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your
