@@ -15,6 +15,7 @@ in
       ../../modules/nixos/user.nix
       ../../modules/nixos/fonts.nix
       ../../modules/nixos/display/kde.nix
+      # ../../modules/nixos/display/gnome.nix
       #../../modules/nixos/gaming.nix
     ];
 

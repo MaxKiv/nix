@@ -30,7 +30,7 @@ in
         "$cmd_duration"
         "$status"
         "$line_break"
-        "[❯](bold purple)"
+        "[❯](bold yellow)"
         ''''${custom.space}''
       ];
       custom.space = {
@@ -63,7 +63,7 @@ in
         format = "[$symbol ](yellow dimmed)";
       };
       directory = {
-        format = " [${pad.left}](fg:bright-black)[$path](bg:bright-black fg:white)[${pad.right}](fg:bright-black)";
+        format = " [${pad.left}](fg:black)[$path](bg:black fg:white)[${pad.right}](fg:black)";
         truncation_length = 6;
         truncation_symbol = "~/󰇘/";
       };
@@ -97,15 +97,26 @@ in
         openSUSE = os "" "green";
         SUSE = os "" "green";
         Ubuntu = os "" "bright-purple";
+        Windows = os "󰍲" "blue";
+        Raspbian = os "󰐿" "purple";
+        Mint = os "󰣭" "bright-green";
+        Macos = os "󰀵" "green";
+        Manjaro = os "" "yellow";
+        Linux = os "󰌽" "white";
+        Gentoo = os "󰣨" "orange";
+        Alpine = os "" "blue";
+        Android = os "" "green";
+        Artix = os "󰣇" "blue";
+        CentOS = os "" "yellow";
+        Redhat = os "󱄛" "red";
+        RedHatEnterprise = os "󱄛" "red";
       };
       python = lang "" "yellow";
       nodejs = lang " " "yellow";
       lua = lang "󰢱" "blue";
-      nix = lang "" "blue";
       rust = lang "" "red";
       java = lang "" "red";
       c = lang "" "orange";
-      cpp = lang "󰙲" "yellow";
       golang = lang "" "blue";
     };
   };
