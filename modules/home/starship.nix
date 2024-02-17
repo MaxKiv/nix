@@ -64,8 +64,6 @@ in
       };
       directory = {
         format = " [${pad.left}](fg:black)[$path](bg:black fg:white)[${pad.right}](fg:black)";
-        truncation_length = 6;
-        truncation_symbol = "~/󰇘/";
       };
       # directory.substitutions = {
       #   "Documents" = "󰈙 ";
