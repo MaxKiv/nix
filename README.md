@@ -17,25 +17,35 @@ sudo nixos-collect-garbage -d
 
 ## TODO
 
-[ ] Change nvim symlinks to relative path
+[ ] direnv?
 
-[ ] flakify the dotfiles repo?
+[ ] setup SOPS
+    [ ] setup proper ssh (default key)
+    [ ] setup proper passwd
+    [ ] setup git gnupg signing
 
-[ ] Expand nixos modules
+[ ] Hyprland
 
-[ ] Expand home manager modules
+[ ] WSl setup
+
+[ ] live boot usb setup
+
+[ ] server setup
+
+[ ] setup impermanence? god help me
 
 [ ] Separate nixos and home-manager flake outputs, so that a user change doesnt
-require a new system
+require a new system? how?
 
 
 ## Information
 
 - How do I currently manage dotfiles?
 Before this adventure I was managing my dotfiles as a bare git repository
-deployed to `$HOME`. This works very well.
+deployed to `$HOME`. This works very well, but is a bit tedious to sync to new
+machines.
 
-I want to keep my dotfiles in their original configuration language, because I'm
+I want to keep some of my dotfiles in their original configuration language, because I'm
 forced to use windows sometimes. I also want to be able to edit my neovim
 configuration without having to rebuild my system.
 
@@ -43,16 +53,7 @@ To do this I'm using `(config.lib.file) mkOutOfStoreSymlink`. Make sure to pass
 an absolute path to it when using a nix flake. This allows my dotfiles to live
 as a submodule of this repository in their original language.
 
-In the future I might make a separate windows configuration, and move everything
-here into a true nix flake.
-
 For more info see:
 https://www.reddit.com/r/NixOS/comments/108fwwh/tradeoffs_of_using_home_manager_for_neovim_plugins/
 https://github.com/nix-community/home-manager/issues/257#issuecomment-831300021
 
-## Current split config nix vs native
-
-|  Item  | Type |
-| ------------- | ------------- |
-| nvim  | native |
-| tmux  | nix |

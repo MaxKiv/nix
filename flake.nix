@@ -1,73 +1,103 @@
+# Much of the flake structure is shamelessly stolen from
+# https://github.com/erictossell/nixflakes/blob/main/flake.nix
 {
-  description = "Nixos config flake";
+  description = "MaxKiv's Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/release-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:rycee/home-manager/release-23.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dotfiles = {
-      url = "github:maxkiv/nix";
-      flake = false;
+    hyprland = {
+      url = "github:hyprwm/hyprland";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprpicker = {
+      url = "github:hyprwm/hyprpicker";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs"; 
     };
+
+
+    # NixOS-WSL = {
+    #   url = "github:nix-community/NixOS-WSL";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, ... } @ attrs:
     let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      supportedSystems = [ "x86_64-linux" ];
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
     in
     {
 
-      nixosConfigurations.uptown = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/uptown/configuration.nix
-            inputs.home-manager.nixosModules.default
-          ];
-        };
+      nixosConfigurations = {
 
-      nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/laptop/configuration.nix
-            inputs.home-manager.nixosModules.default
-          ];
-        };
+        boston =
+          let system = "x86_64-linux";
+          in nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              username = "max";
+              hostname = "boston";
+              type = "desktop";
+              inherit system;
+            } // attrs;
+            modules = [
+              # import default modules through default.nix
+              ./.
+              # Specify host specific modules
+              ./modules/hardware/nvidia
+              ./modules/desktop/kde
+            ];
+          };
 
-      nixosConfigurations.downtown = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+        tokyo =
+          let system = "x86_64-linux";
+          in nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              username = "max";
+              hostname = "tokyo";
+              type = "laptop";
+              inherit system;
+            } // attrs;
+            modules = [
+              # import default modules through default.nix
+              ./.
+              # Specify host specific modules
+              ./modules/desktop/kde
+            ];
+          };
 
-          specialArgs = { inherit inputs; };
+      }; #configurations
 
-          modules = [
-            ./hosts/downtown/configuration.nix
-            inputs.home-manager.nixosModules.default
-          ];
-        };
+      devShells = forAllSystems (system:
+        let
+          pkgs = nixpkgsFor.${system};
+        in
+        {
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              nixpkgs-fmt
+              statix
+            ];
+          };
+        });
 
-      nixosConfigurations.live = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
 
-          specialArgs = { inherit inputs; };
-
-          modules = [
-        (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
-            ./hosts/default/configuration.nix
-            inputs.home-manager.nixosModules.default
-          ];
-        };
-
-
+      # templates.default = {
+      #   path = ./.;
+      #   description = "The default template for Eriim's nixflakes.";
+      # }; #templates
     };
 }
