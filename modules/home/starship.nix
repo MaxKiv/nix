@@ -64,6 +64,7 @@ in
       };
       directory = {
         format = " [${pad.left}](fg:black)[$path](bg:black fg:white)[${pad.right}](fg:black)";
+        truncate_to_repo = true;
       };
       # directory.substitutions = {
       #   "Documents" = "󰈙 ";

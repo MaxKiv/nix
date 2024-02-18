@@ -138,6 +138,7 @@ in
     #discordo # TUI discord client
     killall
     lua
+    home-manager
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

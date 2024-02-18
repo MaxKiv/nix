@@ -136,6 +136,7 @@ in
     lm_sensors # Monitor temps, fans, voltages
     lua
     killall
+    home-manager
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
