@@ -31,7 +31,7 @@
     lua
     home-manager
     brightnessctl
-    pavucontrol
     playerctl
+    gparted
   ];
 }

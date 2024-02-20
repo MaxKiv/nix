@@ -11,6 +11,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # flake-utils.url = "github:numtide/flake-utils";
+
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hyprland = {
       url = "github:hyprwm/hyprland";
     };
@@ -36,31 +43,35 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    # hardware.url = "github:nixos/nixos-hardware";
+
   };
 
-  outputs = { self, nixpkgs, ... } @ attrs:
+  outputs = { self, nixpkgs, home-manager, nixos-generators, ... } @ attrs:
     let
       supportedSystems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+      username = "max";
     in
     {
-
+      # NixOS configuration entrypoint
+      # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
 
         boston =
           let system = "x86_64-linux";
           in nixpkgs.lib.nixosSystem {
             specialArgs = {
-              username = "max";
               hostname = "boston";
               type = "desktop";
-              inherit system;
+              inherit system username;
             } // attrs;
             modules = [
               # import default modules through default.nix
               ./.
               # Specify host specific modules
+              ./modules/hardware/network
               ./modules/hardware/nvidia
               ./modules/desktop/kde
             ];
@@ -70,20 +81,37 @@
           let system = "x86_64-linux";
           in nixpkgs.lib.nixosSystem {
             specialArgs = {
-              username = "max";
               hostname = "tokyo";
               type = "laptop";
-              inherit system;
+              inherit system username;
             } // attrs;
             modules = [
               # import default modules through default.nix
               ./.
               # Specify host specific modules
+              ./modules/hardware/network
               ./modules/desktop/kde
             ];
           };
+      }; # nixosConfigurations
 
-      }; #configurations
+      packages.x86_64-linux = {
+        iso = nixos-generators.nixosGenerate {
+            specialArgs = {
+              system = "x86_64-linux";
+              format = "install-iso";
+              hostname = "live";
+              type = "laptop"; # TODO this makes no sense
+              inherit username;
+            } // attrs;
+          modules = [
+            ./hosts
+          ];
+          system = "x86_64-linux";
+          format = "install-iso";
+        };
+
+      }; # packages
 
       devShells = forAllSystems (system:
         let

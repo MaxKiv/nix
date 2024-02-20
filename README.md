@@ -7,6 +7,11 @@ This is the nix stuff you always forget:
 build)
 sudo nixos-rebuild switch --flake ~/git/nix#downtown --show-trace
 
+# Build ISO image
+nix build ~/git/nix#iso
+# flash it to usb
+dd if=result/iso/LiveNix.iso of=/dev/sda bs=4M status=progress conv=fdatasync
+
 # run nixos gc
 sudo nixos-collect-garbage -d
 
@@ -17,7 +22,9 @@ sudo nixos-collect-garbage -d
 
 ## TODO
 
-[ ] direnv?
+[ ] live boot usb setup
+
+[ ] integration nixos-hardware
 
 [ ] setup SOPS
     [ ] setup proper ssh (default key)
@@ -28,9 +35,9 @@ sudo nixos-collect-garbage -d
 
 [ ] WSl setup
 
-[ ] live boot usb setup
-
 [ ] server setup
+
+[ ] setup disko? god help me
 
 [ ] setup impermanence? god help me
 

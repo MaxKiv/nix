@@ -2,7 +2,11 @@
 
 {
   boot.loader = {
-    systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
+    systemd-boot = {
+      enable = true;
+    };
   };
+
+  console.earlySetup = true;
 }
