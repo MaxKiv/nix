@@ -21,8 +21,9 @@
       shellAliases = {
 
         # ls
-        ls = "eza";
-        ll = "eza -s";
+        ls = "${pkgs.eza}/bin/eza";
+        ll = "${pkgs.eza}/bin/eza -la";
+        lr = "${pkgs.eza}/bin/eza -la -snew";
         # ls="ls --color=auto";
         # ll="ls -alF";
         # la="ls -A";
@@ -31,6 +32,8 @@
         grep="grep --color=auto";
 
         fj="fg";
+        dn="fg";
+        n="nvim";
         nv="nvim";
         vim="nvim";
 

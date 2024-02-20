@@ -25,6 +25,11 @@
       inputs.nixpkgs.follows = "nixpkgs"; 
     };
 
+    # source = "https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml";
+    alacritty-catppuccin = {
+      url = "github:catppuccin/alacritty";
+      flake = false;
+    };
 
     # NixOS-WSL = {
     #   url = "github:nix-community/NixOS-WSL";

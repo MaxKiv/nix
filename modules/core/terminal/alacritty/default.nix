@@ -1,4 +1,4 @@
-{ config, pkgs, home-manager, username, ... }:
+{ config, pkgs, home-manager, alacritty-catppuccin, username, ... }:
 
 {
   home-manager.users.${username} = { config, pkgs, ... }:
@@ -8,9 +8,13 @@
     programs.alacritty.enable = true;
 
     xdg.configFile = {
-      "alacritty/alacritty.yml" = {
+      "alacritty/alacritty.toml" = {
         source = config.lib.file.mkOutOfStoreSymlink
-        "${config.home.homeDirectory}/git/nix/dotfiles/.config/alacritty/alacritty.yml";
+        "${config.home.homeDirectory}/git/nix/dotfiles/.config/alacritty/alacritty.toml";
+      };
+
+      "alacritty/catppuccin-mocha.toml" = {
+        source = "${alacritty-catppuccin}/catppuccin-mocha.toml";
       };
     };
   };

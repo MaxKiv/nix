@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "alacritty-catppuccin": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1705368763,
+        "narHash": "sha256-ypYaxlsDjI++6YNcE+TxBSnlUXKKuAMmLQ4H74T/eLw=",
+        "owner": "catppuccin",
+        "repo": "alacritty",
+        "rev": "f2da554ee63690712274971dd9ce0217895f5ee0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "alacritty",
+        "type": "github"
+      }
+    },
     "firefox-addons": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -203,6 +219,7 @@
     },
     "root": {
       "inputs": {
+        "alacritty-catppuccin": "alacritty-catppuccin",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "hyprland": "hyprland",

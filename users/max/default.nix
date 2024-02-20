@@ -6,7 +6,6 @@
     isNormalUser = true;
     initialPassword = "Proverdi12";
     extraGroups = [ "wheel" "input" "video" "render" ];
-    description = "It's me!";
   };
 
   # Setup root user
