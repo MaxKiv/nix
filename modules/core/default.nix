@@ -3,6 +3,7 @@
 {
   imports = [
     ./boot
+    ./fonts
     ./locale
     ./nix
     ./pkgs

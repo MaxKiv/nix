@@ -19,7 +19,7 @@
       monospace = [ "Hasklig" ];
       sansSerif = [ "Hasklig" ];
       serif = [ "Hasklig" ];
-      # emoji = [ "Blobmoji" ];
+      # emoji = [ "Blobmoji" ]; # for blobs 😘
       emoji = [ "Noto Color Emoji" ];
     };
   };

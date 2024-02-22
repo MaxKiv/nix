@@ -168,6 +168,13 @@ let
       keyword = "gmail";
       url = "https://mail.google.com";
     }
+
+    {
+      name = "Gmail";
+      tags = [ "gmail" ];
+      keyword = "gmail";
+      url = "https://mail.google.com";
+    }
   ];
 
   search = {

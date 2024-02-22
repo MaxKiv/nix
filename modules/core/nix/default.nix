@@ -7,16 +7,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Setup home-manager
-  home-manager.users.${username} = {
-    programs.home-manager.enable = true;
-    home.username = username;
-    home.homeDirectory = "/home/${username}";
-    home.stateVersion = "23.11";
-    nixpkgs.config.allowUnfree = true;
-  };
-
-
   nix.gc.automatic = true;
 
   # This value determines the NixOS release from which the default
@@ -26,4 +16,13 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11";
+
+  # Setup home-manager as nixos module
+  home-manager.users.${username} = {
+    programs.home-manager.enable = true;
+    home.username = username;
+    home.homeDirectory = "/home/${username}";
+    home.stateVersion = "23.11";
+    nixpkgs.config.allowUnfree = true;
+  };
 }
