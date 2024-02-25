@@ -70,9 +70,9 @@ let
     "general.autoScroll" = true;
     "general.useragent.locale" = "en-US";
 
-    "extensions.activeThemeID" = "{87adc190-0881-4325-8f33-166782c657e0}";
+    "extensions.activeThemeID" = "{f5525f34-4102-4f6e-8478-3cf23cfeff7a}";
 
-    "extensions.extensions.activeThemeID" = "firefox-alpenglow@mozilla.org";
+    # "extensions.extensions.activeThemeID" = "firefox-alpenglow@mozilla.org";
     "extensions.update.enabled" = false;
 
     "print.print_footerleft" = "";
