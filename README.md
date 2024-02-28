@@ -9,7 +9,13 @@ sudo nixos-rebuild switch --flake ~/git/nix#downtown --show-trace
 
 # Build ISO image
 nix build ~/git/nix#iso
+# optionally format the usb
+lsblk
+sudo umount /dev/sda
+sudo mkfs.vfat -F 32 /dev/sda
 # flash it to usb
+cp result/iso/LiveNix.iso /dev/sda
+# or, if you hate ergonomics
 dd if=result/iso/LiveNix.iso of=/dev/sda bs=4M status=progress conv=fdatasync
 
 # run nixos gc

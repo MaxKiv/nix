@@ -1,9 +1,8 @@
-{ username, lib, home-manager, ... }:
+{ pkgs, username, lib, home-manager, ... }:
 {
   # This contains everything that should be in an iso
   imports = [
     home-manager.nixosModules.home-manager
-    ../../users
     ../../modules/core
     ../../modules/hardware/sound
     ../../modules/hardware/bluetooth
@@ -23,4 +22,14 @@
     neededForBoot = true;
   };
 
+
+  # Override user
+  users.users.${username} = {
+    shell = pkgs.bash;
+    isNormalUser = true;
+    initialPassword = "Proverdi12";
+    extraGroups = [ "wheel" "input" "video" "render" ];
+  };
+
+  services.getty.autologinUser = lib.mkForce "${username}";
 }

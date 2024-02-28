@@ -33,5 +33,6 @@
     brightnessctl
     playerctl
     gparted
+    kalker
   ];
 }
