@@ -5,7 +5,7 @@ This is the nix stuff you always forget:
 ```bash
 # rebuild nixos configuration (substitute downtown for the system you want to
 build)
-sudo nixos-rebuild switch --flake ~/git/nix#downtown --show-trace
+sudo nixos-rebuild switch --flake ~/git/nix#downtown --show-trace -L
 
 # Build ISO image
 nix build ~/git/nix#iso
@@ -28,7 +28,12 @@ sudo nixos-collect-garbage -d
 
 ## TODO
 
-[ ] live boot usb setup
+[ ] Add a justfile, cool!
+    https://nixos-and-flakes.thiscute.world/best-practices/simplify-nixos-related-commands
+
+[ ] fix live boot usb setup
+
+[ ] cachix?
 
 [ ] integration nixos-hardware
 
@@ -41,7 +46,7 @@ sudo nixos-collect-garbage -d
 
 [ ] WSl setup
 
-[ ] server setup
+[ ] Nas/server setup
 
 [ ] setup disko? god help me
 
