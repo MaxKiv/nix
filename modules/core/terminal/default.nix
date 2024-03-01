@@ -4,6 +4,7 @@
   imports = [
     ./alacritty
     ./bash
+    ./fzf
     ./git
     ./htop
     ./nvim

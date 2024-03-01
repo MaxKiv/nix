@@ -6,6 +6,7 @@
     ../../modules/core
     ../../modules/hardware/sound
     ../../modules/hardware/bluetooth
+    ../../modules/desktop/kde
   ];
 
   # Iso specific settings

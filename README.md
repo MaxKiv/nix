@@ -28,10 +28,10 @@ sudo nixos-collect-garbage -d
 
 ## TODO
 
-[ ] Add a justfile, cool!
+[x] Add a justfile, cool!
     https://nixos-and-flakes.thiscute.world/best-practices/simplify-nixos-related-commands
 
-[ ] fix live boot usb setup
+[?] fix live boot usb setup
 
 [ ] cachix?
 

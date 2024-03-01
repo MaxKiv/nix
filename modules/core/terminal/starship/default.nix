@@ -101,7 +101,7 @@ in
         };
         os = {
           disabled = false;
-          format = "$symbol";
+          format = "on $symbol";
         };
         os.symbols = {
           Arch = os "" "bright-blue";

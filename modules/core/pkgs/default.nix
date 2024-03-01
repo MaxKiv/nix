@@ -20,7 +20,6 @@
     nodejs_21
     xclip
     bat # the better cat
-    fzf
     ripgrep # the better grep
     fd # the better find
     findutils # locate etc
