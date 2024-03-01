@@ -93,6 +93,24 @@
               ./modules/desktop/kde
             ];
           };
+
+        rapanui =
+          let system = "x86_64-linux";
+          in nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              hostname = "rapanui";
+              type = "laptop";
+              inherit system username;
+            } // attrs;
+            modules = [
+              # import default modules through default.nix
+              ./.
+              # Specify host specific modules
+              ./modules/hardware/network
+              ./modules/desktop/kde
+            ];
+          };
+
       }; # nixosConfigurations
 
       packages.x86_64-linux = {
