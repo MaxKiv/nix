@@ -34,5 +34,6 @@
     playerctl
     gparted
     kalker
+    just
   ];
 }

@@ -19,6 +19,8 @@ in
       settings = {
         add_newline = true;
         format = builtins.concatStringsSep "" [
+          "$username"
+          "$hostname"
           "$nix_shell"
           "$os"
           "$directory"
@@ -37,6 +39,16 @@ in
           "[❯](bold yellow)"
           ''''${custom.space}''
         ];
+        username = {
+          format = "[$user](bold blue) ";
+          disabled = false;
+          show_always = true;
+        };
+        hostname = {
+          ssh_only = false;
+          format = "at [$hostname](bold blue) ";
+          disabled = false;
+        };
         custom.space = {
           when = ''! test $env'';
           format = "  ";
