@@ -1,0 +1,9 @@
+keys:
+  - &rapanui age1h3zcp6hm52rax273c0rq4l74x29ggxtj3kjrrnf3dql4n9a0tywsm6velg
+  - &boston age1kfeym2q27vjs3f8ks2hl8hphvhzahyvgdqqt9zmu65wucrcn6dnq3c946a
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *rapanui
+      - *boston

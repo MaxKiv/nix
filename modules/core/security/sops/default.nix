@@ -12,7 +12,7 @@
   sops.secrets = {
     "ssh/${hostname}" = {
       owner = "${username}";
-      path = "/home/${username}/.ssh/id_25519";
+      path = "/home/${username}/.ssh/id_ed25519";
     };
 
     "pass/${username}" = {

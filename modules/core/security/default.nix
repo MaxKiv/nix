@@ -4,6 +4,7 @@
   imports = [
     ./gnupg
     ./polkit
+    ./sops
   ];
 
 }

@@ -3,6 +3,7 @@
 {
   # Default system packages
   environment.systemPackages = with pkgs; [
+    sops
     cowsay
     neofetch
     eza

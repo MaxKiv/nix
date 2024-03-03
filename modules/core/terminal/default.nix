@@ -10,6 +10,7 @@
     ./nvim
     ./starship
     ./tmux
+    ./zoxide
   ];
 
 }

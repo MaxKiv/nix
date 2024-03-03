@@ -40,13 +40,13 @@ in
           ''''${custom.space}''
         ];
         username = {
-          format = "[$user](bold blue) ";
+          format = "[$user](bold blue)";
           disabled = false;
           show_always = true;
         };
         hostname = {
           ssh_only = false;
-          format = "at [$hostname](bold blue) ";
+          format = "@[$hostname](bold blue) ";
           disabled = false;
         };
         custom.space = {

@@ -11,7 +11,7 @@ deploy:
   nixos-rebuild switch --flake . --use-remote-sudo
 
 debug:
-  nixos-rebuild switch --flake . --use-remote-sudo --show-trace --verbose
+  nixos-rebuild switch --flake . --use-remote-sudo --show-trace --verbose --option eval-cache false
 
 up:
   nix flake update

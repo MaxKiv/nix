@@ -24,6 +24,17 @@ sudo nixos-collect-garbage -d
 # How to access nixos config in home-manager?
 # https://github.com/nix-community/home-manager/issues/393
 { osConfig, ... }
+
+# SOPS
+## generate new key at ~/.config/sops/age/keys.txt
+nix shell nixpkgs#age -c age-keygen -o ~/.config/sops/age/keys.txt
+
+## generate new key at ~/.config/sops/age/keys.txt from private ssh key at ~/.ssh/private
+nix run nixpkgs#ssh-to-age -- -private-key -i ~/.ssh/private > ~/.config/sops/age/keys.txt
+
+## get a public key of ~/.config/sops/age/keys.txt
+nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
+
 ```
 
 ## TODO
@@ -39,6 +50,7 @@ sudo nixos-collect-garbage -d
 
 [ ] setup SOPS
     [ ] setup proper ssh (default key)
+    [ ] setup wifi uuid/passwd
     [ ] setup proper passwd
     [ ] setup git gnupg signing
 

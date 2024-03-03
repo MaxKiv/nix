@@ -20,6 +20,7 @@
 
     hyprland = {
       url = "github:hyprwm/hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprpicker = {
@@ -38,6 +39,11 @@
       flake = false;
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # NixOS-WSL = {
     #   url = "github:nix-community/NixOS-WSL";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -53,6 +59,7 @@
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
       username = "max";
+      dotfilesDir = ./dotfiles;
     in
     {
       # NixOS configuration entrypoint
@@ -65,7 +72,7 @@
             specialArgs = {
               hostname = "terra";
               type = "desktop";
-              inherit system username;
+              inherit system username dotfilesDir;
             } // attrs;
             modules = [
               # import default modules through default.nix
@@ -83,7 +90,7 @@
             specialArgs = {
               hostname = "downtown";
               type = "laptop";
-              inherit system username;
+              inherit system username dotfilesDir;
             } // attrs;
             modules = [
               # import default modules through default.nix
@@ -101,7 +108,7 @@
             specialArgs = {
               hostname = "rapanui";
               type = "laptop";
-              inherit system username;
+              inherit system username dotfilesDir;
             } // attrs;
             modules = [
               # import default modules through default.nix
@@ -117,23 +124,6 @@
 
       packages.x86_64-linux = {
         iso = nixos-generators.nixosGenerate {
-<<<<<<< HEAD
-            specialArgs = {
-              system = "x86_64-linux";
-              format = "install-iso";
-              hostname = "live";
-              type = "laptop"; # TODO this makes no sense
-              inherit username;
-            } // attrs;
-||||||| parent of 47bf650 (feat: terra hostname)
-            specialArgs = {
-              system = "x86_64-linux";
-              format = "install-iso";
-              hostname = "live";
-              type = "laptop"; # TODO this makes no sense
-              inherit username dotfilesDir;
-            } // attrs;
-=======
           specialArgs = {
             system = "x86_64-linux";
             format = "install-iso";
@@ -141,7 +131,6 @@
             type = "laptop"; # TODO this makes no sense
             inherit username dotfilesDir;
           } // attrs;
->>>>>>> 47bf650 (feat: terra hostname)
           modules = [
             ./hosts
           ];

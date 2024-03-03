@@ -52,6 +52,9 @@
         # Tmux
         tms="tmux new-session -s";
         tml="tmux list-session";
+
+        # xclip
+        clip="xclip -sel clip";
       };
     };
 
