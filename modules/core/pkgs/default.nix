@@ -34,5 +34,6 @@
     gparted
     kalker
     just
+    bitwarden-cli
   ];
 }

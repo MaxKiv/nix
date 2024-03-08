@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./bitwarden
     ./firefox
     ./chromium
     ./libreoffice
