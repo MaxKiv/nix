@@ -170,10 +170,17 @@ let
     }
 
     {
-      name = "Gmail";
-      tags = [ "gmail" ];
-      keyword = "gmail";
-      url = "https://mail.google.com";
+    name = "Calendar";
+      tags = [ "calendar" ];
+      keyword = "calendar";
+      url = "https://calendar.google.com";
+    }
+
+    {
+    name = "Maps";
+      tags = [ "maps" ];
+      keyword = "maps";
+      url = "https://maps.google.com";
     }
   ];
 
