@@ -243,7 +243,7 @@ let
         urls = [{
           template = "https://www.youtube.com";
           params = [
-            { name = "search_query"; value = "{searchTerms}"; }
+            { name = "results?search_query"; value = "{searchTerms}"; }
           ];
         }];
 
