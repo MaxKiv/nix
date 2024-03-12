@@ -29,7 +29,7 @@
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs"; 
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # source = "https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml";
@@ -43,11 +43,11 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    # hardware.url = "github:nixos/nixos-hardware";
+    nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-generators, ... } @ attrs:
+  outputs = { self, nixpkgs, home-manager, nixos-generators, nixos-hardware, ... } @ attrs:
     let
       supportedSystems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -59,11 +59,11 @@
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
 
-        boston =
+        terra =
           let system = "x86_64-linux";
           in nixpkgs.lib.nixosSystem {
             specialArgs = {
-              hostname = "boston";
+              hostname = "terra";
               type = "desktop";
               inherit system username;
             } // attrs;
@@ -77,11 +77,11 @@
             ];
           };
 
-        tokyo =
+        downtown =
           let system = "x86_64-linux";
           in nixpkgs.lib.nixosSystem {
             specialArgs = {
-              hostname = "tokyo";
+              hostname = "downtown";
               type = "laptop";
               inherit system username;
             } // attrs;
@@ -89,6 +89,7 @@
               # import default modules through default.nix
               ./.
               # Specify host specific modules
+              nixos-hardware.nixosModules.lenovo-thinkpad-t440s
               ./modules/hardware/network
               ./modules/desktop/kde
             ];
@@ -106,6 +107,7 @@
               # import default modules through default.nix
               ./.
               # Specify host specific modules
+              nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
               ./modules/hardware/network
               ./modules/desktop/kde
             ];
@@ -115,6 +117,7 @@
 
       packages.x86_64-linux = {
         iso = nixos-generators.nixosGenerate {
+<<<<<<< HEAD
             specialArgs = {
               system = "x86_64-linux";
               format = "install-iso";
@@ -122,6 +125,23 @@
               type = "laptop"; # TODO this makes no sense
               inherit username;
             } // attrs;
+||||||| parent of 47bf650 (feat: terra hostname)
+            specialArgs = {
+              system = "x86_64-linux";
+              format = "install-iso";
+              hostname = "live";
+              type = "laptop"; # TODO this makes no sense
+              inherit username dotfilesDir;
+            } // attrs;
+=======
+          specialArgs = {
+            system = "x86_64-linux";
+            format = "install-iso";
+            hostname = "live";
+            type = "laptop"; # TODO this makes no sense
+            inherit username dotfilesDir;
+          } // attrs;
+>>>>>>> 47bf650 (feat: terra hostname)
           modules = [
             ./hosts
           ];

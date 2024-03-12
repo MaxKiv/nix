@@ -104,7 +104,7 @@ let
     "services.sync.engine.passwords" = false;
     "signon.rememberSignons" = false;
     "general.config.obscure_value" = 0;
-  } // lib.optionalAttrs (config.networking.hostName == "boston") {
+  } // lib.optionalAttrs (config.networking.hostName == "terra") {
     # TODO use an option to inject this outside
     # Hardware video decoding support.
     "media.ffmpeg.vaapi.enabled" = true;
