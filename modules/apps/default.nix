@@ -3,11 +3,13 @@
 {
   imports = [
     ./bitwarden
-    ./firefox
     ./chromium
+    ./deluge
+    ./discord
+    ./firefox
     ./libreoffice
     ./steam
-    ./discord
+    ./vlc
   ];
 
 }
