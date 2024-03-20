@@ -35,6 +35,8 @@ in {
       userEmail = email;
       userName = gitName;
 
+      signing.key = email;
+
       # Better diffs
       delta = {
         enable = true;
@@ -46,6 +48,7 @@ in {
           #syntax-theme = "zebra-dark";
         };
       };
+
     };
   };
 }

@@ -45,14 +45,15 @@ nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
 [?] fix live boot usb setup
 
 [ ] cachix?
+    [x] gaming bin cache server
 
-[ ] integration nixos-hardware
+[x] integration nixos-hardware
 
-[ ] setup SOPS
-    [ ] setup proper ssh (default key)
-    [ ] setup wifi uuid/passwd
-    [ ] setup proper passwd
-    [ ] setup git gnupg signing
+[x] setup SOPS
+    [x] setup proper ssh (default key)
+    [x] setup wifi uuid/passwd
+    [x] setup proper passwd
+    [\] setup git gnupg signing
 
 [ ] Hyprland
 
@@ -66,6 +67,7 @@ nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
 
 [ ] Separate nixos and home-manager flake outputs, so that a user change doesnt
 require a new system? how?
+    [ ] maybe just dont do this?
 
 
 ## Information

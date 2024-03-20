@@ -1,21 +1,34 @@
-{ lib, config, pkgs, home-manager, username, ... }:
+{ lib, config, pkgs, home-manager, username, hostname, ... }:
 
-with lib;
 {
-  config = {
-    home-manager.users.${username} = {
-      services.gpg-agent =  {
-        enable = true;
+  home-manager.users.${username} = { config, pkgs, ... }: {
+    services.gpg-agent =  {
+      enable = true;
 
-        # enable usage of ssh with gpg
-        enableSshSupport = true;
+      # enable usage of ssh with gpg
+      enableSshSupport = true;
 
-        # enable extra sockets, useful for gpg agent forwarding
-        enableExtraSocket = true;
+      # enable extra sockets, useful for gpg agent forwarding
+      enableExtraSocket = true;
 
-        # if environment has gui
-        # pinentryFlavor = mkDefault "curses";
-        };
-      };
+      enableBashIntegration = true;
+    };
+
+    # TODO does this work?
+    # Import my own public key
+    programs.gpg.publicKeys.${username}.source = config.sops.secrets."gpg".path;
   };
+
+  # Deploy the gpg private key
+  sops.secrets."gpg" = {
+    mode = "0400";
+    path = "/home/${username}/.gnupg/private-keys-v1.d/max.key";
+    owner = "${username}";
+  };
+
+  # Import the private key into the gpg-agent
+  environment.shellInit = ''
+    gpg --import ${config.sops.secrets.gpg.path}
+  '';
+
 }

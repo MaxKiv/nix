@@ -14,6 +14,16 @@
     shell = pkgs.bash;
   };
 
+  sops.secrets = {
+    "pass/${username}" = {
+      neededForUsers = true;
+    };
+
+    "pass/root" = {
+      neededForUsers = true;
+    };
+  };
+
   # Only Nix can mutate users
   users.mutableUsers = false;
 }

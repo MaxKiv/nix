@@ -218,8 +218,7 @@ let
         urls = [{
           template = "https://mipmip.github.io/home-manager-option-search/";
           params = [
-            { name = "type"; value = "options"; }
-            { name = "query"; value = "{searchTerms}"; }
+            { name = "?query"; value = "{searchTerms}"; }
           ];
         }];
 
