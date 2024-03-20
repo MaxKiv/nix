@@ -9,20 +9,5 @@
 
   sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
 
-  sops.secrets = {
-    "ssh/${hostname}" = {
-      owner = "${username}";
-      path = "/home/${username}/.ssh/id_ed25519";
-    };
-
-    "pass/${username}" = {
-      neededForUsers = true;
-    };
-
-    "pass/root" = {
-      neededForUsers = true;
-    };
-  };
-
 }
 

@@ -97,6 +97,12 @@
               ./modules/hardware/network
               ./modules/hardware/nvidia
               ./modules/desktop/kde
+
+              {
+                # give the users in this list the right to specify additional
+                # substituters
+                nix.settings.trusted-users = [ "max" ];
+              }
             ];
           };
 

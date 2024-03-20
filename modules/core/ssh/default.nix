@@ -1,9 +1,6 @@
 { dotfilesDir, config, username, hostname, ... }:
 
 {
-  # users.users.${username} = {
-  #   openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAETSTzRnvYIQsOwhdwcbVRyZVnP6/F3b+inurb9+RMu ${username}" ];
-  # };
 
   services.openssh = {
     enable = true;
@@ -11,10 +8,12 @@
     settings.KbdInteractiveAuthentication = false;
   };
 
-
-  # users.users.${username}.openssh.authorizedKeys.keys = [
-  #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJGs6nMoXWJFaBAO6zVz0qhG6SUM5pY+XXR8mNugvzVu maxkivits42@gmail.com"
-  # ];
+  sops.secrets = {
+    "ssh/${hostname}" = {
+      owner = "${username}";
+      path = "/home/${username}/.ssh/id_ed25519";
+    };
+  };
 
   home-manager.users.${username} = { config, pkgs, ... }:
   {
@@ -22,11 +21,8 @@
     programs.ssh.matchBlocks.${hostname}.identityFile = config.sops.secrets."ssh/${hostname}".path;
 
     home.file = {
-    #   # TODO SOPS
-      # ".ssh/${hostname}".source = config.sops.secrets."ssh/${hostname}".path;
-      # ".ssh/id_ed25519.pub".source = "${dotfilesDir}/.ssh/${hostname}.pub";
-      # ".ssh/id_ed25519.pub".source = ../../../dotfiles/.ssh/${hostname}.pub;
-      # ".ssh/id_ed25519.pub".source = /home/max/git/nix/dotfiles/.ssh/${hostname}.pub;
+      # TODO make this reference a private repository, see:
+      # https://github.com/ryan4yin/nix-config/blob/985beb8bd47189e4b2ef5200ef5c1ab28e3812a8/home/base/desktop/ssh.nix#L4
       ".ssh/id_ed25519.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/${hostname}.pub";
     };
 
