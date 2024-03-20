@@ -10,6 +10,9 @@
     };
     hostName = hostname;
   };
+
+
+
   users.users.${username} = {
     extraGroups = [ "networkmanager" ];
   };

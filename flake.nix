@@ -3,6 +3,17 @@
 {
   description = "MaxKiv's Nixos config flake";
 
+  # the nixConfig here only affects the flake itself, not the system configuration!
+  # for more information, see:
+  # https://nixos-and-flakes.thiscute.world/nixos-with-flakes/add-custom-cache-servers
+  nixConfig = {
+    # for more detail see:
+    # https://nixos-and-flakes.thiscute.world/nixos-with-flakes/add-custom-cache-servers
+    extra-substituters = ["https://nix-gaming.cachix.org"];
+    extra-trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+  };
+
+  # Inputs to the flake
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -49,10 +60,14 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    # NixOS modules for specific hardware
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
+    # provides game launcher packages and general gaming tools
+    nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
+  # Outputs this flake produces
   outputs = { self, nixpkgs, home-manager, nixos-generators, nixos-hardware, ... } @ attrs:
     let
       supportedSystems = [ "x86_64-linux" ];
@@ -66,6 +81,7 @@
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
 
+        # Desktop pc host
         terra =
           let system = "x86_64-linux";
           in nixpkgs.lib.nixosSystem {
@@ -84,6 +100,7 @@
             ];
           };
 
+        # Craptop
         downtown =
           let system = "x86_64-linux";
           in nixpkgs.lib.nixosSystem {
@@ -102,6 +119,7 @@
             ];
           };
 
+        # Thinkpad
         rapanui =
           let system = "x86_64-linux";
           in nixpkgs.lib.nixosSystem {
@@ -122,7 +140,9 @@
 
       }; # nixosConfigurations
 
+      # nixos-generators entrypoint
       packages.x86_64-linux = {
+        # Install-iso configuration
         iso = nixos-generators.nixosGenerate {
           specialArgs = {
             system = "x86_64-linux";
@@ -140,6 +160,8 @@
 
       }; # packages
 
+      # Development shells provided by this flake, to use:
+      # nix develop .#default
       devShells = forAllSystems (system:
         let
           pkgs = nixpkgsFor.${system};
