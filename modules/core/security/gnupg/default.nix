@@ -14,7 +14,6 @@
       enableBashIntegration = true;
     };
 
-    # TODO does this work?
     # Import my own public key
     programs.gpg.publicKeys.${username}.source = config.sops.secrets."gpg".path;
   };
@@ -25,10 +24,5 @@
     path = "/home/${username}/.gnupg/private-keys-v1.d/max.key";
     owner = "${username}";
   };
-
-  # Import the private key into the gpg-agent
-  environment.shellInit = ''
-    gpg --import ${config.sops.secrets.gpg.path}
-  '';
 
 }
