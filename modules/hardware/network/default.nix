@@ -25,6 +25,10 @@
     "@home_uuid@" = {
       psk = "@home_psk@";
     };
+
+    "@leushuis_uuid@" = {
+      psk = "@leushuis_psk@";
+    };
   };
 
   users.users.${username} = {
