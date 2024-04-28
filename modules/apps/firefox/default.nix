@@ -15,6 +15,11 @@ let
 
   # ~/.mozilla/firefox/PROFILE_NAME/prefs.js | user.js
   settings = {
+    # Fonts
+    "font.name.monospace.x-western" = "${lib.head config.fonts.fontconfig.defaultFonts.monospace}";
+    "font.name.sans-serif.x-western" = "${lib.head config.fonts.fontconfig.defaultFonts.sansSerif}";
+    "font.name.serif.x-western" = "${lib.head config.fonts.fontconfig.defaultFonts.serif}";
+
     "app.normandy.first_run" = false;
     "app.shield.optoutstudies.enabled" = false;
 
