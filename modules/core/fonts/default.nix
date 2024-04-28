@@ -9,6 +9,8 @@
     #noto-fonts-emoji-blob-bin
     noto-fonts-color-emoji
 
+    ibm-plex
+
     # The nerdiest of fonts
     (nerdfonts.override { fonts = [ "Hasklig" ]; })
   ];

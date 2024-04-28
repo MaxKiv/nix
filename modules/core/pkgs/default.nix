@@ -18,7 +18,7 @@
     cargo
     python3
     ruby
-    nodejs_21
+    nodejs_20
     xclip
     bat # the better cat
     ripgrep # the better grep
@@ -36,5 +36,6 @@
     kalker
     just
     bitwarden-cli
+    asciiquarium
   ];
 }

@@ -11,7 +11,7 @@
 
   services.xserver.desktopManager.plasma5.enable = true;
   # sddm is recommended for plasma5
-  services.xserver.displayManager.sddm.enable = true;
+  services.displayManager.sddm.enable = true;
 
   # KDE system packages
   environment.systemPackages = with pkgs; [
