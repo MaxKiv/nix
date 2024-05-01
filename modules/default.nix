@@ -6,6 +6,7 @@
     ./core
     ./desktop
     ./hardware
+    ./dev
   ];
 }
 

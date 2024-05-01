@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
 
-# Configure keymap in X11
+  # Configure keymap in X11
   services.xserver = {
     layout = "us";
     xkbVariant = "";
@@ -56,7 +56,7 @@
     desktopManager.gnome = {
       enable = true;
       extraGSettingsOverridePackages = [
-          pkgs.nautilus-open-any-terminal
+        pkgs.nautilus-open-any-terminal
       ];
     };
   };

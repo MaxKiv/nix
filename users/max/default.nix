@@ -5,7 +5,7 @@
     shell = pkgs.bash;
     isNormalUser = true;
     hashedPasswordFile = config.sops.secrets."pass/${username}".path;
-    extraGroups = [ "wheel" "input" "video" "render" "dialout" ];
+    extraGroups = [ "wheel" "input" "video" "render" ];
   };
 
   # Setup root user
