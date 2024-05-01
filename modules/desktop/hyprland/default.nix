@@ -17,9 +17,7 @@
   wayland.windowManager.hyprland = {
     enable = true;
     wayland.windowManager.hyprland.enableNvidiaPatches = true;
-    settings = {
-
-    };
+    settings = { };
   };
 
   systemd = {
@@ -39,23 +37,23 @@
   };
 
   environment.systemPackages = with pkgs; [
-      # file manager
-      libsForQt5.dolphin
-      # notification center
-      #swaync
-      dunst
-      # screensharing
-      pipewire
-      wireplumber
-      # auth agent
-      polkilt-kde-agent
-      # qt
-      qt5-wayland
-      qt6-wayland
-      # bar
-      waybar
-      # app launcher
-      wofi
+    # file manager
+    libsForQt5.dolphin
+    # notification center
+    #swaync
+    dunst
+    # screensharing
+    pipewire
+    wireplumber
+    # auth agent
+    polkilt-kde-agent
+    # qt
+    qt5-wayland
+    qt6-wayland
+    # bar
+    waybar
+    # app launcher
+    wofi
   ];
 
   imports = [

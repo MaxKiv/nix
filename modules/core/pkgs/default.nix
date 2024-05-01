@@ -7,18 +7,9 @@
     cowsay
     neofetch
     eza
-    lshw # Detailed info on connected hardware
     git
     wget
     unzip
-    cmake
-    gnumake
-    clang_17
-    clang-tools_17
-    cargo
-    python3
-    ruby
-    nodejs_20
     xclip
     bat # the better cat
     ripgrep # the better grep
@@ -28,14 +19,18 @@
     glow # md reader
     coreutils
     killall
-    lua
     home-manager
     brightnessctl
     playerctl
     gparted
-    kalker
+    kalker # cmdline calculator
     just
     bitwarden-cli
     asciiquarium
+    lshw # Detailed info on connected hardware
+    busybox # unix utilities
+    toybox # unix utilities
+    usbutils # lsusb
+    pciutils # inspecting and manipulating configuration of PCI devices
   ];
 }

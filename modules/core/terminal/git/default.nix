@@ -3,7 +3,8 @@
 let
   email = "maxkivits42@gmail.com";
   gitName = "MaxKiv";
-in {
+in
+{
 
   home-manager.users.${username} = {
     home.packages = with pkgs; [ git ];
@@ -41,8 +42,8 @@ in {
       delta = {
         enable = true;
         options = {
-          navigate = true;     # use n and N to move between diff sections
-          light = false;       # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+          navigate = true; # use n and N to move between diff sections
+          light = false; # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
           side-by-side = true; # side-by-side diff
           line-numbers = false; # show line numbers
           #syntax-theme = "zebra-dark";

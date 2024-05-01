@@ -2,7 +2,7 @@
 
 {
   home-manager.users.${username} = { config, pkgs, ... }: {
-    services.gpg-agent =  {
+    services.gpg-agent = {
       enable = true;
 
       # enable usage of ssh with gpg

@@ -176,14 +176,14 @@ let
     }
 
     {
-    name = "Calendar";
+      name = "Calendar";
       tags = [ "calendar" ];
       keyword = "calendar";
       url = "https://calendar.google.com";
     }
 
     {
-    name = "Maps";
+      name = "Maps";
       tags = [ "maps" ];
       keyword = "maps";
       url = "https://maps.google.com";
@@ -297,11 +297,12 @@ in
       };
     };
 
-    xdg.mimeApps.defaultApplications = builtins.listToAttrs (map (mimeType: {
-          name = mimeType;
-          value = ["firefox.desktop"];
-          })
-        mimeTypes);
+    xdg.mimeApps.defaultApplications = builtins.listToAttrs (map
+      (mimeType: {
+        name = mimeType;
+        value = [ "firefox.desktop" ];
+      })
+      mimeTypes);
   };
 
 }
