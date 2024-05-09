@@ -1,9 +1,16 @@
 { config, pkgs, home-manager, username, ... }:
 
 {
+
+  environment.systemPackages = with pkgs; [
+    rust-analyzer
+  ];
+
   home-manager.users.${username} = { config, pkgs, ... }:
     {
-      home.packages = with pkgs; [ neovim ];
+      home.packages = with pkgs; [
+        neovim
+      ];
 
       home.sessionVariables = {
         EDITOR = "nvim";

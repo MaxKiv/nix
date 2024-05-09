@@ -4,6 +4,7 @@
   imports = [
     ./alacritty
     ./bash
+    ./direnv
     ./fzf
     ./git
     ./htop
