@@ -97,6 +97,7 @@
               ./modules/hardware/network
               ./modules/hardware/nvidia
               ./modules/desktop/kde
+              ./modules/gaming
 
               {
                 # give the users in this list the right to specify additional
@@ -141,6 +142,7 @@
               nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
               ./modules/hardware/network
               ./modules/desktop/kde
+              ./modules/gaming
             ];
           };
 

@@ -1,13 +1,6 @@
 { pkgs, config, ... }:
 
 {
-  # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
   # Load nvidia drivers for Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ];
 
