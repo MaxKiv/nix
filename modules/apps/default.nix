@@ -8,7 +8,6 @@
     ./discord
     ./firefox
     ./libreoffice
-    ./steam
     ./vlc
   ];
 

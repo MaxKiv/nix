@@ -7,6 +7,7 @@
     ./desktop
     ./hardware
     ./dev
+    # ./gaming
   ];
 }
 
