@@ -32,5 +32,6 @@
     toybox # unix utilities
     usbutils # lsusb
     pciutils # inspecting and manipulating configuration of PCI devices
+    cachix # nix binary cache cli
   ];
 }

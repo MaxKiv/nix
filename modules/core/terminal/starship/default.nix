@@ -36,7 +36,7 @@ in
           "$cmd_duration"
           "$status"
           "$line_break"
-          "[❯](bold yellow)"
+          # "[❯](bold yellow)"
           ''''${custom.space}''
         ];
         username = {
@@ -51,7 +51,7 @@ in
         };
         custom.space = {
           when = ''! test $env'';
-          format = "  ";
+          format = "   ";
         };
         continuation_prompt = "∙  ┆ ";
         line_break = { disabled = false; };
