@@ -8,6 +8,7 @@
     ./hardware
     ./dev
     # ./gaming
+    ./rice
   ];
 }
 

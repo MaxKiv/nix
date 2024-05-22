@@ -1,4 +1,4 @@
-{ config, pkgs, home-manager, alacritty-catppuccin, username, ... }:
+{ config, pkgs, home-manager, lib, alacritty-catppuccin, username, ... }:
 
 {
   home-manager.users.${username} = { config, pkgs, ... }:
