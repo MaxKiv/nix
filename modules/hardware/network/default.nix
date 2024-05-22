@@ -1,6 +1,19 @@
-{ hostname, username, sops, ... }:
+{ hostname, username, sops, chaotic, ... }:
 
 {
+  imports = [
+    chaotic.nixosModules.default # Adds chaotic binary cache, used for NordVPN
+  ];
+
+  # Setup for NordVPN
+  chaotic.nordvpn.enable = true;
+  networking.firewall = {
+    enable = true;
+    checkReversePath = false;
+    allowedTCPPorts = [ 443 ];
+    allowedUDPPorts = [ 1194 ];
+  };
+
   networking = {
     networkmanager = {
       enable = true;
@@ -36,7 +49,7 @@
   };
 
   users.users.${username} = {
-    extraGroups = [ "networkmanager" ];
+    extraGroups = [ "networkmanager" "nordvpn" ];
   };
 }
 

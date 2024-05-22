@@ -35,5 +35,6 @@
     cachix # nix binary cache cli
     nix-ld # Run unpatched dynamic binaries on NixOS
     appimage-run # Setup common unix libs required to run appimages on nixos
+    # wgnord # NordLynx cli (nordVPN)
   ];
 }

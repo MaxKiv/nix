@@ -7,6 +7,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Trust current user, allows us to add binary caches etc
+  nix.settings.trusted-users = [ username ];
+
   # Perform automatic garbage collection of the nix store
   nix.gc = {
     automatic = true;

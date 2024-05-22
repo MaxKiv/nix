@@ -21,6 +21,7 @@
     lutris # unix game runner that managers wine/proton versions
     heroic # another game launcher for epic / GOG
     bottles # wine prefix manager for all games not runnable by above
+    dwarf-fortress-packages.dwarf-fortress-full # DF classic with bells
   ];
 
   # GameMode is a daemon/lib combo for Linux that allows games to request a set

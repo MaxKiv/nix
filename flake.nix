@@ -65,6 +65,9 @@
 
     # provides game launcher packages and general gaming tools
     nix-gaming.url = "github:fufexan/nix-gaming";
+
+    # Collection of bleeding edge nix packages -> just used for NordVPN for now
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
   # Outputs this flake produces
