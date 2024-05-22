@@ -37,4 +37,17 @@
     home.stateVersion = "23.11";
     nixpkgs.config.allowUnfree = true;
   };
+
+  # # Run unpatched dynamic binaries on NixOS
+  # nix-ld = {
+  #   enable = true;
+  #   libraries = with pkgs; [
+  #     stdenv.cc.cc
+  #   ];
+  # };
+  #
+  # TODO
+  # https://github.com/Mic92/envfs
+  # https://github.com/thiagokokada/nix-alien
+
 }
