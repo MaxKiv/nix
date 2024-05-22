@@ -7,6 +7,9 @@ This is the nix stuff you always forget:
 build)
 sudo nixos-rebuild switch --flake ~/git/nix#downtown --show-trace -L
 
+# or just
+just
+
 # Build ISO image
 nix build ~/git/nix#iso
 # optionally format the usb
@@ -20,6 +23,8 @@ dd if=result/iso/LiveNix.iso of=/dev/sda bs=4M status=progress conv=fdatasync
 
 # run nixos gc
 sudo nixos-collect-garbage -d
+# or just
+just gc
 
 # How to access nixos config in home-manager?
 # https://github.com/nix-community/home-manager/issues/393
@@ -42,13 +47,11 @@ nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
 [x] Add a justfile, cool!
     https://nixos-and-flakes.thiscute.world/best-practices/simplify-nixos-related-commands
 
+[ ] more ricing
+
+[ ] switch to grub
+
 [?] fix live boot usb setup
-
-[ ] fix firefox font
-
-[ ] cachix?
-    [x] gaming bin cache server
-    [ ] fix it
 
 [x] integration nixos-hardware
 
