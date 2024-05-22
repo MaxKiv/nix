@@ -46,12 +46,9 @@ nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
 
 [ ] fix firefox font
 
-[ ] fix network secrets deployment
-    [ ] look at https://discourse.nixos.org/t/do-you-guys-always-manually-type-wpa-supplicant-command-every-time-connecting-to-a-wifi/15597/6
-    [ ] Likely the wifi passwds are saved in the kde keyring stuff atm
-
 [ ] cachix?
     [x] gaming bin cache server
+    [ ] fix it
 
 [x] integration nixos-hardware
 

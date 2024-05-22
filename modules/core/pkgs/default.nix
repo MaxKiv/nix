@@ -33,5 +33,7 @@
     usbutils # lsusb
     pciutils # inspecting and manipulating configuration of PCI devices
     cachix # nix binary cache cli
+    nix-ld # Run unpatched dynamic binaries on NixOS
+    appimage-run # Setup common unix libs required to run appimages on nixos
   ];
 }

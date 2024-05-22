@@ -26,6 +26,10 @@
       psk = "@home_psk@";
     };
 
+    "@hotspot_uuid@" = {
+      psk = "@hotspot_psk@";
+    };
+
     "@leushuis_uuid@" = {
       psk = "@leushuis_psk@";
     };
