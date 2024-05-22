@@ -68,10 +68,13 @@
 
     # Collection of bleeding edge nix packages -> just used for NordVPN for now
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
+    # Ricing, see default.nix && rice/
+    stylix.url = "github:danth/stylix";
   };
 
   # Outputs this flake produces
-  outputs = { self, nixpkgs, home-manager, nixos-generators, nixos-hardware, ... } @ attrs:
+  outputs = { self, nixpkgs, home-manager, nixos-generators, nixos-hardware, stylix, ... } @ attrs:
     let
       supportedSystems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -101,12 +104,6 @@
               ./modules/hardware/nvidia
               ./modules/desktop/kde
               ./modules/gaming
-
-              {
-                # give the users in this list the right to specify additional
-                # substituters
-                nix.settings.trusted-users = [ "max" ];
-              }
             ];
           };
 
