@@ -6,6 +6,7 @@
   ];
 
   stylix.image = ../../assets/backgrounds/porthole.jpg;
+  # colorschemes: https://github.com/tinted-theming/base16-schemes
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
   stylix.polarity = "dark"; # "light" or "either"

@@ -59,26 +59,24 @@ in
         unbind '"'
         unbind %
         bind - split-window -v -c "#{pane_current_path}"
-        bind | split-window -h -c "#{pane_current_path}"
+        bind \ split-window -h -c "#{pane_current_path}"
         bind c new-window -c "#{pane_current_path}"
         bind -r C-L swap-window -t +1\; select-window -t +1
         bind -r C-H swap-window -t -1\; select-window -t -1
-        bind -r h select-pane -L  # move left
-        bind -r j select-pane -D  # move down
-        bind -r k select-pane -U  # move up
-        bind -r l select-pane -R  # move right
-        #bind o swap-pane -D       # swap current pane with the next one
-        #bind i swap-pane -U       # swap current pane with the previous one
-        bind-key -r > swap-pane -t '{right-of}'
-        bind-key -r < swap-pane -t '{left-of}'
-        bind -r H resize-pane -L 5
-        bind -r J resize-pane -D 5
-        bind -r K resize-pane -U 5
-        bind -r L resize-pane -R 5
-        bind -r C-Up resize-pane -U 5
-        bind -r C-Down resize-pane -D 5
-        bind -r C-Left resize-pane -L 5
-        bind -r C-Right resize-pane -R 5
+        bind -r h previous-window
+        bind -r l next-window
+        #bind -r h select-pane -L  # move left
+        #bind -r j select-pane -D  # move down
+        #bind -r k select-pane -U  # move up
+        #bind -r l select-pane -R  # move right
+        #bind -r H resize-pane -L 5
+        #bind -r J resize-pane -D 5
+        #bind -r K resize-pane -U 5
+        #bind -r L resize-pane -R 5
+        #bind -r C-Up resize-pane -U 5
+        #bind -r C-Down resize-pane -D 5
+        #bind -r C-Left resize-pane -L 5
+        #bind -r C-Right resize-pane -R 5
         bind-key x kill-pane
         bind-key X kill-window
         bind-key C-x kill-session
