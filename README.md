@@ -44,6 +44,12 @@ nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
 
 ## TODO
 
+[ ] Download nvim LSPs through nix instead of mason, the nix-ld workaround is
+hacky
+
+[ ] https://github.com/Mic92/envfs
+[ ] https://github.com/thiagokokada/nix-alien
+
 [x] Add a justfile, cool!
     https://nixos-and-flakes.thiscute.world/best-practices/simplify-nixos-related-commands
 
@@ -59,9 +65,9 @@ nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
     [x] setup proper ssh (default key)
     [x] setup wifi uuid/passwd
     [x] setup proper passwd
-    [\] setup git gnupg signing
+    [x] setup git gnupg signing
 
-[ ] Hyprland
+[.] Hyprland
 
 [ ] WSl setup
 
@@ -89,7 +95,8 @@ configuration without having to rebuild my system.
 
 To do this I'm using `(config.lib.file) mkOutOfStoreSymlink`. Make sure to pass
 an absolute path to it when using a nix flake. This allows my dotfiles to live
-as a submodule of this repository in their original language.
+as a submodule of this repository in their original language, and does not
+require a rebuild when I make a nvim config change.
 
 For more info see:
 https://www.reddit.com/r/NixOS/comments/108fwwh/tradeoffs_of_using_home_manager_for_neovim_plugins/
