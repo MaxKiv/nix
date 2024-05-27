@@ -59,7 +59,7 @@ in
         unbind '"'
         unbind %
         bind - split-window -v -c "#{pane_current_path}"
-        bind \ split-window -h -c "#{pane_current_path}"
+        bind \\ split-window -h -c "#{pane_current_path}"
         bind c new-window -c "#{pane_current_path}"
         bind -r C-L swap-window -t +1\; select-window -t +1
         bind -r C-H swap-window -t -1\; select-window -t -1

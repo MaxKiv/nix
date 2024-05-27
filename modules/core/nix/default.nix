@@ -41,16 +41,13 @@
     nixpkgs.config.allowUnfree = true;
   };
 
-  # # Run unpatched dynamic binaries on NixOS
-  # nix-ld = {
-  #   enable = true;
-  #   libraries = with pkgs; [
-  #     stdenv.cc.cc
-  #   ];
-  # };
-  #
-  # TODO
-  # https://github.com/Mic92/envfs
-  # https://github.com/thiagokokada/nix-alien
+  # Enable nix-ld to use dynamically linked executables with hardcoded paths
+  programs.nix-ld = {
+    enable = true;
+    package = pkgs.nix-ld-rs;
+  };
+
+  # Enable envfs for fhs compatibility
+  services.envfs.enable = true;
 
 }
