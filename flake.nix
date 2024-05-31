@@ -24,6 +24,10 @@
 
     # flake-utils.url = "github:numtide/flake-utils";
 
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+    };
+
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -74,15 +78,21 @@
   };
 
   # Outputs this flake produces
-  outputs = { self, nixpkgs, home-manager, nixos-generators, nixos-hardware, stylix, ... } @ attrs:
+  outputs = { self, nixpkgs, ... } @ inputs:
     let
       supportedSystems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
       username = "max";
       dotfilesDir = ./dotfiles;
+      inherit (self) outputs;
     in
     {
+      # overlays = import ./overlays {inherit inputs outputs;};
+      overlays = [
+        inputs.neovim-nightly-overlay.overlays.default
+      ];
+
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
@@ -95,7 +105,7 @@
               hostname = "terra";
               type = "desktop";
               inherit system username dotfilesDir;
-            } // attrs;
+            } // inputs;
             modules = [
               # import default modules through default.nix
               ./.
@@ -115,12 +125,12 @@
               hostname = "downtown";
               type = "laptop";
               inherit system username dotfilesDir;
-            } // attrs;
+            } // inputs;
             modules = [
               # import default modules through default.nix
               ./.
               # Specify host specific modules
-              nixos-hardware.nixosModules.lenovo-thinkpad-t440s
+              inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t440s
               ./modules/hardware/network
               ./modules/desktop/kde
             ];
@@ -133,13 +143,18 @@
             specialArgs = {
               hostname = "rapanui";
               type = "laptop";
-              inherit system username dotfilesDir;
-            } // attrs;
+              inherit system username dotfilesDir inputs;
+            } // inputs;
             modules = [
+              {
+                nixpkgs.overlays = [
+                  inputs.neovim-nightly-overlay.overlays.default
+                ];
+              }
               # import default modules through default.nix
               ./.
               # Specify host specific modules
-              nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
+              inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
               ./modules/hardware/network
               ./modules/desktop/kde
               ./modules/gaming
@@ -151,14 +166,14 @@
       # nixos-generators entrypoint
       packages.x86_64-linux = {
         # Install-iso configuration
-        iso = nixos-generators.nixosGenerate {
+        iso = inputs.nixos-generators.nixosGenerate {
           specialArgs = {
             system = "x86_64-linux";
             format = "install-iso";
             hostname = "live";
             type = "laptop"; # TODO this makes no sense
             inherit username dotfilesDir;
-          } // attrs;
+          } // inputs;
           modules = [
             ./hosts
           ];

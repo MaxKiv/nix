@@ -1,11 +1,14 @@
-{ pkgs, stylix, username, ... }:
+{ pkgs, inputs, username, ... }:
 
+let
+  stylix = inputs.stylix;
+in
 {
   imports = [
     stylix.nixosModules.stylix
   ];
 
-  stylix.image = ../../assets/backgrounds/porthole.jpg;
+  stylix.image = ../../assets/backgrounds/sunset-train.jpg;
   # colorschemes: https://github.com/tinted-theming/base16-schemes
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
@@ -14,21 +17,21 @@
   stylix.cursor.package = pkgs.bibata-cursors;
   stylix.cursor.name = "Bibata-Modern-Ice";
 
-  stylix.fonts = {
-    monospace = {
-      package = pkgs.nerdfonts.override { fonts = [ "Hasklig" ]; };
-      name = "Hasklug Nerd Font Mono";
-    };
-    sansSerif = {
-      package = pkgs.dejavu_fonts;
-      name = "DejaVu Sans";
-    };
-    serif = {
-      package = pkgs.dejavu_fonts;
-      name = "DejaVu Serif";
-    };
-  };
-
+  # stylix.fonts = {
+  #   monospace = {
+  #     package = pkgs.nerdfonts.override { fonts = [ "Hasklig" ]; };
+  #     name = "Hasklug Nerd Font Mono";
+  #   };
+  #   sansSerif = {
+  #     package = pkgs.dejavu_fonts;
+  #     name = "DejaVu Sans";
+  #   };
+  #   serif = {
+  #     package = pkgs.dejavu_fonts;
+  #     name = "DejaVu Serif";
+  #   };
+  # };
+  #
   stylix.fonts.sizes = {
     applications = 12;
     terminal = 15;

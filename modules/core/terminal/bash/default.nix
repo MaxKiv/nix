@@ -39,6 +39,7 @@
 
           # git stuff
           gs = "${pkgs.git}/bin/git status";
+          gd = "${pkgs.git}/bin/git diff";
           gc = "${pkgs.git}/bin/git commit";
           gf = "${pkgs.git}/bin/git fetch -p -t";
           gl = "${pkgs.git}/bin/git log --oneline --decorate --graph";

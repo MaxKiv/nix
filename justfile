@@ -18,8 +18,8 @@ up:
 
 # Update specific input
 # usage: make upp i=home-manager
-upp:
-  nix flake lock --update-input $(i)
+upp input:
+  nix flake lock --update-input {{input}}
 
 history:
   nix profile history --profile /nix/var/nix/profiles/system
@@ -52,15 +52,6 @@ gc:
 #
 # ruby: add-idols-ssh-key
 #   nixos-rebuild --flake .#ruby --target-host ruby --build-host ruby switch --use-remote-sudo
-#
-# ruby-debug: add-idols-ssh-key
-#   nixos-rebuild --flake .#ruby --target-host ruby --build-host ruby switch --use-remote-sudo --show-trace --verbose
-#
-# kana: add-idols-ssh-key
-#   nixos-rebuild --flake .#kana --target-host kana --build-host kana switch --use-remote-sudo
-#
-# kana-debug: add-idols-ssh-key
-#   nixos-rebuild --flake .#kana --target-host kana --build-host kana switch --use-remote-sudo --show-trace --verbose
 #
 # idols: aqua ruby kana
 #
