@@ -1,4 +1,4 @@
-{ home-manager, pkgs, username, ... }:
+{ inputs, home-manager, pkgs, username, ... }:
 
 {
   # Required for nix flakes
@@ -31,6 +31,10 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11";
+
+  # Use system level nixpkgs, this captures our overlays too
+  home-manager.useGlobalPkgs = true;
+  home-manager.verbose = true;
 
   # Setup home-manager as nixos module
   home-manager.users.${username} = {

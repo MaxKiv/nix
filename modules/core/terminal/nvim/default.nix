@@ -1,16 +1,14 @@
-{ config, pkgs, home-manager, username, ... }:
+{ inputs, config, pkgs, home-manager, neovim-nightly-overlay, system, username, ... }:
 
 {
 
-  environment.systemPackages = with pkgs; [
-    rust-analyzer
+  environment.systemPackages = [
+    pkgs.rust-analyzer
+    inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
   ];
 
   home-manager.users.${username} = { config, pkgs, ... }:
     {
-      home.packages = with pkgs; [
-        neovim
-      ];
 
       home.sessionVariables = {
         EDITOR = "nvim";
@@ -27,14 +25,34 @@
         name = "nvim";
         comment = "Edit text files";
         icon = "nvim";
-        exec = "${pkgs.alacritty}/bin/alacritty -e ${pkgs.neovim}/bin/nvim %F";
-        categories = [ "TerminalEmulator" ];
+        exec = "${pkgs.alacritty}/bin/alacritty -e ${inputs.neovim-nightly-overlay.packages.${pkgs.system}.default}/bin/nvim %F";
+        categories = [ "Application" ];
         terminal = false;
         mimeType = [ "text/plain" ];
       };
 
-      xdg.mimeApps.defaultApplications = {
-        "text/plain" = [ "nvim" ];
+      xdg.mimeApps = {
+        defaultApplications = {
+          "application/x-shellscript" = "nvim.desktop";
+          "application/x-perl" = "nvim.desktop";
+          "application/json" = "nvim.desktop";
+          "text/x-readme" = "nvim.desktop";
+          "text/plain" = "nvim.desktop";
+          "text/markdown" = "nvim.desktop";
+          "text/x-csrc" = "nvim.desktop";
+          "text/x-chdr" = "nvim.desktop";
+          "text/x-python" = "nvim.desktop";
+          "text/x-makefile" = "nvim.desktop";
+          "text/x-markdown" = "nvim.desktop";
+          "text/x-c++src" = "nvim.desktop";
+          "text/x-sh" = "nvim.desktop";
+          "text/x-rust" = "nvim.desktop";
+          "text/csv" = "nvim.desktop";
+        };
+
+        associations.added = {
+          "text/x-nix" = "nvim.desktop";
+        };
       };
 
       xdg.configFile = {
