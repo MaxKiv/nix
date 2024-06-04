@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ inputs, pkgs, ... }: {
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -9,33 +9,34 @@
     variant = "";
   };
 
-  services.xserver.desktopManager.plasma5.enable = true;
-  # sddm is recommended for plasma5
-  services.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
+  services.desktopManager.plasma6.enable = true;
+
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "where_is_my_sddm_theme";
+  };
 
   # KDE system packages
   environment.systemPackages = with pkgs; [
+    (
+      pkgs.where-is-my-sddm-theme.override {
+        themeConfig.General = {
+          background = "${../../../assets/backgrounds/sunset.png}";
+          backgroundMode = "fill";
+          cursorColor = "#ffffff";
+        };
+      })
     #hicolor_icon_theme
     kleopatra
-    kdeconnect
     spectacle
     gwenview
     dolphin
     okular
-    libsForQt5.kdeconnect-kde # KDE connect
+    libnotify
   ];
 
-  # Exclude some default KDE plasma applications
-  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-    #elisa
-    #gwenview
-    #okular
-    #oxygen
-    #khelpcenter
-    konsole # we have a more sexy terminal
-    #plasma-browser-integration
-    #print-manager
-  ];
+  programs.kdeconnect.enable = true;
 
   networking.firewall = {
     enable = true;

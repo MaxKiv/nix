@@ -18,6 +18,12 @@
           alias dcam='dot commit --amend --no-edit'
         '';
 
+        # profileExtra = ''
+        #   if [ -x "$(command -v tmux)" ] && [ -n "''${DISPLAY}" ] && [ -z "''${TMUX}" ]; then
+        #       exec tmux new-session -d -s ''${USER} >/dev/null 2>&1
+        #   fi
+        # '';
+
         shellAliases = {
 
           # ls
@@ -125,7 +131,7 @@
 
         # open a file selected by fzf in vim
         vf() {
-          vim $(fzf)
+          nvim "$(fzf)"
         }
 
         # fd - cd to selected directory
@@ -140,6 +146,11 @@
         fda() {
           local dir
           dir=$(find ''${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+        }
+
+        # fopen - open file selected by fzf
+        fopen() {
+          xdg-open "$(fzf)"
         }
 
         # fkill - kill processes - list only the ones you can kill. Modified the earlier script.
