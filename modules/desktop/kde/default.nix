@@ -34,6 +34,8 @@
     dolphin
     okular
     libnotify
+    #xclip
+    wl-clipboard-rs
   ];
 
   programs.kdeconnect.enable = true;

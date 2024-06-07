@@ -5,6 +5,7 @@
     ./boot
     ./fonts
     ./locale
+    ./man
     ./nix
     ./pkgs
     ./ssh
