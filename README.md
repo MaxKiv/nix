@@ -43,6 +43,8 @@ nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
 ```
 
 ## TODO
+[ ] nvim: mini.files et al
+[ ] nvim: fzf.lua
 
 [ ] Download nvim LSPs through nix instead of mason, the nix-ld workaround is
 hacky

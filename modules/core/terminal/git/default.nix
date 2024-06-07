@@ -20,6 +20,7 @@ in
         credential.helper = "store";
         github.user = gitName;
         push.autoSetupRemote = true;
+        push.default = "current";
 
         diff = {
           colorMoved = "default";
