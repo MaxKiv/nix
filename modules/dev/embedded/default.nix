@@ -1,8 +1,9 @@
 { config, pkgs, username, ... }:
 {
   environment.systemPackages = with pkgs; [
-    openocd
-    qemu
+    openocd # Open on chip debugger, device flashing
+    qemu # emulate devices
+    tio # serial console tty
   ];
 
   # plugdev: Allows members to mount (only with the options nodev and nosuid,
