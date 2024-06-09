@@ -75,6 +75,13 @@
 
     # Ricing, see default.nix && rice/
     stylix.url = "github:danth/stylix";
+
+    # Declaratively manage plasma using home-manager
+    plasma-manager = {
+      url = "github:pjones/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   # Outputs this flake produces

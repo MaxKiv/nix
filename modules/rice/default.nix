@@ -17,21 +17,21 @@ in
   stylix.cursor.package = pkgs.bibata-cursors;
   stylix.cursor.name = "Bibata-Modern-Ice";
 
-  # stylix.fonts = {
-  #   monospace = {
-  #     package = pkgs.nerdfonts.override { fonts = [ "Hasklig" ]; };
-  #     name = "Hasklug Nerd Font Mono";
-  #   };
-  #   sansSerif = {
-  #     package = pkgs.dejavu_fonts;
-  #     name = "DejaVu Sans";
-  #   };
-  #   serif = {
-  #     package = pkgs.dejavu_fonts;
-  #     name = "DejaVu Serif";
-  #   };
-  # };
-  #
+  stylix.fonts = {
+    monospace = {
+      package = pkgs.nerdfonts.override { fonts = [ "Hasklig" ]; };
+      name = "Hasklug Nerd Font";
+    };
+    sansSerif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Sans";
+    };
+    serif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Serif";
+    };
+  };
+
   stylix.fonts.sizes = {
     applications = 12;
     terminal = 15;
@@ -46,7 +46,7 @@ in
     popups = 1.0;
   };
 
-  # Exclude these from stylix
+  # Exclude these from stylix, these clash with my own config
   home-manager.users.${username} = {
     stylix.targets = {
       vim.enable = false;
