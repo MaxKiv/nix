@@ -3,6 +3,7 @@
   imports = [
     ./embedded
     ./rust
+    ./c
   ];
 
   environment.systemPackages = with pkgs; [
