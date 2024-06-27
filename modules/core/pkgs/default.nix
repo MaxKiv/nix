@@ -36,5 +36,7 @@
     nix-ld # Run unpatched dynamic binaries on NixOS
     appimage-run # Setup common unix libs required to run appimages on nixos
     exercism # exercism cli
+    zenith # htop replacement
+    chafa
   ];
 }
