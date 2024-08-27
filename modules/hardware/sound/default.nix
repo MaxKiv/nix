@@ -7,7 +7,6 @@
 
   # Sound settings
   security.rtkit.enable = true;
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   environment.systemPackages = with pkgs; [ pulseaudio ];
   services.pipewire = {

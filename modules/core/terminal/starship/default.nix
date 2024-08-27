@@ -72,14 +72,14 @@ in
         };
         nix_shell = {
           disabled = false;
-          format = "[${pad.left}](fg:white)[ ](bg:white fg:black)[${pad.right}](fg:white) ";
+          format = "[${pad.left}](fg:white)[ shell](bg:white fg:black)[${pad.right}](fg:white) ";
         };
         container = {
           symbol = " 󰏖";
           format = "[$symbol ](yellow dimmed)";
         };
         directory = {
-          format = " [${pad.left}](fg:black)[$path](bg:black fg:white)[${pad.right}](fg:black)";
+          format = "at [${pad.left}](fg:black)[$path](bg:black fg:white)[${pad.right}](fg:black)";
           truncate_to_repo = false;
         };
         # directory.substitutions = {
@@ -99,33 +99,33 @@ in
           style = "";
           format = "[ $symbol $branch](fg:purple)(:$remote_branch)";
         };
-        os = {
-          disabled = false;
-          format = "on $symbol";
-        };
-        os.symbols = {
-          Arch = os "" "bright-blue";
-          Debian = os "" "red)";
-          EndeavourOS = os "" "purple";
-          Fedora = os "" "blue";
-          NixOS = os "" "blue";
-          openSUSE = os "" "green";
-          SUSE = os "" "green";
-          Ubuntu = os "" "bright-purple";
-          Windows = os "󰍲" "blue";
-          Raspbian = os "󰐿" "purple";
-          Mint = os "󰣭" "bright-green";
-          Macos = os "󰀵" "green";
-          Manjaro = os "" "yellow";
-          Linux = os "󰌽" "white";
-          Gentoo = os "󰣨" "orange";
-          Alpine = os "" "blue";
-          Android = os "" "green";
-          Artix = os "󰣇" "blue";
-          CentOS = os "" "yellow";
-          Redhat = os "󱄛" "red";
-          RedHatEnterprise = os "󱄛" "red";
-        };
+        # os = {
+        #   disabled = false;
+        #   format = "on $symbol";
+        # };
+        # os.symbols = {
+        #   Arch = os "" "bright-blue";
+        #   Debian = os "" "red)";
+        #   EndeavourOS = os "" "purple";
+        #   Fedora = os "" "blue";
+        #   NixOS = os "" "blue";
+        #   openSUSE = os "" "green";
+        #   SUSE = os "" "green";
+        #   Ubuntu = os "" "bright-purple";
+        #   Windows = os "󰍲" "blue";
+        #   Raspbian = os "󰐿" "purple";
+        #   Mint = os "󰣭" "bright-green";
+        #   Macos = os "󰀵" "green";
+        #   Manjaro = os "" "yellow";
+        #   Linux = os "󰌽" "white";
+        #   Gentoo = os "󰣨" "orange";
+        #   Alpine = os "" "blue";
+        #   Android = os "" "green";
+        #   Artix = os "󰣇" "blue";
+        #   CentOS = os "" "yellow";
+        #   Redhat = os "󱄛" "red";
+        #   RedHatEnterprise = os "󱄛" "red";
+        # };
         python = lang "" "yellow";
         nodejs = lang " " "yellow";
         lua = lang "󰢱" "blue";

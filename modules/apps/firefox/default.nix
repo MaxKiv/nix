@@ -151,6 +151,7 @@ let
     ublock-origin
     unpaywall
     vimium
+    sponsorblock
   ];
 
   bookmarks = [
@@ -247,9 +248,9 @@ let
 
       "Youtube" = {
         urls = [{
-          template = "https://www.youtube.com";
+          template = "https://www.youtube.com/results";
           params = [
-            { name = "results?search_query"; value = "{searchTerms}"; }
+            { name = "search_query"; value = "{searchTerms}"; }
           ];
         }];
 
@@ -267,6 +268,31 @@ let
 
         # icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
         definedAliases = [ "@s" ];
+      };
+
+      "CPPReference" = {
+        urls = [{
+          template = "https://duckduckgo.com/";
+          params = [
+            { name = "sites"; value = "cppreference.com"; }
+            { name = "q"; value = "{searchTerms}"; }
+          ];
+        }];
+
+        icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+        definedAliases = [ "@c" ];
+      };
+
+      "Reddit" = {
+        urls = [{
+          template = "https://reddit.com/r/";
+          params = [
+            { name = ""; value = "{searchTerms}"; }
+          ];
+        }];
+
+        icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+        definedAliases = [ "@r" ];
       };
 
     };

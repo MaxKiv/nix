@@ -14,25 +14,27 @@
 
   services.displayManager.sddm = {
     enable = true;
-    theme = "where_is_my_sddm_theme";
+    # theme = "chili";
+    # Run sddm in wayland
+    wayland.enable = true;
   };
-  # Run sddm in wayland
-  services.displayManager.sddm.wayland.enable = true;
 
   # Set plasma6 as default session
   services.displayManager.defaultSession = "plasma";
 
   # KDE system packages
   environment.systemPackages = with pkgs; [
-    (
-      pkgs.where-is-my-sddm-theme.override {
-        themeConfig.General = {
-          background = "${../../../assets/backgrounds/sunset.png}";
-          backgroundMode = "fill";
-          cursorColor = "#ffffff";
-        };
-      })
+    # (
+    #   pkgs.where-is-my-sddm-theme.override {
+    #     themeConfig.General = {
+    #       background = "${../../../assets/backgrounds/sunset.png}";
+    #       backgroundMode = "fill";
+    #       cursorColor = "#ffffff";
+    #     };
+    #   })
+    # sddm-chili-theme
     #hicolor_icon_theme
+    kcalc
     kleopatra
     spectacle
     gwenview

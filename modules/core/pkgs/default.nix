@@ -3,30 +3,29 @@
 {
   # Default system packages
   environment.systemPackages = with pkgs; [
-    sops
-    cowsay
-    neofetch
-    eza
-    git
-    wget
-    unzip
-    xclip
+    home-manager # manage my home dir/programs
+    sops # manage my nixos secrets
+    cowsay # very important
+    neofetch # very important
+    eza # better ls
+    git # its git
+    wget # get stuff from the web
+    xclip # clipboard binary
     bat # the better cat
     ripgrep # the better grep
     fd # the better find
     findutils # locate etc
-    tree
+    tree # we love green
     glow # md reader
-    coreutils
-    killall
-    home-manager
-    brightnessctl
-    playerctl
-    gparted
+    coreutils # its coreutils
+    killall # when you need a shotgun
+    brightnessctl # CLI for brightness
+    playerctl # CLI to control media players
+    gparted # manage disk partitions
     kalker # cmdline calculator
-    just
-    bitwarden-cli
-    asciiquarium
+    just # simple cmd runner
+    bitwarden-cli # CLI for bitwarden
+    asciiquarium # very important
     lshw # Detailed info on connected hardware
     busybox # unix utilities
     toybox # unix utilities
@@ -37,6 +36,10 @@
     appimage-run # Setup common unix libs required to run appimages on nixos
     exercism # exercism cli
     zenith # htop replacement
-    chafa
+    chafa # show images in terminal
+    zip # zip stuff
+    unzip # unzip stuff
+    yt-dlp # youtube-dl fork
+    inkscape
   ];
 }
