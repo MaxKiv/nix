@@ -21,11 +21,13 @@ in
         format = builtins.concatStringsSep "" [
           "$username"
           "$hostname"
+          "$directory"
           "$nix_shell"
           "$os"
-          "$directory"
           "$container"
-          "$git_branch $git_status"
+          "$git_branch"
+          "$git_commit"
+          "$git_status"
           "$python"
           "$nodejs"
           "$lua"
@@ -72,14 +74,14 @@ in
         };
         nix_shell = {
           disabled = false;
-          format = "[${pad.left}](fg:white)[ shell](bg:white fg:black)[${pad.right}](fg:white) ";
+          format = "in [${pad.left}](fg:white)[ shell](bg:white fg:black)[${pad.right}](fg:white) ";
         };
         container = {
           symbol = " 󰏖";
           format = "[$symbol ](yellow dimmed)";
         };
         directory = {
-          format = "at [${pad.left}](fg:black)[$path](bg:black fg:white)[${pad.right}](fg:black)";
+          format = "at [${pad.left}](fg:black)[$path](bg:black fg:white)[${pad.right}](fg:black) ";
           truncate_to_repo = false;
         };
         # directory.substitutions = {
@@ -95,9 +97,13 @@ in
         #   "Vault" = "󱉽 ";
         # };
         git_branch = {
-          symbol = "";
-          style = "";
-          format = "[ $symbol $branch](fg:purple)(:$remote_branch)";
+          format = "on [$branch(:$remote_branch)](fg:bold #f1502f) ";
+          # format = "[ (fg:orange)$symbol $branch](:$remote_branch)";
+        };
+        git_commit = {
+          only_detached = false;
+          format = "at [\($hash$tag\)](bold yellow) ";
+          # format = "[ (fg:orange)$symbol $branch](:$remote_branch)";
         };
         # os = {
         #   disabled = false;
@@ -126,13 +132,14 @@ in
         #   Redhat = os "󱄛" "red";
         #   RedHatEnterprise = os "󱄛" "red";
         # };
-        python = lang "" "yellow";
-        nodejs = lang " " "yellow";
-        lua = lang "󰢱" "blue";
-        rust = lang "" "red";
-        java = lang "" "red";
-        c = lang "" "orange";
-        golang = lang "" "blue";
+
+        # python = lang "" "yellow";
+        # nodejs = lang " " "yellow";
+        # lua = lang "󰢱" "blue";
+        # rust = lang "" "red";
+        # java = lang "" "red";
+        # c = lang "" "orange";
+        # golang = lang "" "blue";
       };
     };
   };
