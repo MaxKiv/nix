@@ -28,6 +28,11 @@
       url = "github:nix-community/neovim-nightly-overlay";
     };
 
+    nil-lsp = {
+      url = "github:oxalica/nil";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -98,6 +103,19 @@
       # overlays = import ./overlays {inherit inputs outputs;};
       overlays = [
         inputs.neovim-nightly-overlay.overlays.default
+        (_: _: {
+          nil = inputs.nil-lsp.packages."x86_64-linux".default;
+        })
+        (final: prev: {
+            # Override nil-lsp with a specific Rust toolchain
+            nil = prev.nil.overrideAttrs (old: {
+              nativeBuildInputs = old.nativeBuildInputs or [] ++ [
+                (final.rust-bin.stable."1.77.0".default.override {
+                  extensions = [ ];  # Add any extensions you need
+                })
+              ];
+            });
+          })
       ];
 
       # NixOS configuration entrypoint

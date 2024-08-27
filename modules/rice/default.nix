@@ -8,6 +8,8 @@ in
     stylix.nixosModules.stylix
   ];
 
+  stylix.enable = true;
+
   stylix.image = ../../assets/backgrounds/sunset-train.jpg;
   # colorschemes: https://github.com/tinted-theming/base16-schemes
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
@@ -50,7 +52,10 @@ in
   home-manager.users.${username} = {
     stylix.targets = {
       vim.enable = false;
+      neovim.enable = false;
       alacritty.enable = false;
+
+      kde.enable = true;
     };
   };
 

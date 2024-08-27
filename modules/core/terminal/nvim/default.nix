@@ -3,6 +3,7 @@
 {
 
   environment.systemPackages = [
+    pkgs.nil
     pkgs.rust-analyzer
     inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
   ];

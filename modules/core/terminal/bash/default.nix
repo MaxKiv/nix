@@ -25,6 +25,7 @@
         # '';
 
         shellAliases = {
+          open = "${pkgs.xdg-utils}/bin/xdg-open";
 
           # ls
           ls = "${pkgs.eza}/bin/eza";
@@ -45,6 +46,7 @@
 
           # git stuff
           gs = "${pkgs.git}/bin/git status";
+          gba = "${pkgs.git}/bin/git branch -a";
           gd = "${pkgs.git}/bin/git diff";
           gc = "${pkgs.git}/bin/git commit";
           gcs = "${pkgs.git}/bin/git commit --gpg-sign=\"Max Kivits\"";
@@ -62,6 +64,7 @@
           # Tmux
           tms = "tmux new-session -s";
           tml = "tmux list-session";
+          tma = "tmux a -t ";
 
           # xclip
           clip = "xclip -sel clip";
@@ -170,9 +173,6 @@
         }
 
         ### Tmux ###
-        tma() {
-          tmux a -t "$1"
-        }
         tmf() {
           local session=$(tmux ls | cut -d":" -f1 | fzf)
           tmux a -t "$session"
