@@ -58,6 +58,7 @@
           gpf = "${pkgs.git}/bin/git push --force-with-lease";
           gau = "${pkgs.git}/bin/git add -u";
           gcam = "${pkgs.git}/bin/git commit --amend --no-edit";
+          gcams = "${pkgs.git}/bin/git commit --amend --no-edit --gpg-sign=\"Max Kivits\"";
           grc = "${pkgs.git}/bin/git rebase --continue";
           gru = "${pkgs.git}/bin/git reset \"@{u}\"";
 
