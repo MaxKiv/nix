@@ -60,6 +60,10 @@
           gcam = "${pkgs.git}/bin/git commit --amend --no-edit";
           gcams = "${pkgs.git}/bin/git commit --amend --no-edit --gpg-sign=\"Max Kivits\"";
           grc = "${pkgs.git}/bin/git rebase --continue";
+          gr = "${pkgs.git}/bin/git rebase";
+          gri = "${pkgs.git}/bin/git rebase -i";
+          grs = "${pkgs.git}/bin/git rebase --gpg-sign=\"Max Kivits\"";
+          gris = "${pkgs.git}/bin/git rebase -i --gpg-sign=\"Max Kivits\"";
           gru = "${pkgs.git}/bin/git reset \"@{u}\"";
 
           # Tmux

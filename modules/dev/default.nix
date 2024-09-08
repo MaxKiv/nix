@@ -16,8 +16,7 @@
     python3
     ruby
     nodejs_20
-    nixpkgs-fmt
-    statix
+    git-open
   ];
 }
 
