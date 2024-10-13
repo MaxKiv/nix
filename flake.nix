@@ -217,6 +217,7 @@
         {
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
+              sops
               nixpkgs-fmt
               statix
             ];

@@ -13,12 +13,12 @@ deploy:
 debug:
   nixos-rebuild switch --flake . --use-remote-sudo --show-trace --verbose --option eval-cache false
 
-up:
+update:
   nix flake update
 
 # Update specific input
 # usage: make upp i=home-manager
-upp input:
+up input:
   nix flake lock --update-input {{input}}
 
 history:
@@ -34,6 +34,10 @@ clean:
 gc:
   # garbage collect all unused nix store entries
   sudo nix-collect-garbage --delete-old
+
+# Edit secrets with sops
+secret:
+  sops secrets/secrets.yaml
 
 ############################################################################
 #
