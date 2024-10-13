@@ -1,4 +1,4 @@
-{ hostname, username, sops, chaotic, ... }:
+{ hostname, username, chaotic, config, ... }:
 
 {
   imports = [
@@ -29,23 +29,18 @@
   # The entire wireless.env file containing all network SSID and PSK is a
   # single secret, see:
   # https://www.reddit.com/r/NixOS/comments/zneyil/using_sopsnix_to_amange_wireless_secrets/
-  networking.wireless.environmentFile = sops.secrets."wireless.env".path;
+  networking.wireless.secretsFile = config.sops.secrets."wireless.env".path;
   # Secrets (PSKs, passwords, etc.) can be provided without adding them to the
   # world-readable Nix store by defining them in the environment file and
   # referring to them in option networking.wireless.networks with the syntax
   # @varname@. 
+  # TODO: XX probably broke this, see:
+  # https://github.com/NixOS/nixpkgs/issues/342140
+  # https://mynixos.com/nixpkgs/option/networking.wireless.secretsFile
   networking.wireless.networks = {
-    "@home_uuid@" = {
-      psk = "@home_psk@";
-    };
-
-    "@hotspot_uuid@" = {
-      psk = "@hotspot_psk@";
-    };
-
-    "@leushuis_uuid@" = {
-      psk = "@leushuis_psk@";
-    };
+    home.psk = "@home_psk@";
+    hotspot.psk = "@hotspot_psk@";
+    leushuis.psk = "@leushuis_psk@";
   };
 
   users.users.${username} = {
