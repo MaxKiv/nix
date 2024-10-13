@@ -19,6 +19,7 @@
     heroic # another game launcher for epic / GOG
     bottles # wine prefix manager for all games not runnable by above
     # dwarf-fortress-packages.dwarf-fortress-full # DF classic with bells
+    starsector # open-world single-player space-combat, roleplaying, exploration, and economic game
   ];
 
   # GameMode is a daemon/lib combo for Linux that allows games to request a set
