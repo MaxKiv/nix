@@ -13,9 +13,6 @@
           # Dotfiles management
           alias dot='${pkgs.git}/bin/git --git-dir=${config.home.homeDirectory}/git/nix/dotfiles/.git --work-tree=${config.home.homeDirectory}/git/nix/dotfiles'
           alias ds='dot status'
-          alias df='dot fetch'
-          alias dau='dot add -u'
-          alias dcam='dot commit --amend --no-edit'
         '';
 
         # profileExtra = ''
