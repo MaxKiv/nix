@@ -18,6 +18,6 @@
   # services.udev.packages: Installs packages that contain udev rules and 
   # ensures that those rules are applied. It automatically installs the 
   # necessary binaries and configurations required for udev.
-  services.udev.packages = [ pkgs.openocd pkgs.saleae-logic-2 ];
+  services.udev.packages = [ pkgs.openocd pkgs.saleae-logic-2 pkgs.picotool ];
 
 }
