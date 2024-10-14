@@ -39,7 +39,6 @@
           dn = "fg";
           n = "nvim";
           nv = "nvim";
-          vim = "nvim";
 
           # git stuff
           gs = "${pkgs.git}/bin/git status";
@@ -64,12 +63,12 @@
           gru = "${pkgs.git}/bin/git reset \"@{u}\"";
 
           # Tmux
-          tms = "tmux new-session -s";
-          tml = "tmux list-session";
-          tma = "tmux a -t ";
+          tms = "${pkgs.tmux}/bin/tmux new-session -s";
+          tml = "${pkgs.tmux}/bin/tmux list-session";
+          tma = "${pkgs.tmux}/bin/tmux a -t ";
 
           # xclip
-          clip = "xclip -sel clip";
+          clip = "${pkgs.xclip}/bin/xclip -sel clip";
         };
       };
 

@@ -301,7 +301,6 @@ let
 in
 {
   home-manager.users.${username} = {
-    home.packages = with pkgs; [ firefox ];
     home.sessionVariables.BROWSER = "firefox";
 
     programs.firefox = {
