@@ -40,6 +40,8 @@
     zip # zip stuff
     unzip # unzip stuff
     yt-dlp # youtube-dl fork
-    inkscape
+    inkscape # wish I was smart enough for this
+    nethogs # network monitor tool
+    sniffnet # network monitor tool
   ];
 }
