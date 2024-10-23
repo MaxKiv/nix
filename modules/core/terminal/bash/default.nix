@@ -183,6 +183,18 @@
           tmux kill-session -t "$session"
         }
 
+        lsb() {
+          local selected_file
+          selected_file=$(find . -type f -executable 2>/dev/null | fzf)
+
+          if [ -n "$selected_file" ]; then
+            echo -n "$selected_file" | xclip -selection clipboard
+            echo "Copied to clipboard: $selected_file"
+          else
+            echo "No file selected."
+          fi
+        }
+
       '';
     };
 
