@@ -1,7 +1,17 @@
-{ lib, config, pkgs, home-manager, username, hostname, ... }:
-
 {
-  home-manager.users.${username} = { config, pkgs, ... }: {
+  lib,
+  config,
+  pkgs,
+  home-manager,
+  username,
+  hostname,
+  ...
+}: {
+  home-manager.users.${username} = {
+    config,
+    pkgs,
+    ...
+  }: {
     services.gpg-agent = {
       enable = true;
 
@@ -24,5 +34,4 @@
     path = "/home/${username}/.gnupg/private-keys-v1.d/max.key";
     owner = "${username}";
   };
-
 }

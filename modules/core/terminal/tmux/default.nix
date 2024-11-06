@@ -1,11 +1,14 @@
-{ config, pkgs, home-manager, username, ... }:
-
-let
-  inherit (config.lib.file) mkOutOfStoreSymlink;
-in
 {
+  config,
+  pkgs,
+  home-manager,
+  username,
+  ...
+}: let
+  inherit (config.lib.file) mkOutOfStoreSymlink;
+in {
   home-manager.users.${username} = {
-    home.packages = with pkgs; [ tmux ];
+    home.packages = with pkgs; [tmux];
 
     programs.tmux = {
       enable = true;
@@ -83,10 +86,10 @@ in
       '';
 
       plugins = with pkgs; [
-        { plugin = tmuxPlugins.cpu; }
-        { plugin = tmuxPlugins.yank; }
-        { plugin = tmuxPlugins.open; }
-        { plugin = tmuxPlugins.sensible; }
+        {plugin = tmuxPlugins.cpu;}
+        {plugin = tmuxPlugins.yank;}
+        {plugin = tmuxPlugins.open;}
+        {plugin = tmuxPlugins.sensible;}
         {
           plugin = tmuxPlugins.copycat;
           extraConfig = ''
@@ -111,20 +114,17 @@ in
           plugin = tmuxPlugins.continuum;
           extraConfig = ''
             set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '5' # minutes    
+            set -g @continuum-save-interval '5' # minutes
           '';
         }
       ];
 
       #shell = "${pkgs.bash}/bin/bash";
-
     };
 
     #home.file = {
     #".tmux.conf" = { source = mkOutOfStoreSymlink ../../dotfiles/.tmux.conf; };
     # ".tmux.conf" = { source = "${dotfiles}/.tmux.conf"; };
     #};
-
   };
-
 }

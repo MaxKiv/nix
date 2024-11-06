@@ -4,5 +4,4 @@
   ];
 
   #----Host specific config ----
-
 }

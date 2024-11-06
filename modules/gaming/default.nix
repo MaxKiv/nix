@@ -1,6 +1,9 @@
-{ pkgs, config, username, ... }:
-
 {
+  pkgs,
+  config,
+  username,
+  ...
+}: {
   # Enable OpenGL
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
@@ -31,9 +34,7 @@
   # required for proton GE installer
   home-manager.users.${username} = {
     home.sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-        "\${HOME}/.steam/root/compatibilitytools.d";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
     };
   };
-
 }

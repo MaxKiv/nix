@@ -1,11 +1,7 @@
-{ ... }:
-
-{
+{...}: {
   imports = [
     ./gnupg
     ./polkit
     ./sops
   ];
-
 }
-

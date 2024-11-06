@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   fonts.packages = with pkgs; [
     # KDE fallback font?
     material-design-icons
@@ -12,18 +10,17 @@
     ibm-plex
 
     # The nerdiest of fonts
-    (nerdfonts.override { fonts = [ "Hasklig" ]; })
+    (nerdfonts.override {fonts = ["Hasklig"];})
   ];
 
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      monospace = [ "Hasklig" ];
-      sansSerif = [ "Hasklig" ];
-      serif = [ "Hasklig" ];
+      monospace = ["Hasklig"];
+      sansSerif = ["Hasklig"];
+      serif = ["Hasklig"];
       # emoji = [ "Blobmoji" ]; # for blobs 😘
-      emoji = [ "Noto Color Emoji" ];
+      emoji = ["Noto Color Emoji"];
     };
   };
-
 }

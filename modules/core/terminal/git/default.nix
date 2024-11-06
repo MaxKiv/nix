@@ -1,13 +1,15 @@
-{ config, pkgs, home-manager, username, ... }:
-
-let
+{
+  config,
+  pkgs,
+  home-manager,
+  username,
+  ...
+}: let
   email = "maxkivits42@gmail.com";
   gitName = "MaxKiv";
-in
-{
-
+in {
   home-manager.users.${username} = {
-    home.packages = with pkgs; [ git ];
+    home.packages = with pkgs; [git];
 
     programs.git = {
       enable = true;
@@ -50,8 +52,6 @@ in
           #syntax-theme = "zebra-dark";
         };
       };
-
     };
   };
 }
-

@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
 {
-
+  config,
+  pkgs,
+  ...
+}: {
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -8,7 +10,6 @@
   };
 
   environment = {
-
     pathsToLink = [
       "/share/nautilus-python/extensions"
     ];
@@ -20,33 +21,35 @@
       gnome.nautilus-python
     ];
 
-    gnome.excludePackages = (with pkgs; [
-      gnome-text-editor
-      gnome-console
-      gnome-photos
-      gnome-tour
-      gnome-connections
-      snapshot
-    ]) ++ (with pkgs.gnome; [
-      cheese # webcam tool
-      gnome-music
-      gedit # text editor
-      epiphany # web browser
-      geary # email reader
-      evince # document viewer
-      gnome-characters
-      totem # video player
-      tali # poker game
-      iagno # go game
-      hitori # sudoku game
-      atomix # puzzle game
-      yelp # Help view
-      gnome-contacts
-      gnome-initial-setup
-      gnome-shell-extensions
-      gnome-maps
-      gnome-font-viewer
-    ]);
+    gnome.excludePackages =
+      (with pkgs; [
+        gnome-text-editor
+        gnome-console
+        gnome-photos
+        gnome-tour
+        gnome-connections
+        snapshot
+      ])
+      ++ (with pkgs.gnome; [
+        cheese # webcam tool
+        gnome-music
+        gedit # text editor
+        epiphany # web browser
+        geary # email reader
+        evince # document viewer
+        gnome-characters
+        totem # video player
+        tali # poker game
+        iagno # go game
+        hitori # sudoku game
+        atomix # puzzle game
+        yelp # Help view
+        gnome-contacts
+        gnome-initial-setup
+        gnome-shell-extensions
+        gnome-maps
+        gnome-font-viewer
+      ]);
   };
 
   services.xserver = {
@@ -62,15 +65,17 @@
   };
 
   programs.dconf.profiles = {
-    gdm.databases = [{
-      settings = {
-        "org/gnome/desktop/peripherals/touchpad" = {
-          tap-to-click = true;
+    gdm.databases = [
+      {
+        settings = {
+          "org/gnome/desktop/peripherals/touchpad" = {
+            tap-to-click = true;
+          };
+          "org/gnome/desktop/interface" = {
+            cursor-theme = "Qogir";
+          };
         };
-        "org/gnome/desktop/interface" = {
-          cursor-theme = "Qogir";
-        };
-      };
-    }];
+      }
+    ];
   };
 }

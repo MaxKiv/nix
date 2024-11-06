@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   imports = [
     ./boot
     ./fonts
@@ -12,5 +10,4 @@
     ./security
     ./terminal
   ];
-
 }
