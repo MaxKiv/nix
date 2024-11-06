@@ -9,8 +9,8 @@
   nixConfig = {
     # for more detail see:
     # https://nixos-and-flakes.thiscute.world/nixos-with-flakes/add-custom-cache-servers
-    extra-substituters = [ "https://nix-gaming.cachix.org" ];
-    extra-trusted-public-keys = [ "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
+    extra-substituters = ["https://nix-gaming.cachix.org"];
+    extra-trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
   };
 
   # Inputs to the flake
@@ -90,145 +90,156 @@
   };
 
   # Outputs this flake produces
-  outputs = { self, nixpkgs, ... } @ inputs:
-    let
-      supportedSystems = [ "x86_64-linux" ];
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
-      username = "max";
-      dotfilesDir = ./dotfiles;
-      inherit (self) outputs;
-    in
-    {
-      # overlays = import ./overlays {inherit inputs outputs;};
-      overlays = [
-        inputs.neovim-nightly-overlay.overlays.default
-        (_: _: {
-          nil = inputs.nil-lsp.packages."x86_64-linux".default;
-        })
-        (final: prev: {
-            # Override nil-lsp with a specific Rust toolchain
-            nil = prev.nil.overrideAttrs (old: {
-              nativeBuildInputs = old.nativeBuildInputs or [] ++ [
-                (final.rust-bin.stable."1.77.0".default.override {
-                  extensions = [ ];  # Add any extensions you need
-                })
-              ];
-            });
-          })
-      ];
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
+    supportedSystems = ["x86_64-linux"];
+    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+    nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
+    username = "max";
+    dotfilesDir = ./dotfiles;
+    inherit (self) outputs;
+  in {
+    # overlays = import ./overlays {inherit inputs outputs;};
+    overlays = [
+      inputs.neovim-nightly-overlay.overlays.default
+      (_: _: {
+        nil = inputs.nil-lsp.packages."x86_64-linux".default;
+      })
+      (final: prev: {
+        # Override nil-lsp with a specific Rust toolchain
+        nil = prev.nil.overrideAttrs (old: {
+          nativeBuildInputs =
+            old.nativeBuildInputs
+            or []
+            ++ [
+              (final.rust-bin.stable."1.77.0".default.override {
+                extensions = []; # Add any extensions you need
+              })
+            ];
+        });
+      })
+    ];
 
-      # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
-      nixosConfigurations = {
-
-        # Desktop pc host
-        terra =
-          let system = "x86_64-linux";
-          in nixpkgs.lib.nixosSystem {
-            specialArgs = {
+    # NixOS configuration entrypoint
+    # Available through 'nixos-rebuild --flake .#your-hostname'
+    nixosConfigurations = {
+      # Desktop pc host
+      terra = let
+        system = "x86_64-linux";
+      in
+        nixpkgs.lib.nixosSystem {
+          specialArgs =
+            {
               hostname = "terra";
               type = "desktop";
               inherit system username dotfilesDir;
-            } // inputs;
-            modules = [
-              # import default modules through default.nix
-              ./.
-              # Specify host specific modules
-              ./modules/hardware/network
-              ./modules/hardware/nvidia
-              ./modules/desktop/kde
-              ./modules/gaming
-            ];
-          };
+            }
+            // inputs;
+          modules = [
+            # import default modules through default.nix
+            ./.
+            # Specify host specific modules
+            ./modules/hardware/network
+            ./modules/hardware/nvidia
+            ./modules/desktop/kde
+            ./modules/gaming
+          ];
+        };
 
-        # Craptop
-        downtown =
-          let system = "x86_64-linux";
-          in nixpkgs.lib.nixosSystem {
-            specialArgs = {
+      # Craptop
+      downtown = let
+        system = "x86_64-linux";
+      in
+        nixpkgs.lib.nixosSystem {
+          specialArgs =
+            {
               hostname = "downtown";
               type = "laptop";
               inherit system username dotfilesDir;
-            } // inputs;
-            modules = [
-              # import default modules through default.nix
-              ./.
-              # Specify host specific modules
-              inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t440s
-              ./modules/hardware/network
-              ./modules/desktop/kde
-            ];
-          };
+            }
+            // inputs;
+          modules = [
+            # import default modules through default.nix
+            ./.
+            # Specify host specific modules
+            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t440s
+            ./modules/hardware/network
+            ./modules/desktop/kde
+          ];
+        };
 
-        # Thinkpad
-        rapanui =
-          let system = "x86_64-linux";
-          in nixpkgs.lib.nixosSystem {
-            specialArgs = {
+      # Thinkpad
+      rapanui = let
+        system = "x86_64-linux";
+      in
+        nixpkgs.lib.nixosSystem {
+          specialArgs =
+            {
               hostname = "rapanui";
               type = "laptop";
               inherit system username dotfilesDir inputs;
-            } // inputs;
-            modules = [
-              {
-                nixpkgs.overlays = [
-                  inputs.neovim-nightly-overlay.overlays.default
-                ];
-              }
-              # import default modules through default.nix
-              ./.
-              # Specify host specific modules
-              inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
-              ./modules/hardware/network
-              ./modules/desktop/kde
-              ./modules/gaming
-            ];
-          };
+            }
+            // inputs;
+          modules = [
+            {
+              nixpkgs.overlays = [
+                inputs.neovim-nightly-overlay.overlays.default
+              ];
+            }
+            # import default modules through default.nix
+            ./.
+            # Specify host specific modules
+            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
+            ./modules/hardware/network
+            ./modules/desktop/kde
+            ./modules/gaming
+          ];
+        };
+    }; # nixosConfigurations
 
-      }; # nixosConfigurations
-
-      # nixos-generators entrypoint
-      packages.x86_64-linux = {
-        # Install-iso configuration
-        iso = inputs.nixos-generators.nixosGenerate {
-          specialArgs = {
+    # nixos-generators entrypoint
+    packages.x86_64-linux = {
+      # Install-iso configuration
+      iso = inputs.nixos-generators.nixosGenerate {
+        specialArgs =
+          {
             system = "x86_64-linux";
             format = "install-iso";
             hostname = "live";
             type = "laptop"; # TODO this makes no sense
             inherit username dotfilesDir;
-          } // inputs;
-          modules = [
-            ./hosts
-          ];
-          system = "x86_64-linux";
-          format = "install-iso";
-        };
+          }
+          // inputs;
+        modules = [
+          ./hosts
+        ];
+        system = "x86_64-linux";
+        format = "install-iso";
+      };
+    }; # packages
 
-      }; # packages
+    # Development shells provided by this flake, to use:
+    # nix develop .#default
+    devShells = forAllSystems (system: let
+      pkgs = nixpkgsFor.${system};
+    in {
+      default = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          sops
+          nixpkgs-fmt
+          statix
+        ];
+      };
+    });
 
-      # Development shells provided by this flake, to use:
-      # nix develop .#default
-      devShells = forAllSystems (system:
-        let
-          pkgs = nixpkgsFor.${system};
-        in
-        {
-          default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              sops
-              nixpkgs-fmt
-              statix
-            ];
-          };
-        });
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
-
-      # templates.default = {
-      #   path = ./.;
-      #   description = "The default template for Eriim's nixflakes.";
-      # }; #templates
-    };
+    # templates.default = {
+    #   path = ./.;
+    #   description = "The default template for Eriim's nixflakes.";
+    # }; #templates
+  };
 }

@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   imports = [
     ./alacritty
     ./bash
@@ -13,5 +11,4 @@
     ./tmux
     ./zoxide
   ];
-
 }

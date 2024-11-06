@@ -1,5 +1,11 @@
-{ sops-nix, config, home-manager, hostname, username, ... }:
 {
+  sops-nix,
+  config,
+  home-manager,
+  hostname,
+  username,
+  ...
+}: {
   imports = [
     sops-nix.nixosModules.sops
   ];
@@ -8,6 +14,4 @@
   sops.defaultSopsFormat = "yaml";
 
   sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
-
 }
-

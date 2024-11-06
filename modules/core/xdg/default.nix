@@ -1,7 +1,4 @@
-{ ... }:
-
-{
-
+{...}: {
   xdg = {
     configFile."mimeapps.list".force = true;
     mimeAppsenable = true;

@@ -1,7 +1,4 @@
-{ ... }:
-
-{
-
+{...}: {
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
@@ -19,5 +16,4 @@
     LC_TELEPHONE = "nl_NL.UTF-8";
     LC_TuptownIME = "nl_NL.UTF-8";
   };
-
 }

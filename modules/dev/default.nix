@@ -1,5 +1,9 @@
-{ config, pkgs, username, ... }:
 {
+  config,
+  pkgs,
+  username,
+  ...
+}: {
   imports = [
     ./embedded
     ./rust
@@ -19,4 +23,3 @@
     git-open
   ];
 }
-

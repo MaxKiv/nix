@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   imports = [
     ./bitwarden
     ./chromium
@@ -10,5 +8,4 @@
     ./libreoffice
     ./vlc
   ];
-
 }

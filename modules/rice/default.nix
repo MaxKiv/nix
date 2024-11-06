@@ -1,9 +1,11 @@
-{ pkgs, inputs, username, ... }:
-
-let
-  stylix = inputs.stylix;
-in
 {
+  pkgs,
+  inputs,
+  username,
+  ...
+}: let
+  stylix = inputs.stylix;
+in {
   imports = [
     stylix.nixosModules.stylix
   ];
@@ -21,7 +23,7 @@ in
 
   stylix.fonts = {
     monospace = {
-      package = pkgs.nerdfonts.override { fonts = [ "Hasklig" ]; };
+      package = pkgs.nerdfonts.override {fonts = ["Hasklig"];};
       name = "Hasklug Nerd Font";
     };
     sansSerif = {
@@ -58,6 +60,4 @@ in
       kde.enable = true;
     };
   };
-
 }
-

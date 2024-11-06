@@ -1,10 +1,7 @@
-{ ... }:
-
-{
+{...}: {
   imports = [
     ./bluetooth
     ./print
     ./sound
   ];
-
 }

@@ -1,5 +1,10 @@
-{ pkgs, username, lib, home-manager, ... }:
 {
+  pkgs,
+  username,
+  lib,
+  home-manager,
+  ...
+}: {
   # This contains everything that should be in an iso
   imports = [
     home-manager.nixosModules.home-manager
@@ -19,17 +24,16 @@
   # FIX for running out of space / tmp, which is used for building
   fileSystems."/nix/.rw-store" = {
     fsType = "tmpfs";
-    options = [ "mode=0755" "nosuid" "nodev" "relatime" "size=14G" ];
+    options = ["mode=0755" "nosuid" "nodev" "relatime" "size=14G"];
     neededForBoot = true;
   };
-
 
   # Override user
   users.users.${username} = {
     shell = pkgs.bash;
     isNormalUser = true;
     initialPassword = "Proverdi12";
-    extraGroups = [ "wheel" "input" "video" "render" ];
+    extraGroups = ["wheel" "input" "video" "render"];
   };
 
   services.getty.autologinUser = lib.mkForce "${username}";

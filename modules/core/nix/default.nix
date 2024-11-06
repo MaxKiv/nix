@@ -1,14 +1,18 @@
-{ inputs, home-manager, pkgs, username, ... }:
-
 {
+  inputs,
+  home-manager,
+  pkgs,
+  username,
+  ...
+}: {
   # Required for nix flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # Trust current user, allows us to add binary caches etc
-  nix.settings.trusted-users = [ username ];
+  nix.settings.trusted-users = [username];
 
   # Perform automatic garbage collection of the nix store
   nix.gc = {
@@ -34,7 +38,7 @@
 
   # Use system level nixpkgs, this captures our overlays too
   home-manager.useUserPackages = true;
-  home-manager.sharedModules = [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
+  home-manager.sharedModules = [inputs.plasma-manager.homeManagerModules.plasma-manager];
   home-manager.useGlobalPkgs = true;
   home-manager.verbose = true;
 
@@ -55,5 +59,4 @@
 
   # Enable envfs for fhs compatibility
   services.envfs.enable = true;
-
 }
