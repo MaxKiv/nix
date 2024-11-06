@@ -11,6 +11,10 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Set system flake registry to speed up nix shells
+  # See: https://yusef.napora.org/blog/pinning-nixpkgs-flake/
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
+
   # Trust current user, allows us to add binary caches etc
   nix.settings.trusted-users = [username];
 
