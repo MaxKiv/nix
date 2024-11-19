@@ -44,5 +44,6 @@
     nethogs # network monitor tool
     sniffnet # network monitor tool
     imagemagick # a classic
+    poppler_utils # pdfunite and other pdf utils
   ];
 }
