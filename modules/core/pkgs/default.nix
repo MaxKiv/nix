@@ -6,6 +6,8 @@
     cowsay # very important
     neofetch # very important
     eza # better ls
+    duf # better df (file system tool)
+    jq # sed for JSON
     git # its git
     wget # get stuff from the web
     xclip # clipboard binary
@@ -41,5 +43,6 @@
     inkscape # wish I was smart enough for this
     nethogs # network monitor tool
     sniffnet # network monitor tool
+    imagemagick # a classic
   ];
 }
