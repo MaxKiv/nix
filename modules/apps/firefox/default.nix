@@ -307,19 +307,18 @@ let
       "Spotify" = {
         urls = [
           {
-            template = "https://open.spotify.com/";
-            params = [
-              {
-                name = "";
-                value = "{searchTerms}";
-              }
-            ];
+            template = "https://open.spotify.com/search/{searchTerms}";
           }
         ];
 
-        # icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+        iconUpdateURL = "https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png";
         definedAliases = ["@s"];
       };
+
+      "Cargo" = {
+            urls = [{template = "https://crates.io/crates/{searchTerms}";}];
+            definedAliases = ["@c"];
+          };
 
       "CPPReference" = {
         urls = [
@@ -338,24 +337,18 @@ let
           }
         ];
 
-        icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-        definedAliases = ["@c"];
+        # icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+        definedAliases = ["@x"];
       };
 
       "Reddit" = {
         urls = [
           {
-            template = "https://reddit.com/r/";
-            params = [
-              {
-                name = "";
-                value = "{searchTerms}";
-              }
-            ];
+            template = "https://reddit.com/r/{searchTerms}";
           }
         ];
 
-        icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+        # icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
         definedAliases = ["@r"];
       };
     };
