@@ -7,6 +7,8 @@
     #noto-fonts-emoji-blob-bin
     noto-fonts-color-emoji
 
+    roboto
+
     ibm-plex
 
     # The nerdiest of fonts
