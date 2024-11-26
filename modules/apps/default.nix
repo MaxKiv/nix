@@ -6,6 +6,7 @@
     ./discord
     ./firefox
     ./libreoffice
+    ./thunar
     ./vlc
   ];
 }

@@ -316,9 +316,9 @@ let
       };
 
       "Cargo" = {
-            urls = [{template = "https://crates.io/crates/{searchTerms}";}];
-            definedAliases = ["@c"];
-          };
+        urls = [{template = "https://crates.io/crates/{searchTerms}";}];
+        definedAliases = ["@c"];
+      };
 
       "CPPReference" = {
         urls = [

@@ -67,6 +67,7 @@
         grs = "${pkgs.git}/bin/git rebase --gpg-sign=\"Max Kivits\"";
         gris = "${pkgs.git}/bin/git rebase -i --gpg-sign=\"Max Kivits\"";
         gru = "${pkgs.git}/bin/git reset \"@{u}\"";
+        g- = "${pkgs.git}/bin/git switch -";
 
         # Tmux
         tms = "${pkgs.tmux}/bin/tmux new-session -s";
@@ -87,6 +88,15 @@
 
       mkcd() {
         mkdir "$1" && cd "$_"
+      }
+
+      # checkout git branch (including remote branches), sorted by most recent commit, limit 30 last branches
+      gsw() {
+        local branches branch
+        branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+        branch=$(echo "$branches" |
+                 fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+        git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
       }
 
       # TODO make this work for all hosts and display servers
@@ -143,14 +153,14 @@
 
       # open a file selected by fzf in vim
       vf() {
-        nvim "$(fzf)"
+        nvim "$(fzf-tmux)"
       }
 
       # fd - cd to selected directory
       fd() {
         local dir
         dir=$(find ''${1:-.} -path '*/\.*' -prune \
-          -o -type d -print 2> /dev/null | fzf +m) &&
+          -o -type d -print 2> /dev/null | fzf-tmux +m) &&
           cd "$dir"
         }
 
@@ -191,7 +201,7 @@
 
       lsb() {
         local selected_file
-        selected_file=$(find . -type f -executable 2>/dev/null | fzf)
+        selected_file=$(find . -type f -executable 2>/dev/null | fzf-tmux)
 
         if [ -n "$selected_file" ]; then
           echo -n "$selected_file" | xclip -selection clipboard
