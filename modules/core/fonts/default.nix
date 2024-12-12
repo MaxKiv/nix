@@ -12,15 +12,15 @@
     ibm-plex
 
     # The nerdiest of fonts
-    (nerdfonts.override {fonts = ["Hasklig"];})
+    nerd-fonts.hasklug
   ];
 
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      monospace = ["Hasklig"];
-      sansSerif = ["Hasklig"];
-      serif = ["Hasklig"];
+      monospace = ["Hasklug"];
+      sansSerif = ["Hasklug"];
+      serif = ["Hasklug"];
       # emoji = [ "Blobmoji" ]; # for blobs 😘
       emoji = ["Noto Color Emoji"];
     };
