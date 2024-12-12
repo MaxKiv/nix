@@ -40,6 +40,11 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11";
 
+  # Make sure nix LSP is available
+  environment.systemPackages = [
+    pkgs.nil
+  ];
+
   # Use system level nixpkgs, this captures our overlays too
   home-manager.useUserPackages = true;
   home-manager.sharedModules = [inputs.plasma-manager.homeManagerModules.plasma-manager];

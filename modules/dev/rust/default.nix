@@ -10,6 +10,7 @@
     rustup
     rustfmt
     clippy
+    rust-analyzer
     cargo-generate
     cargo-binutils
   ];
