@@ -2,6 +2,7 @@
   imports = [
     ./alacritty
     ./bash
+    ./bat
     ./direnv
     ./fzf
     ./git
@@ -9,6 +10,7 @@
     ./nvim
     ./starship
     ./tmux
+    ./zellij
     ./zoxide
   ];
 }
