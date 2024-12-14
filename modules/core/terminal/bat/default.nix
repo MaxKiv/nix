@@ -26,5 +26,9 @@
       home.activation.postActivate = ''
         ${pkgs.bat}/bin/bat cache --build
       '';
+
+      home.sessionVariables = {
+        BAT_CONFIG_PATH="${config.home.homeDirectory}/git/nix/dotfiles/.config/bat/bat.conf";
+      };
     };
 }
