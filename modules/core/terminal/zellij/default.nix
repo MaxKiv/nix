@@ -1,9 +1,9 @@
 {
-config,
-pkgs,
-home-manager,
-username,
-...
+  config,
+  pkgs,
+  home-manager,
+  username,
+  ...
 }: {
   home-manager.users.${username} = {
     config,
@@ -21,5 +21,4 @@ username,
       "zellij/layouts" = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/zellij/layouts";};
     };
   };
-
 }

@@ -104,10 +104,12 @@
   in {
     # overlays = import ./overlays {inherit inputs outputs;};
     overlays = [
+      # Neovim nightly overlay
       inputs.neovim-nightly-overlay.overlays.default
       (_: _: {
         nil = inputs.nil-lsp.packages."x86_64-linux".default;
       })
+      # overlay to fix nil-lsp derivation
       (final: prev: {
         # Override nil-lsp with a specific Rust toolchain
         nil = prev.nil.overrideAttrs (old: {
@@ -229,17 +231,12 @@
       default = pkgs.mkShell {
         buildInputs = with pkgs; [
           sops
-          nixpkgs-fmt
+          alejandra
           statix
         ];
       };
     });
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
-
-    # templates.default = {
-    #   path = ./.;
-    #   description = "The default template for Eriim's nixflakes.";
-    # }; #templates
   };
 }
