@@ -12,7 +12,7 @@ in {
 
   stylix.enable = true;
 
-  stylix.image = ../../assets/backgrounds/sunset-train.jpg;
+  stylix.image = ../../assets/backgrounds/future-windmill.png;
   # colorschemes: https://github.com/tinted-theming/base16-schemes
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
