@@ -46,5 +46,6 @@
     imagemagick # a classic
     poppler_utils # pdfunite and other pdf utils
     ffmpeg # its ffmpeg
+    tdesktop # telegram desktop
   ];
 }
