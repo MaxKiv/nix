@@ -1,28 +1,43 @@
 {pkgs, ...}: {
   fonts.packages = with pkgs; [
-    # KDE fallback font?
     material-design-icons
 
-    # Better emojis? 🏎️
+    roboto
+    roboto-mono
+    roboto-serif
+    roboto-slab
+
+    fira
+    # fira-code
+    fira-mono
+    fira-sans
+
+    source-code-pro
+    source-sans
+    source-sans-pro
+    source-serif
+    source-serif-pro
+
     #noto-fonts-emoji-blob-bin
     noto-fonts-color-emoji
-
-    roboto
+    twitter-color-emoji
+    unicode-emoji
 
     ibm-plex
 
-    # The nerdiest of fonts
     nerd-fonts.hasklug
+    nerd-fonts.fira-code
+    nerd-fonts.droid-sans-mono
   ];
 
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      monospace = ["Hasklug"];
-      sansSerif = ["Hasklug"];
-      serif = ["Hasklug"];
+      monospace = ["Fira Mono" "Hasklug" "Source Code Pro"];
+      serif = ["Fira Serif" "Hasklug" "Source Serif Pro"];
+      sansSerif = ["Fira Sans" "Hasklug" "Source Sans Pro"];
       # emoji = [ "Blobmoji" ]; # for blobs 😘
-      emoji = ["Noto Color Emoji"];
+      emoji = ["Twitter Color Emoji"];
     };
   };
 }
