@@ -3,7 +3,7 @@
 
 # Build and deploy this NixOS derivation
 deploy:
-  sudo nixos-rebuild switch --flake . --specialisation kde
+  sudo nixos-rebuild switch --flake .
 
 # Print all available just commands
 help:

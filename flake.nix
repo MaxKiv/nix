@@ -78,7 +78,7 @@
     # Collection of bleeding edge nix packages -> just used for NordVPN for now
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
-    # Ricing, see default.nix && rice/
+    # Apply system-wide styling declaratively
     stylix.url = "github:danth/stylix";
 
     # Declaratively manage plasma using home-manager
@@ -86,6 +86,12 @@
       url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
+    };
+
+    # Declaratively style the spotify client
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -196,7 +202,8 @@
             # Specify host specific modules
             inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
             ./modules/hardware/network
-            ./modules/desktop/kde
+            # ./modules/desktop/kde
+            ./modules/desktop/sway
             ./modules/gaming
           ];
         };
