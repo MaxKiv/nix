@@ -18,8 +18,10 @@ in {
 
   stylix.polarity = "dark"; # "light" or "either"
 
-  stylix.cursor.package = pkgs.bibata-cursors;
-  stylix.cursor.name = "Bibata-Modern-Ice";
+  # stylix.cursor.package = pkgs.bibata-cursors;
+  # stylix.cursor.name = "Bibata-Modern-Ice";
+  stylix.cursor.package = pkgs.catppuccin-cursors.mochaLight;
+  stylix.cursor.name = "Catppuccin-Mocha-Light";
 
   stylix.fonts = {
     monospace = {
@@ -28,19 +30,19 @@ in {
     };
     sansSerif = {
       package = pkgs.dejavu_fonts;
-      name = "DejaVu Sans";
+      name = "Roboto";
     };
     serif = {
       package = pkgs.dejavu_fonts;
-      name = "DejaVu Serif";
+      name = "Roboto";
     };
   };
 
   stylix.fonts.sizes = {
-    applications = 12;
-    terminal = 15;
-    desktop = 10;
-    popups = 10;
+    applications = 13;
+    terminal = 13;
+    desktop = 13;
+    popups = 13;
   };
 
   stylix.opacity = {
@@ -56,8 +58,6 @@ in {
       vim.enable = false;
       neovim.enable = false;
       alacritty.enable = false;
-
-      kde.enable = true;
     };
   };
 }

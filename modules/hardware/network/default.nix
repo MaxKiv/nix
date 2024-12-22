@@ -44,6 +44,7 @@
   networking.wireless.networks = {
     home.psk = "@home_psk@";
     hotspot.psk = "@hotspot_psk@";
+    soof_spot.psk = "@soof_spot_spk@";
     leushuis.psk = "@leushuis_psk@";
   };
 
