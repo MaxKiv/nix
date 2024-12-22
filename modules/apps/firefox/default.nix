@@ -37,6 +37,9 @@ let
       "DisplayMenuBar" = "default-off"; # alternatives: "always", "never" or "default-on"
       "SearchBar" = "unified"; # alternative: "separate"
 
+      # disable alt menu
+      "ui.key.menuAccessKeyFocuses" = false;
+
       # disable updates (pretty pointless with nix)
       "app.update.channel" = "default";
 
