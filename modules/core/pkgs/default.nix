@@ -10,7 +10,6 @@
     jq # sed for JSON
     git # its git
     wget # get stuff from the web
-    xclip # clipboard binary
     bat # the better cat
     ripgrep # the better grep
     fd # the better find
