@@ -84,7 +84,7 @@
         zma = "${pkgs.zellij}/bin/zellij attach";
 
         # xclip
-        clip = "${pkgs.xclip}/bin/xclip -sel clip";
+        # clip = "${pkgs.xclip}/bin/xclip -sel clip";
       };
     };
 
@@ -94,6 +94,14 @@
       export NIX_LD=$(nix eval --impure --raw --expr 'let pkgs = import <nixpkgs> {}; NIX_LD = pkgs.lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker"; in NIX_LD')
 
       export BASH_ENV="~/.bash_aliases"
+
+      function clip() {
+        if [ -z "''${WAYLAND_DISPLAY}" ]; then
+          ${pkgs.xclip}/bin/xclip -sel clip
+        else
+          ${pkgs.wl-clipboard-rs}/bin/wl-copy
+        fi
+      }
 
       mkcd() {
         mkdir "$1" && cd "$_"
@@ -254,7 +262,7 @@
           (echo "$zellij_sessions") | sort -u | fzf
         )
         if [ -n "$selected_session" ]; then
-          zellij delete-session "$selected_session"
+          zellij delete-session "$selected_session" --force
         fi
       }
     '';

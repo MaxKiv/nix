@@ -14,6 +14,7 @@
       enable = true;
       enableBashIntegration = false; # Dont autostart in every terminal thanks
     };
+    stylix.targets.zellij.enable = true;
 
     # symlink to zellij config file in dotfiles repo
     xdg.configFile = {
