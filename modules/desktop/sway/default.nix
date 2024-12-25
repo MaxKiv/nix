@@ -57,6 +57,7 @@ in
     ../components/mako
     ../components/wofi
     ../components/clipman
+    ../components/flashfocus
   ];
 
   environment.systemPackages = with pkgs; [
@@ -81,6 +82,7 @@ in
     # networkmanagerapplet # System tray GUI for networkmanager
     pulsemixer # CLI to control puleaudio
     # power-profiles-daemon # make power profiles available over D-Bus
+    flashfocus # Python script that flashes window I switch focus to
   ];
 
   # Enable the gnome-keyring secrets vault. 
