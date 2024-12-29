@@ -269,6 +269,35 @@ let
         definedAliases = ["@h"];
       };
 
+      "Translate" = {
+        urls = [
+          {
+            template = "https://translate.google.com/";
+            params = [
+              {
+                name = "sl";
+                value = "en";
+              }
+              {
+                name = "tl";
+                value = "nl";
+              }
+              {
+                name = "text";
+                value = "{searchTerms}";
+              }
+              {
+                name = "op";
+                value = "translate";
+              }
+            ];
+          }
+        ];
+
+        icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+        definedAliases = ["@t"];
+      };
+
       "Github" = {
         urls = [
           {
