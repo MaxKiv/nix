@@ -14,6 +14,8 @@
   # Set system flake registry to speed up nix shells
   # See: https://yusef.napora.org/blog/pinning-nixpkgs-flake/
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
+  nix.settings.flake-registry = "${inputs.flake-registry}/flake-registry.json";
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ]; # For legacy commands
 
   # Trust current user, allows us to add binary caches etc
   nix.settings.trusted-users = [username];
