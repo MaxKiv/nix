@@ -20,8 +20,11 @@ in {
 
   # stylix.cursor.package = pkgs.bibata-cursors;
   # stylix.cursor.name = "Bibata-Modern-Ice";
-  stylix.cursor.package = pkgs.catppuccin-cursors.mochaLight;
-  stylix.cursor.name = "Catppuccin-Mocha-Light";
+  stylix.cursor = {
+    package = pkgs.catppuccin-cursors.mochaLight;
+    name = "Catppuccin-Mocha-Light-Cursors";
+    size = 24;
+  };
 
   stylix.fonts = {
     monospace = {
@@ -47,7 +50,7 @@ in {
 
   stylix.opacity = {
     applications = 1.0;
-    terminal = 1.0;
+    terminal = 0.8;
     desktop = 1.0;
     popups = 1.0;
   };
@@ -59,5 +62,10 @@ in {
       neovim.enable = false;
       alacritty.enable = false;
     };
+
+    # stylix.iconTheme = {
+    #   enable = true;
+    #   package = pkgs.papirus-icon-theme;
+    # };
   };
 }
