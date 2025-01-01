@@ -166,8 +166,11 @@ in
     }: {
       # Services required for a smooth sway/waybar experience
       services.batsignal.enable = true;
-      services.blueman-applet.enable = true;
       services.network-manager-applet.enable = true;
+
+      services.blueman-applet.enable = true;
+      home.packages = [ pkgs.dconf ];
+      dconf.settings."org/blueman/plugins/powermanager".auto-power-on = false;
 
       stylix.targets.kde.enable = false;
 
