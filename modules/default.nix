@@ -6,6 +6,6 @@
     ./hardware
     ./dev
     # ./gaming
-    ./rice
+    ./stylix
   ];
 }

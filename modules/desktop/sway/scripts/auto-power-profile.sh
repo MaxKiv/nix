@@ -30,6 +30,7 @@ while true; do
     if [[ $prev != "$profile" ]]; then
         echo setting power profile to $profile
         powerprofilesctl set $profile
+        pkill -RTMIN+8 waybar # Attempt to signal waybar components
     fi
 
     prev=$profile
