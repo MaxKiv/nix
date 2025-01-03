@@ -1,6 +1,29 @@
 { username, ... }:
 {
-  services.mpd.user = username;
+  # Run mpd as system service
+  services.mpd = {
+    enable = true;
+    user = username; # run as main user
+    musicDirectory = "/home/max/music";
+    extraConfig = ''
+      restore_paused "yes"
+      replaygain "auto"
+      follow_outside_symlinks "yes"
+      auto_update "yes"
+
+      audio_output {
+        type "fifo"
+        name "Visualizer"
+        format "44100:16:2"
+        path "/tmp/mpd.fifo"
+      }
+      audio_output {
+        type "pipewire"
+        name "My PipeWire Output"
+      }
+    '';
+  };
+
   systemd.services.mpd.environment = {
     # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
     XDG_RUNTIME_DIR = "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
@@ -11,29 +34,18 @@
     , pkgs
     , ...
     }: {
-      # Media player daemon
-      services.mpd = {
-        enable = true;
-        musicDirectory = "${config.xdg.userDirs.music}";
-        network.startWhenNeeded = true;
-        dataDir = "${config.home.homeDirectory}/.config/mpd";
-        extraConfig = ''
-          follow_outside_symlinks "yes"
-          auto_update "yes"
-          audio_output {
-            type "fifo"
-            name "Visualizer"
-            format "44100:16:2"
-            path "/tmp/mpd.fifo"
-          }
-          audio_output {
-            type "pipewire"
-            name "My PipeWire Output"
-          }
-        '';
+      # Enable Media Player Remote Interfacing Specification for MPD
+      services.mpd-mpris.enable = true;
+
+      # MPD Clients
+      home.packages = with pkgs; [ rmpc ];
+
+      # Symlink rmpc dotfile, look there for keybinds
+      xdg.configFile = {
+        "rmpc/config.ron" = { source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/rmpc/config.ron"; };
       };
 
-      # MPD Client
+      # For keybinds see: https://pkgbuild.com/~jelle/ncmpcpp/
       programs.ncmpcpp = {
         enable = true;
         package = pkgs.ncmpcpp.override {
@@ -54,8 +66,8 @@
           centered_cursor = "yes";
           allow_for_physical_item_deletion = "yes";
           lines_scrolled = "0";
-          follow_now_playing_lyrics = "yes";
-          lyrics_fetchers = "musixmatch";
+          #follow_now_playing_lyrics = "yes";
+          #lyrics_fetchers = "musixmatch";
 
           # visualizer
           visualizer_data_source = "/tmp/mpd.fifo";
@@ -101,6 +113,28 @@
 
           color1 = "white";
           color2 = "blue";
+        };
+      };
+
+      xdg.desktopEntries = {
+        "ncmpcpp" = {
+          name = "ncmpcpp";
+          comment = "Listen to music";
+          icon = "ncmpcpp";
+          exec = "${pkgs.alacritty}/bin/alacritty -e ncmpcpp";
+          categories = [ "Application" ];
+          terminal = false;
+          #mimeType = ["text/plain"];
+        };
+
+        "rmpc" = {
+          name = "music: rmpc";
+          comment = "Listen to music";
+          icon = "rmpc";
+          exec = "${pkgs.alacritty}/bin/alacritty -e rmpc";
+          categories = [ "Application" ];
+          terminal = false;
+          #mimeType = ["text/plain"];
         };
       };
     };
