@@ -83,6 +83,7 @@ in
     networkmanager # Manage wireless networks
     # networkmanagerapplet # System tray GUI for networkmanager
     pulsemixer # CLI to control puleaudio
+    alsa-utils # for amixer to mute mic
     # power-profiles-daemon # make power profiles available over D-Bus
     flashfocus # Python script that flashes window I switch focus to
   ];
@@ -125,7 +126,7 @@ in
 
   xdg.portal = {
     enable = true;
-    xdgOpenUsePortal = true;
+    # xdgOpenUsePortal = true;
     wlr.enable = true;
     wlr.settings.screencast = {
       # TODO: this is laptop only
@@ -153,7 +154,7 @@ in
       xdg-desktop-portal-gtk
       # xdg-desktop-portal-hyprland
       # xdg-desktop-portal-shana
-      xdg-desktop-portal-wlr
+      # xdg-desktop-portal-wlr
       # xdg-desktop-portal-kde
     ];
   };
@@ -200,36 +201,36 @@ in
       xdg.configFile = {
         "sway/config" = { source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/sway/config"; };
 
-        "xdg-desktop-portal-shana/config.toml" = {
-          text = ''
-          open_file = "Kde"
-          save_file = "Kde"
-
-          [tips]
-          open_file_when_folder = "Kde"
-
-          [file-dialog]
-          # Show hidden files in the file dialog
-          show-hidden = true
-
-          # Set the initial folder when the dialog opens
-          initial-folder = "~/"
-
-          # Allow selecting multiple files at once
-          allow-multiple = true
-
-          # Set dialog size (width x height in pixels)
-          size = [800, 600]
-
-          # Enable bookmarks for quick navigation
-          bookmarks = [
-              "~/Downloads",
-              "~/Pictures",
-              "~/git"
-              "~/projects"
-          ]
-          '';
-        };
+        # "xdg-desktop-portal-shana/config.toml" = {
+        #   text = ''
+        #   open_file = "Kde"
+        #   save_file = "Kde"
+        #
+        #   [tips]
+        #   open_file_when_folder = "Kde"
+        #
+        #   [file-dialog]
+        #   # Show hidden files in the file dialog
+        #   show-hidden = true
+        #
+        #   # Set the initial folder when the dialog opens
+        #   initial-folder = "~/"
+        #
+        #   # Allow selecting multiple files at once
+        #   allow-multiple = true
+        #
+        #   # Set dialog size (width x height in pixels)
+        #   size = [800, 600]
+        #
+        #   # Enable bookmarks for quick navigation
+        #   bookmarks = [
+        #       "~/Downloads",
+        #       "~/Pictures",
+        #       "~/git"
+        #       "~/projects"
+        #   ]
+        #   '';
+        # };
       };
     };
 }
