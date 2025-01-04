@@ -12,7 +12,6 @@
   # make power profiles available over D-Bus
   services.power-profiles-daemon.enable = true;
 
-  # symlink to config file in dotfiles repo
   home-manager.users.${username} =
     { config
     , pkgs

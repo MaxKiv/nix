@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   imports = [
     ./alacritty
     ./bash
@@ -10,6 +10,7 @@
     ./nvim
     ./starship
     ./tmux
+    ./yazi
     ./zellij
     ./zoxide
   ];

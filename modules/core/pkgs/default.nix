@@ -49,5 +49,7 @@
     ffmpeg # its ffmpeg
     tdesktop # telegram desktop
     qimgv # image viewer
+    picard # GUI to edit music metadata
+    zenity # spawn xdg portals
   ];
 }
