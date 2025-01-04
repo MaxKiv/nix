@@ -58,6 +58,8 @@ in
     ../components/wofi
     ../components/clipman
     ../components/flashfocus
+    # TODO: fix this
+    # ../components/xdg-desktop-portal-termfilechooser
   ];
 
   environment.systemPackages = with pkgs; [
@@ -123,6 +125,7 @@ in
 
   xdg.portal = {
     enable = true;
+    xdgOpenUsePortal = true;
     wlr.enable = true;
     wlr.settings.screencast = {
       # TODO: this is laptop only
@@ -131,8 +134,28 @@ in
       chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
     };
 
-    # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    # config.common = {
+    #   default = "kde";
+    #   "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+    #   "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+    #   "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+    #   "org.freedesktop.portal.FileChooser" = [ "kde" ];
+    # };
+    #
+    # config.sway = {
+    #   default = pkgs.lib.mkForce "kde";
+    #   # "org.freedesktop.impl.portal.Settings"=["luminous" "gtk"];
+    #   "org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
+    # };
+
+    # gtk portals backend implementations
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      # xdg-desktop-portal-hyprland
+      # xdg-desktop-portal-shana
+      xdg-desktop-portal-wlr
+      # xdg-desktop-portal-kde
+    ];
   };
 
   # use greetd with tuigreet as login manager
@@ -176,6 +199,37 @@ in
 
       xdg.configFile = {
         "sway/config" = { source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/sway/config"; };
+
+        "xdg-desktop-portal-shana/config.toml" = {
+          text = ''
+          open_file = "Kde"
+          save_file = "Kde"
+
+          [tips]
+          open_file_when_folder = "Kde"
+
+          [file-dialog]
+          # Show hidden files in the file dialog
+          show-hidden = true
+
+          # Set the initial folder when the dialog opens
+          initial-folder = "~/"
+
+          # Allow selecting multiple files at once
+          allow-multiple = true
+
+          # Set dialog size (width x height in pixels)
+          size = [800, 600]
+
+          # Enable bookmarks for quick navigation
+          bookmarks = [
+              "~/Downloads",
+              "~/Pictures",
+              "~/git"
+              "~/projects"
+          ]
+          '';
+        };
       };
     };
 }
