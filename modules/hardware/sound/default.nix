@@ -1,9 +1,10 @@
-{ pkgs
-, username
-, ...
+{
+  pkgs,
+  username,
+  ...
 }: {
   users.users.${username} = {
-    extraGroups = [ "audio" ];
+    extraGroups = ["audio"];
   };
 
   # Enable the RealtimeKit system service so pipewire can ask for realtime scheduling

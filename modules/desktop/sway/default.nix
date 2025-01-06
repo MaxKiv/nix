@@ -1,11 +1,11 @@
 # closing screen still sleeps laptop?
 # idle?
-{ pkgs
-, config
-, username
-, ...
-}:
-let
+{
+  pkgs,
+  config,
+  username,
+  ...
+}: let
   # bash script to let dbus know about important env variables and
   # propagate them to relevent services run at the end of sway config
   # see
@@ -50,8 +50,7 @@ let
         exec $APP_COMMAND &
     fi
   '';
-in
-{
+in {
   imports = [
     ../components/waybar
     ../components/mako
@@ -88,7 +87,7 @@ in
     flashfocus # Python script that flashes window I switch focus to
   ];
 
-  # Enable the gnome-keyring secrets vault. 
+  # Enable the gnome-keyring secrets vault.
   # Will be exposed through DBus to programs willing to store secrets.
   services.gnome.gnome-keyring.enable = true;
 
@@ -103,7 +102,7 @@ in
     xwayland.enable = true;
 
     # clearout default packages
-    extraPackages = [ ];
+    extraPackages = [];
 
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland
@@ -183,54 +182,54 @@ in
   services.blueman.enable = true;
 
   # symlink to sway config file in dotfiles repo
-  home-manager.users.${username} =
-    { config
-    , pkgs
-    , ...
-    }: {
-      # Services required for a smooth sway/waybar experience
-      services.batsignal.enable = true;
-      services.network-manager-applet.enable = true;
+  home-manager.users.${username} = {
+    config,
+    pkgs,
+    ...
+  }: {
+    # Services required for a smooth sway/waybar experience
+    services.batsignal.enable = true;
+    services.network-manager-applet.enable = true;
 
-      services.blueman-applet.enable = true;
-      home.packages = [ pkgs.dconf ];
-      dconf.settings."org/blueman/plugins/powermanager".auto-power-on = false;
+    services.blueman-applet.enable = true;
+    home.packages = [pkgs.dconf];
+    dconf.settings."org/blueman/plugins/powermanager".auto-power-on = false;
 
-      stylix.targets.kde.enable = false;
+    stylix.targets.kde.enable = false;
 
-      xdg.configFile = {
-        "sway/config" = { source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/sway/config"; };
+    xdg.configFile = {
+      "sway/config" = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/sway/config";};
 
-        # "xdg-desktop-portal-shana/config.toml" = {
-        #   text = ''
-        #   open_file = "Kde"
-        #   save_file = "Kde"
-        #
-        #   [tips]
-        #   open_file_when_folder = "Kde"
-        #
-        #   [file-dialog]
-        #   # Show hidden files in the file dialog
-        #   show-hidden = true
-        #
-        #   # Set the initial folder when the dialog opens
-        #   initial-folder = "~/"
-        #
-        #   # Allow selecting multiple files at once
-        #   allow-multiple = true
-        #
-        #   # Set dialog size (width x height in pixels)
-        #   size = [800, 600]
-        #
-        #   # Enable bookmarks for quick navigation
-        #   bookmarks = [
-        #       "~/Downloads",
-        #       "~/Pictures",
-        #       "~/git"
-        #       "~/projects"
-        #   ]
-        #   '';
-        # };
-      };
+      # "xdg-desktop-portal-shana/config.toml" = {
+      #   text = ''
+      #   open_file = "Kde"
+      #   save_file = "Kde"
+      #
+      #   [tips]
+      #   open_file_when_folder = "Kde"
+      #
+      #   [file-dialog]
+      #   # Show hidden files in the file dialog
+      #   show-hidden = true
+      #
+      #   # Set the initial folder when the dialog opens
+      #   initial-folder = "~/"
+      #
+      #   # Allow selecting multiple files at once
+      #   allow-multiple = true
+      #
+      #   # Set dialog size (width x height in pixels)
+      #   size = [800, 600]
+      #
+      #   # Enable bookmarks for quick navigation
+      #   bookmarks = [
+      #       "~/Downloads",
+      #       "~/Pictures",
+      #       "~/git"
+      #       "~/projects"
+      #   ]
+      #   '';
+      # };
     };
+  };
 }
