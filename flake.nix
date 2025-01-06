@@ -250,6 +250,15 @@
       };
     });
 
+    # Templates provided by this flake, to use:
+    # nix flake init -t path/to/your/flake#project
+    templates = {
+      project = {
+        description = "Create a new project flake with devshell and nixpkgs linked to my system flake";
+        path = ./templates/project;
+      };
+    };
+
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
   };
 }
