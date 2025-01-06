@@ -1,7 +1,8 @@
-{ pkgs
-, libs
-, inputs
-, ...
+{
+  pkgs,
+  libs,
+  inputs,
+  ...
 }: {
   specialisation = {
     hyprland.configuration = {
@@ -21,15 +22,15 @@
       wayland.windowManager.hyprland = {
         enable = true;
         wayland.windowManager.hyprland.enableNvidiaPatches = true;
-        settings = { };
+        settings = {};
       };
 
       systemd = {
         user.services.polkit-kde-authentication-agent-1 = {
           description = "polkit-kde-authentication-agent-1";
-          wantedBy = [ "graphical-session.target" ];
-          wants = [ "graphical-session.target" ];
-          after = [ "graphical-session.target" ];
+          wantedBy = ["graphical-session.target"];
+          wants = ["graphical-session.target"];
+          after = ["graphical-session.target"];
           serviceConfig = {
             Type = "simple";
             ExecStart = "${pkgs.polkit_kde}/libexec/polkit-kde-authentication-agent-1";

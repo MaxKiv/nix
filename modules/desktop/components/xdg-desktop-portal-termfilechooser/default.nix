@@ -1,13 +1,13 @@
-{ lib
-, stdenv
-, fetchFromGitHub
-, meson
-, ninja
-, pkg-config
-, inih
-, systemd
-, scdoc
-,
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  meson,
+  ninja,
+  pkg-config,
+  inih,
+  systemd,
+  scdoc,
 }:
 stdenv.mkDerivation {
   pname = "xdg-desktop-portal-termfilechooser";
@@ -76,7 +76,6 @@ stdenv.mkDerivation {
     homepage = "https://github.com/boydaihungst/xdg-desktop-portal-termfilechooser";
     license = licenses.mit;
     platforms = platforms.linux;
-    maintainers = [ ];
+    maintainers = [];
   };
 }
-
