@@ -6,9 +6,11 @@
     ./discord
     ./firefox
     ./libreoffice
+    ./logseq
+    ./mpd
+    ./obsidian
     ./spicetify
     ./thunar
-    ./mpd
     ./vlc
   ];
 }

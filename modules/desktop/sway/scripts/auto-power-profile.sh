@@ -6,7 +6,8 @@ BAT_CAP="$BAT/capacity"
 LOW_BAT_PERCENT=50
 
 AC_PROFILE="performance"
-BAT_PROFILE="balanced"
+BAT_PROFILE="power-saver"
+#BAT_PROFILE="balanced"
 LOW_BAT_PROFILE="power-saver"
 
 sleep 10s
