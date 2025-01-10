@@ -5,10 +5,11 @@
   ...
 }: {
   imports = [
-    ./embedded
-    ./rust
-    ./markdown
+    ./aoc
     ./c
+    ./embedded
+    ./markdown
+    ./rust
   ];
 
   environment.systemPackages = with pkgs; [
