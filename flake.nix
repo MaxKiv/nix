@@ -249,14 +249,18 @@
       };
     });
 
-    # Templates provided by this flake, to use:
-    # nix flake init -t path/to/your/flake#project
-    templates = {
-      project = {
-        description = "Create a new project flake with devshell and nixpkgs linked to my system flake";
-        path = ./templates/project;
+    templates = let
+      templateDirs = builtins.attrNames (builtins.readDir ./templates);
+      generateTemplate = dir: {
+        description = "Create a new ${dir} template linked to system flake nixpkgs";
+        path = ./templates/${dir};
       };
-    };
+    in
+      builtins.listToAttrs (map (dir: {
+          name = dir;
+          value = generateTemplate dir;
+        })
+        templateDirs);
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
   };
