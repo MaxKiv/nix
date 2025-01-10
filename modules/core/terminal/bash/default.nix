@@ -55,6 +55,7 @@
         gs = "${pkgs.git}/bin/git status";
         gba = "${pkgs.git}/bin/git branch -a";
         gd = "${pkgs.git}/bin/git diff";
+        gds = "${pkgs.git}/bin/git diff --staged";
         gc = "${pkgs.git}/bin/git commit";
         gcs = "${pkgs.git}/bin/git commit --gpg-sign=\"Max Kivits\"";
         gf = "${pkgs.git}/bin/git fetch -p -t";

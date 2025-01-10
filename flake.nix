@@ -243,7 +243,6 @@
       default = pkgs.mkShell {
         buildInputs = with pkgs; [
           sops
-          nixpkgs-fmt # nil_lsp uses this and I cant be bothered
           alejandra
           statix
         ];
