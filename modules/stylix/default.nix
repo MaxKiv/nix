@@ -18,13 +18,13 @@ in {
 
   stylix.polarity = "dark"; # "light" or "either"
 
-  # stylix.cursor.package = pkgs.bibata-cursors;
-  # stylix.cursor.name = "Bibata-Modern-Ice";
-  stylix.cursor = {
-    package = pkgs.catppuccin-cursors.mochaLight;
-    name = "Catppuccin-Mocha-Light-Cursors";
-    size = 24;
-  };
+  stylix.cursor.package = pkgs.bibata-cursors;
+  stylix.cursor.name = "Bibata-Modern-Ice";
+  # stylix.cursor = {
+  #   package = pkgs.catppuccin-cursors.mochaLight;
+  #   name = "Catppuccin-Mocha-Light-Cursors";
+  #   size = 24;
+  # };
 
   stylix.fonts = {
     monospace = {
