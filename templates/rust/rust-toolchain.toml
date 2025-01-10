@@ -1,0 +1,7 @@
+[toolchain]
+channel = "nightly"
+# components = [ "llvm-tools-preview" ]
+#components = ["rustfmt", "clippy"]
+targets = ["x86_64-unknown-linux-gnu" ]
+# targets = ["riscv32imc-unknown-none-elf" ]
+profile = "default"
