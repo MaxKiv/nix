@@ -2,8 +2,8 @@
   description = "My new project";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
+    your-nixos-flake.url = "github:maxkiv/nix";
+    nixpkgs.follows = "your-nixos-flake/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -24,10 +24,10 @@
       devShell = pkgs.mkShell {
         buildInputs = with pkgs; [
           nil # nix LSP
-          nixpkgs-fmt # nil uses this and I cant be bothered to change it
+          alejandra # nix Formatter
         ];
       };
 
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
     });
 }
