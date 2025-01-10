@@ -7,6 +7,7 @@
   imports = [
     ./embedded
     ./rust
+    ./markdown
     ./c
   ];
 

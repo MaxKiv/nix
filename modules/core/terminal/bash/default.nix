@@ -83,6 +83,7 @@
         # Zellij
         zml = "${pkgs.zellij}/bin/zellij list-sessions";
         zma = "${pkgs.zellij}/bin/zellij attach";
+        zms = "${pkgs.zellij}/bin/zellij -s";
 
         # xclip
         # clip = "${pkgs.xclip}/bin/xclip -sel clip";
