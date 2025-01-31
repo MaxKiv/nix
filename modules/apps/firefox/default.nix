@@ -373,6 +373,43 @@ let
         definedAliases = ["@x"];
       };
 
+      "wikipedia" = {
+        urls = [
+          {
+            # https://en.wikipedia.org/w/index.php?search=test+123&title=Special%3ASearch&ns0=1
+            template = "https://en.wikipedia.org/w/index.php";
+            params = [
+              {
+                name = "search";
+                value = "{searchTerms}";
+              }
+            ];
+          }
+        ];
+
+        # icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+        definedAliases = ["@w"];
+      };
+
+      "Stackoverflow" = {
+        # https://stackoverflow.com/search?q=test+123&
+        template = "https://stackoverflow.com/search";
+        params = [
+          {
+            name = "q";
+            value = "{searchTerms}";
+          }
+        ];
+
+        definedAliases = ["@f"];
+      };
+
+      "Maps" = {
+        # https://www.google.com/maps/place/Curio+Bay
+        template = "https://www.google.com/maps/place/{searchTerms}";
+        definedAliases = ["@m"];
+      };
+
       "Reddit" = {
         urls = [
           {

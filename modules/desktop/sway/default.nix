@@ -57,6 +57,8 @@ in {
     ../components/wofi
     ../components/clipman
     ../components/flashfocus
+    ../components/satty
+    ../components/kanshi
     # TODO: fix this
     # ../components/xdg-desktop-portal-termfilechooser
   ];
@@ -85,6 +87,9 @@ in {
     alsa-utils # for amixer to mute mic
     # power-profiles-daemon # make power profiles available over D-Bus
     flashfocus # Python script that flashes window I switch focus to
+    wdisplays # xrandr type gui to mess with monitor placement
+    wl-mirror # simple wayland display mirror program
+    # kanshi # hotswap monitors
   ];
 
   # Enable the gnome-keyring secrets vault.

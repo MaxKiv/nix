@@ -8,6 +8,7 @@
     ./aoc
     ./c
     ./embedded
+    ./leetcode
     ./markdown
     ./rust
   ];

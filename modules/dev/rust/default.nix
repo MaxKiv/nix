@@ -9,7 +9,7 @@
     pkgs,
     ...
   }: {
-    # For bigger projects these should come from the local tooling flake, but 
+    # For bigger projects these should come from the local tooling flake, but
     # its useful to have them on a system level too
     home.packages = with pkgs; [
       rustc
