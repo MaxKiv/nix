@@ -51,5 +51,6 @@
     qimgv # image viewer
     picard # GUI to edit music metadata
     zenity # spawn xdg portals
+    teams-for-linux
   ];
 }
