@@ -4,6 +4,9 @@
     pkgs,
     ...
   }: {
-    home.packages = with pkgs; [markdown-oxide];
+    home.packages = with pkgs; [
+        markdown-oxide
+        vale
+      ];
   };
 }

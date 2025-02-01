@@ -1,0 +1,7 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "acronym:lib"
+
+    - path: "./test"
+      component: "acronym:test:test"

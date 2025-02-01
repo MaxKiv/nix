@@ -1,0 +1,5 @@
+resolver: lts-20.18
+
+dependencies:
+- base >= 4.7 && < 5
+- text >= 2.0.2

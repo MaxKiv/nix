@@ -10,6 +10,7 @@
     ./embedded
     ./leetcode
     ./markdown
+    ./lua
     ./rust
   ];
 
@@ -24,5 +25,8 @@
     ruby
     nodejs_20
     git-open
+    codespell
+    prettierd
+    nodePackages_latest.prettier
   ];
 }
