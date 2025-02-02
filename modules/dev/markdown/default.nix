@@ -5,8 +5,8 @@
     ...
   }: {
     home.packages = with pkgs; [
-        markdown-oxide
-        vale
-      ];
+      markdown-oxide
+      vale
+    ];
   };
 }

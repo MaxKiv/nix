@@ -7,7 +7,7 @@
   ...
 }: let
   # bash script to let dbus know about important env variables and
-  # propagate them to relevent services run at the end of sway config
+  # propagate them to relevant services run at the end of sway config
   # see
   # https://github.com/emersion/xdg-desktop-portal-wlr/wiki/"It-doesn't-work"-Troubleshooting-Checklist
   # note: this is pretty much the same as  /etc/sway/config.d/nixos.conf but also restarts
