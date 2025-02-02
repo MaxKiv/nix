@@ -59,7 +59,6 @@
     home.username = username;
     home.homeDirectory = "/home/${username}";
     home.stateVersion = "23.11";
-    nixpkgs.config.allowUnfree = true;
   };
 
   # Enable nix-ld to use dynamically linked executables with hardcoded paths

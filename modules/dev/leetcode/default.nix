@@ -11,8 +11,8 @@
     ...
   }: {
     home.packages = with pkgs; [
-        # vsc-leetcode-cli
-        leetcode-cli
-      ];
+      # vsc-leetcode-cli
+      leetcode-cli
+    ];
   };
 }
