@@ -57,7 +57,8 @@ in {
     ../components/wofi
     ../components/clipman
     ../components/flashfocus
-    ../components/satty
+    # ../components/satty
+    ../components/swappy
     ../components/kanshi
     # TODO: fix this
     # ../components/xdg-desktop-portal-termfilechooser
