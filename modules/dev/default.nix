@@ -12,6 +12,7 @@
     ./markdown
     ./lua
     ./rust
+    ./python
   ];
 
   environment.systemPackages = with pkgs; [
