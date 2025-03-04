@@ -13,6 +13,7 @@
     # its useful to have them on a system level too
     home.packages = with pkgs; [
       rustc
+      cargo
       rustfmt
       clippy
       rust-analyzer
