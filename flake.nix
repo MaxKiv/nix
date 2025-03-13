@@ -148,7 +148,7 @@
             {
               hostname = "terra";
               type = "desktop";
-              inherit system username dotfilesDir;
+              inherit system username dotfilesDir inputs;
             }
             // inputs;
           modules = [
@@ -157,7 +157,7 @@
             # Specify host specific modules
             ./modules/hardware/network
             ./modules/hardware/nvidia
-            ./modules/desktop/kde
+            ./modules/desktop/sway
             ./modules/gaming
           ];
         };
@@ -171,7 +171,7 @@
             {
               hostname = "downtown";
               type = "laptop";
-              inherit system username dotfilesDir;
+              inherit system username dotfilesDir inputs;
             }
             // inputs;
           modules = [
