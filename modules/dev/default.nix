@@ -29,5 +29,6 @@
     codespell
     prettierd
     nodePackages_latest.prettier
+    bash-language-server
   ];
 }
