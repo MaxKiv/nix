@@ -13,5 +13,6 @@
     ./spicetify
     ./thunar
     ./vlc
+    ./ventoy
   ];
 }
