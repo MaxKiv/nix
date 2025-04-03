@@ -20,6 +20,8 @@ in {
 
   stylix.cursor.package = pkgs.bibata-cursors;
   stylix.cursor.name = "Bibata-Modern-Ice";
+  stylix.cursor.size = 24;
+
   # stylix.cursor = {
   #   package = pkgs.catppuccin-cursors.mochaLight;
   #   name = "Catppuccin-Mocha-Light-Cursors";
