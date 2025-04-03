@@ -175,6 +175,13 @@ let
     }
 
     {
+      name = "ngram";
+      tags = ["ngram" "type"];
+      keyword = "ngram";
+      url = "https://ranelpadon.github.io/ngram-type/";
+    }
+
+    {
       name = "WhatsApp";
       tags = ["whatsapp"];
       keyword = "whatsapp";
@@ -200,6 +207,13 @@ let
       tags = ["maps"];
       keyword = "maps";
       url = "https://maps.google.com";
+    }
+
+    {
+      name = "Tweakers";
+      tags = ["tweakers"];
+      keyword = "tweakers";
+      url = "https://tweakers.net/";
     }
   ];
 
@@ -438,13 +452,15 @@ in {
         default = {
           id = 0;
           name = "privacy-friendly";
-          inherit bookmarks search settings userChrome extensions;
+          inherit bookmarks search settings userChrome;
+          extensions.packages = extensions;
         };
 
         shit = {
           name = "trade-privacy-for-convenience";
           id = 1;
-          inherit bookmarks search extensions;
+          inherit bookmarks search;
+          extensions.packages = extensions;
         };
       };
     };

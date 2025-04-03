@@ -5,8 +5,9 @@
     ./deluge
     ./discord
     ./firefox
+    ./freecad
+    ./kicad
     ./libreoffice
-    ./logseq
     ./mpd
     ./obsidian
     ./spicetify
