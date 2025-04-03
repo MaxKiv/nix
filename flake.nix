@@ -136,6 +136,22 @@
       })
     ];
 
+    # Nixos Generators entrypoint
+    nixosModules.myFormats = { config, ... }: {
+      imports = [
+        inputs.nixos-generators.nixosModules.all-formats
+      ];
+      nixpkgs.hostPlatform = "x86_64-linux";
+
+      # customize an existing format
+      formatConfigs.install-iso = { config, ... }: {
+          users.users.root = {
+            hashedPassword = nixpkgs.lib.mkForce null;  # Explicitly remove this setting, we use the password in SOPS
+          };
+          networking.wireless.enable = false;  # Disable wpa_supplicant, we use network manager
+      };
+    };
+
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
@@ -202,6 +218,8 @@
                 inputs.neovim-nightly-overlay.overlays.default
               ];
             }
+            # Expose nixos-generators output formats: https://github.com/nix-community/nixos-generators?tab=readme-ov-file#using-as-a-nixos-module
+            self.nixosModules.myFormats
             # import default modules through default.nix
             ./.
             # Specify host specific modules
@@ -213,27 +231,6 @@
           ];
         };
     }; # nixosConfigurations
-
-    # nixos-generators entrypoint
-    packages.x86_64-linux = {
-      # Install-iso configuration
-      iso = inputs.nixos-generators.nixosGenerate {
-        specialArgs =
-          {
-            system = "x86_64-linux";
-            format = "install-iso";
-            hostname = "live";
-            type = "laptop"; # TODO this makes no sense
-            inherit username dotfilesDir;
-          }
-          // inputs;
-        modules = [
-          ./hosts
-        ];
-        system = "x86_64-linux";
-        format = "install-iso";
-      };
-    }; # packages
 
     # Development shells provided by this flake, to use:
     # nix develop .#default
