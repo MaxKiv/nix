@@ -45,4 +45,13 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # Enable both licensed and non-lincensed firmware updates
+  hardware.enableAllFirmware = true;
+
+  # Show fancy splash on boot
+  boot.plymouth.enable = true;
+
+  # Automatic firmware updates
+  services.fwupd.enable = true;
 }

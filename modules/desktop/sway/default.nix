@@ -156,10 +156,10 @@ in {
 
     # gtk portals backend implementations
     extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
+      # xdg-desktop-portal-gtk
       # xdg-desktop-portal-hyprland
       # xdg-desktop-portal-shana
-      # xdg-desktop-portal-wlr
+      xdg-desktop-portal-wlr
       # xdg-desktop-portal-kde
     ];
   };
@@ -167,22 +167,26 @@ in {
   # use greetd with tuigreet as login manager
   services.greetd = {
     enable = true;
-    vt = 2;
+    # vt = 2;
     settings = {
       default_session = {
-        command = ''
-          ${pkgs.greetd.tuigreet}/bin/tuigreet \
-            --time \
-            --debug \
-            --asterisks \
-            --user-menu \
-            --remember \
-            --cmd sway
-        '';
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+        # command = ''
+        #   ${pkgs.greetd.tuigreet}/bin/tuigreet \
+        #     --time \
+        #     --debug \
+        #     --asterisks \
+        #     --user-menu \
+        #     --remember \
+        #     --cmd sway
+        # '';
         user = "greeter";
       };
     };
   };
+
+  # Set up upower to be able to get battery levels of connected devices.
+  services.upower.enable = true;
 
   networking.networkmanager.enable = true;
   services.blueman.enable = true;
@@ -196,6 +200,10 @@ in {
     # Services required for a smooth sway/waybar experience
     services.batsignal.enable = true;
     services.network-manager-applet.enable = true;
+
+    # Enable the playerctld to be able to control music players and mpris-proxy to proxy bluetooth devices.
+    services.playerctld.enable = true;
+    services.mpris-proxy.enable = true;
 
     services.blueman-applet.enable = true;
     home.packages = [pkgs.dconf];

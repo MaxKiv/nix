@@ -40,3 +40,7 @@ gc:
 # Edit secrets with sops
 secret:
     sops secrets/secrets.yaml
+
+# Generate installer ISO
+iso:
+    nix build .#nixosConfigurations.isolate.config.formats.install-iso --show-trace --verbose --option eval-cache false
