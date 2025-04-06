@@ -155,7 +155,6 @@ let
     darkreader
     ff2mpv
     # auto-accepts cookies, use only with privacy-badger & ublock-origin
-    #ctrl-number-to-switch-tabs #TODO get this somehow?
     i-dont-care-about-cookies
     # link-cleaner
     privacy-badger

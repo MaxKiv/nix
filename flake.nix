@@ -148,7 +148,11 @@
           users.users.root = {
             hashedPassword = nixpkgs.lib.mkForce null;  # Explicitly remove this setting, we use the password in SOPS
           };
+          users.users.nixos = {
+            hashedPassword = nixpkgs.lib.mkForce null;  # Explicitly remove this setting, we use the password in SOPS
+          };
           networking.wireless.enable = false;  # Disable wpa_supplicant, we use network manager
+          isoImage.squashfsCompression = "zstd -Xcompression-level 6";
       };
     };
 
@@ -163,7 +167,6 @@
           specialArgs =
             {
               hostname = "terra";
-              type = "desktop";
               inherit system username dotfilesDir;
             }
             // inputs;
@@ -186,7 +189,6 @@
           specialArgs =
             {
               hostname = "downtown";
-              type = "laptop";
               inherit system username dotfilesDir;
             }
             // inputs;
@@ -208,8 +210,36 @@
           specialArgs =
             {
               hostname = "rapanui";
-              type = "laptop";
               inherit system username dotfilesDir inputs;
+            }
+            // inputs;
+          modules = [
+            {
+              nixpkgs.overlays = [
+                inputs.neovim-nightly-overlay.overlays.default
+              ];
+            }
+            # import default modules through default.nix
+            ./.
+            # Specify host specific modules
+            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
+            ./modules/hardware/network
+            # ./modules/desktop/kde
+            ./modules/desktop/sway
+            ./modules/gaming
+          ];
+        };
+
+      # Install ISO
+      isolate = let
+        system = "x86_64-linux";
+      in
+        nixpkgs.lib.nixosSystem {
+          specialArgs =
+            {
+              hostname = "isolate";
+              username = "nixos";
+              inherit system dotfilesDir inputs;
             }
             // inputs;
           modules = [
@@ -222,12 +252,9 @@
             self.nixosModules.myFormats
             # import default modules through default.nix
             ./.
-            # Specify host specific modules
-            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
             ./modules/hardware/network
             # ./modules/desktop/kde
             ./modules/desktop/sway
-            ./modules/gaming
           ];
         };
     }; # nixosConfigurations
