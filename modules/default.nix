@@ -5,7 +5,7 @@
     ./desktop
     ./hardware
     ./dev
-    # ./gaming
     ./stylix
+    ./virtualisation
   ];
 }
