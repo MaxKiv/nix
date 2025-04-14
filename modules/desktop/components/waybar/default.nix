@@ -22,6 +22,12 @@
     ...
   }: {
     programs.waybar.enable = true;
+
+    # Applets for nn and blueman
+    services.network-manager-applet.enable = true;
+    services.blueman-applet.enable = true;
+
+    # We style waybar ourselves 💪
     stylix.targets.waybar.enable = false;
 
     # Automatically switch the power profile on plug and unplug if I'm using power-profiles-daemon

@@ -1,7 +1,6 @@
-# closing screen still sleeps laptop?
-# idle?
 {
   pkgs,
+  lib,
   config,
   username,
   ...
@@ -62,36 +61,61 @@ in {
     ../components/kanshi
     # TODO: fix this
     # ../components/xdg-desktop-portal-termfilechooser
+    ../components/sddm
+    ../components/xdg-portals
   ];
 
-  environment.systemPackages = with pkgs; [
-    dbus-sway-environment
-    sway-launch-or-focus
-    wev # wayland event viewer (find out key names)
-    notify-desktop # provides the notify-send binary to trigger mako
-    grim # screenshot functionality
-    slurp # screenshot functionality
-    wl-clipboard-rs # wl-copy and wl-paste for copy/paste from stdin / stdout
-    xclip # TODO: figure out why I still need this
-    # mako # notification system developed by swaywm maintainer
-    swaylock-fancy # Fancy lock screen
-    # swayidle # Idle management daemon for wayland
-    # sway-audio-idle-inhibit # block swayidle when audio is playing
-    # glib # for gsettings
-    # gtk3.out # for gtk-launch
-    libinput # Handles input devices in Wayland compositors
-    libinput-gestures # Gesture mapper for libinput
-    brightnessctl # CLI to control brightness
-    networkmanager # Manage wireless networks
-    # networkmanagerapplet # System tray GUI for networkmanager
-    pulsemixer # CLI to control puleaudio
-    alsa-utils # for amixer to mute mic
-    # power-profiles-daemon # make power profiles available over D-Bus
-    flashfocus # Python script that flashes window I switch focus to
-    wdisplays # xrandr type gui to mess with monitor placement
-    wl-mirror # simple wayland display mirror program
-    # kanshi # hotswap monitors
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      dbus-sway-environment
+      sway-launch-or-focus
+      wev # wayland event viewer (find out key names)
+      notify-desktop # provides the notify-send binary to trigger mako
+      grim # screenshot functionality
+      slurp # screenshot functionality
+      wl-clipboard-rs # wl-copy and wl-paste for copy/paste from stdin / stdout
+      xclip # TODO: figure out why I still need this
+      # mako # notification system developed by swaywm maintainer
+      swaylock-fancy # Fancy lock screen
+      # swayidle # Idle management daemon for wayland
+      # sway-audio-idle-inhibit # block swayidle when audio is playing
+      # glib # for gsettings
+      # gtk3.out # for gtk-launch
+      libinput # Handles input devices in Wayland compositors
+      libinput-gestures # Gesture mapper for libinput
+      brightnessctl # CLI to control brightness
+      networkmanager # Manage wireless networks
+      # networkmanagerapplet # System tray GUI for networkmanager
+      pulsemixer # CLI to control puleaudio
+      alsa-utils # for amixer to mute mic
+      # power-profiles-daemon # make power profiles available over D-Bus
+      flashfocus # Python script that flashes window I switch focus to
+      wdisplays # xrandr type gui to mess with monitor placement
+      wl-mirror # simple wayland display mirror program
+      # kanshi # hotswap monitors, wayland arandr, in its own module now
+    ]
+    # Add some KDE packages I have become used to
+    ++ (with kdePackages; [
+      ark
+      dolphin
+      dolphin-plugins
+      gwenview
+      kdegraphics-thumbnailers
+      kfilemetadata
+      kimageformats
+      qtimageformats
+      kio
+      kio-admin
+      kio-extras
+      kio-fuse
+      kservice
+      libheif
+      okular
+      polkit-kde-agent-1
+      # plasma-workspace
+      qtwayland
+      kdialog
+    ]);
 
   # Enable the gnome-keyring secrets vault.
   # Will be exposed through DBus to programs willing to store secrets.
@@ -104,10 +128,10 @@ in {
   # enable Sway window manager
   programs.sway = {
     enable = true;
-    wrapperFeatures.gtk = true;
+    # wrapperFeatures.gtk = true;
     xwayland.enable = true;
 
-    # clearout default packages
+    # clear out default packages
     extraPackages = [];
 
     extraSessionCommands = ''
@@ -117,8 +141,9 @@ in {
       export _JAVA_AWT_WM_NONREPARENTING=1
       export MOZ_ENABLE_WAYLAND=1
       export XDG_SESSION_TYPE=wayland
-      export XDG_SESSION_DESKTOP=sway
-      export XDG_CURRENT_DESKTOP=sway
+      export XDG_SESSION_DESKTOP=KDE
+      export XDG_CURRENT_DESKTOP=KDE
+      export XDG_DESKTOP_PORTAL_PREFFERED=kde
     '';
   };
 
@@ -129,66 +154,16 @@ in {
     pulse.enable = true;
   };
 
-  xdg.portal = {
-    enable = true;
-    # xdgOpenUsePortal = true;
-    wlr.enable = true;
-    wlr.settings.screencast = {
-      # TODO: this is laptop only
-      output_name = "eDP-1";
-      chooster_type = "simple";
-      chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
-    };
-
-    # config.common = {
-    #   default = "kde";
-    #   "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
-    #   "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
-    #   "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
-    #   "org.freedesktop.portal.FileChooser" = [ "kde" ];
-    # };
-    #
-    # config.sway = {
-    #   default = pkgs.lib.mkForce "kde";
-    #   # "org.freedesktop.impl.portal.Settings"=["luminous" "gtk"];
-    #   "org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
-    # };
-
-    # gtk portals backend implementations
-    extraPortals = with pkgs; [
-      # xdg-desktop-portal-gtk
-      # xdg-desktop-portal-hyprland
-      # xdg-desktop-portal-shana
-      xdg-desktop-portal-wlr
-      # xdg-desktop-portal-kde
-    ];
-  };
-
-  # use greetd with tuigreet as login manager
-  services.greetd = {
-    enable = true;
-    # vt = 2;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-        # command = ''
-        #   ${pkgs.greetd.tuigreet}/bin/tuigreet \
-        #     --time \
-        #     --debug \
-        #     --asterisks \
-        #     --user-menu \
-        #     --remember \
-        #     --cmd sway
-        # '';
-        user = "greeter";
-      };
-    };
-  };
+  # Automount sd cards
+  services.udisks2.enable = true;
 
   # Set up upower to be able to get battery levels of connected devices.
   services.upower.enable = true;
 
+  # network manager
   networking.networkmanager.enable = true;
+
+  # bluetooth manager
   services.blueman.enable = true;
 
   # symlink to sway config file in dotfiles repo
@@ -199,51 +174,23 @@ in {
   }: {
     # Services required for a smooth sway/waybar experience
     services.batsignal.enable = true;
-    services.network-manager-applet.enable = true;
+
+    # Automount sd/usb
+    services.udiskie.enable = true;
 
     # Enable the playerctld to be able to control music players and mpris-proxy to proxy bluetooth devices.
     services.playerctld.enable = true;
     services.mpris-proxy.enable = true;
 
-    services.blueman-applet.enable = true;
     home.packages = [pkgs.dconf];
     dconf.settings."org/blueman/plugins/powermanager".auto-power-on = false;
 
     stylix.targets.kde.enable = false;
 
     xdg.configFile = {
-      "sway/config" = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/sway/config";};
-
-      # "xdg-desktop-portal-shana/config.toml" = {
-      #   text = ''
-      #   open_file = "Kde"
-      #   save_file = "Kde"
-      #
-      #   [tips]
-      #   open_file_when_folder = "Kde"
-      #
-      #   [file-dialog]
-      #   # Show hidden files in the file dialog
-      #   show-hidden = true
-      #
-      #   # Set the initial folder when the dialog opens
-      #   initial-folder = "~/"
-      #
-      #   # Allow selecting multiple files at once
-      #   allow-multiple = true
-      #
-      #   # Set dialog size (width x height in pixels)
-      #   size = [800, 600]
-      #
-      #   # Enable bookmarks for quick navigation
-      #   bookmarks = [
-      #       "~/Downloads",
-      #       "~/Pictures",
-      #       "~/git"
-      #       "~/projects"
-      #   ]
-      #   '';
-      # };
+      "sway/config" = {
+        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/sway/config";
+      };
     };
   };
 }
