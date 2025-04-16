@@ -128,7 +128,12 @@ in {
   # enable Sway window manager
   programs.sway = {
     enable = true;
-    # wrapperFeatures.gtk = true;
+
+    # package = pkgs.sway-displaylink;
+    package = pkgs.sway;
+    extraOptions = ["--unsupported-gpu"];
+
+    wrapperFeatures.gtk = true;
     xwayland.enable = true;
 
     # clear out default packages

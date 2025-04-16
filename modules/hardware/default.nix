@@ -3,5 +3,6 @@
     ./bluetooth
     ./print
     ./sound
+    ./displaylink
   ];
 }
