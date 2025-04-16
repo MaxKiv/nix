@@ -117,42 +117,32 @@
     overlays = [
       # Neovim nightly overlay
       inputs.neovim-nightly-overlay.overlays.default
-      (_: _: {
-        nil = inputs.nil-lsp.packages."x86_64-linux".default;
-      })
-      # overlay to fix nil-lsp derivation
-      (final: prev: {
-        # Override nil-lsp with a specific Rust toolchain
-        nil = prev.nil.overrideAttrs (old: {
-          nativeBuildInputs =
-            old.nativeBuildInputs
-            or []
-            ++ [
-              (final.rust-bin.stable."1.77.0".default.override {
-                extensions = []; # Add any extensions you need
-              })
-            ];
-        });
-      })
+      # (_: _: {
+      #   nil = inputs.nil-lsp.packages."x86_64-linux".default;
+      # })
+      # (import ./overlays/displaylink.nix {
+      #   pkgs = nixpkgs; # Pass nixpkgs as pkgs
+      #   inherit inputs;
+      # })
     ];
 
     # Nixos Generators entrypoint
-    nixosModules.myFormats = { config, ... }: {
+    nixosModules.myFormats = {config, ...}: {
       imports = [
         inputs.nixos-generators.nixosModules.all-formats
       ];
       nixpkgs.hostPlatform = "x86_64-linux";
 
       # customize an existing format
-      formatConfigs.install-iso = { config, ... }: {
-          users.users.root = {
-            hashedPassword = nixpkgs.lib.mkForce null;  # Explicitly remove this setting, we use the password in SOPS
-          };
-          users.users.nixos = {
-            hashedPassword = nixpkgs.lib.mkForce null;  # Explicitly remove this setting, we use the password in SOPS
-          };
-          networking.wireless.enable = false;  # Disable wpa_supplicant, we use network manager
-          isoImage.squashfsCompression = "zstd -Xcompression-level 6";
+      formatConfigs.install-iso = {config, ...}: {
+        users.users.root = {
+          hashedPassword = nixpkgs.lib.mkForce null; # Explicitly remove this setting, we use the password in SOPS
+        };
+        users.users.nixos = {
+          hashedPassword = nixpkgs.lib.mkForce null; # Explicitly remove this setting, we use the password in SOPS
+        };
+        networking.wireless.enable = false; # Disable wpa_supplicant, we use network manager
+        isoImage.squashfsCompression = "zstd -Xcompression-level 6";
       };
     };
 
@@ -215,9 +205,7 @@
             // inputs;
           modules = [
             {
-              nixpkgs.overlays = [
-                inputs.neovim-nightly-overlay.overlays.default
-              ];
+              nixpkgs.overlays = self.overlays;
             }
             # import default modules through default.nix
             ./.

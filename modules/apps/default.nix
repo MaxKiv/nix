@@ -14,5 +14,6 @@
     ./thunar
     ./vlc
     ./ventoy
+    ./slack
   ];
 }
