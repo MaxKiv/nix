@@ -28,6 +28,7 @@
     git-open
     codespell
     prettierd
+    sshfs
     nodePackages_latest.prettier
     bash-language-server
   ];
