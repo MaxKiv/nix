@@ -57,6 +57,15 @@ in {
     popups = 1.0;
   };
 
+  stylix.targets.qt = {
+    enable = true;
+    platform = pkgs.lib.mkForce "kde";
+  };
+
+  stylix.targets.gtk = {
+    enable = true;
+  };
+
   # Exclude these from stylix, these clash with my own config
   home-manager.users.${username} = {
     stylix.targets = {
