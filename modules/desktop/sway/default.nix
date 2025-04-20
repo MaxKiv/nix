@@ -63,6 +63,7 @@ in {
     # ../components/xdg-desktop-portal-termfilechooser
     ../components/sddm
     ../components/xdg-portals
+    ../components/playerctld
   ];
 
   environment.systemPackages = with pkgs;
@@ -165,6 +166,9 @@ in {
   # Set up upower to be able to get battery levels of connected devices.
   services.upower.enable = true;
 
+  # Filesystem interface implemented by local/remote fileSystems: Mount, trash, and other functionalities for file explorer
+  services.gvfs.enable = true;
+
   # network manager
   networking.networkmanager.enable = true;
 
@@ -190,7 +194,7 @@ in {
     home.packages = [pkgs.dconf];
     dconf.settings."org/blueman/plugins/powermanager".auto-power-on = false;
 
-    stylix.targets.kde.enable = false;
+    # stylix.targets.kde.enable = false;
 
     xdg.configFile = {
       "sway/config" = {

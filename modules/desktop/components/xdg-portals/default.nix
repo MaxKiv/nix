@@ -9,6 +9,10 @@
     xdg-desktop-portal # Desktop integration portals for sandboxed apps
   ];
 
+  systemd.user.services.xdg-desktop-portal = {
+    serviceConfig.Environment = "XDG_CURRENT_DESKTOP=KDE";
+  };
+
   programs.sway = {
     extraSessionCommands = ''
       export XDG_DESKTOP_PORTAL_PREFFERED=kde
@@ -27,8 +31,9 @@
       chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
     };
 
-    configPackages = [
-      pkgs.kdePackages.xdg-desktop-portal-kde
+    configPackages = with pkgs; [
+      kdePackages.xdg-desktop-portal-kde
+      xdg-desktop-portal-wlr
     ];
 
     config.sway = lib.mkForce {
@@ -59,6 +64,22 @@
     pkgs,
     ...
   }: {
+    xdg.configFile = {
+      "xdg-desktop-portal/portals.conf" = {
+        text = ''
+          [preferred]
+          default=kde
+          org.freedesktop.impl.portal.FileChooser=kde
+        '';
+      };
+      "systemd/user/xdg-desktop-portal.service.d/override.conf" = {
+        text = ''
+          [Service]
+          Environment="XDG_CURRENT_DESKTOP=KDE"
+        '';
+      };
+    };
+
     # "xdg-desktop-portal-shana/config.toml" = {
     #   text = ''
     #   open_file = "Kde"
