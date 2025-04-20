@@ -11,7 +11,7 @@
     ./mpd
     ./obsidian
     ./spicetify
-    ./thunar
+    ./dolphin
     ./vlc
     ./ventoy
     ./slack

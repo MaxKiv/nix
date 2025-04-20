@@ -59,7 +59,8 @@ in {
 
   stylix.targets.qt = {
     enable = true;
-    platform = pkgs.lib.mkForce "kde";
+    # TODO: enable when kde is supported
+    # platform = pkgs.lib.mkForce "kde";
   };
 
   stylix.targets.gtk = {
