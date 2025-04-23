@@ -122,10 +122,6 @@ in {
   # Will be exposed through DBus to programs willing to store secrets.
   services.gnome.gnome-keyring.enable = true;
 
-  # Do not sleep on lid close
-  # https://nixos.org/manual/nixos/stable/options#opt-services.logind.lidSwitch
-  services.logind.lidSwitch = "ignore";
-
   # enable Sway window manager
   programs.sway = {
     enable = true;
