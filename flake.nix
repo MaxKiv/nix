@@ -280,6 +280,8 @@
       default = pkgs.mkShell {
         buildInputs = with pkgs; [
           sops
+          just
+          age
           alejandra
           statix
         ];
