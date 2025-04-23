@@ -2,14 +2,16 @@
   config,
   username,
   lib,
+  chaotic,
   ...
-}:
-with lib; let
-  cfg = config.my.nordvpn.enable;
-in {
-  options.my.nordvpn.enable = mkEnableOption "Enable NordVPN setup via chaotic";
+}: {
+  imports = [
+    chaotic.nixosModules.default # Adds chaotic binary cache, used for NordVPN
+  ];
 
-  config = mkIf cfg {
+  options.my.nordvpn.enable = lib.mkEnableOption "Enable NordVPN setup via chaotic";
+
+  config = lib.mkIf config.my.nordvpn.enable {
     chaotic.nordvpn.enable = true;
 
     networking.firewall = {

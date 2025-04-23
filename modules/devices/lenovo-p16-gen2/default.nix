@@ -1,10 +1,13 @@
 {
   hostname,
   username,
+  lib,
   config,
   pkgs,
   ...
-}: {
+}: let
+  nvidiaPkg = config.boot.kernelPackages.nvidiaPackages.stable;
+in {
   # its a laptop!
   imports = [
     ../../hardware/laptop
@@ -15,6 +18,9 @@
 
   # Use Lenovo firmware blobs
   hardware.enableRedistributableFirmware = true;
+
+  hardware.nvidia.package = nvidiaPkg;
+  hardware.nvidia.open = lib.versionAtLeast nvidiaPkg.version "560" && false;
 
   # Set up Nvidia GPU to use prime to use igpu and offload heavy compute to gpu
   services.xserver.videoDrivers = ["nvidia"];
@@ -29,7 +35,6 @@
   };
 
   # Setup CUDA dev toolkit
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   environment.systemPackages = with pkgs; [cudatoolkit];
 
   # Multi-boot system: use GRUB bootloader
