@@ -41,6 +41,16 @@ gc:
 secret:
     sops secrets/secrets.yaml
 
+init-sops:
+    echo "Read about setting up sops here"
+    xdg-open https://github.com/Mic92/sops-nix?tab=readme-ov-file#usage-example
+    echo "Generating age key in ~/.config/sops/age"
+    mkdir -p ~/.config/sops/age
+    age-keygen -o ~/.config/sops/age/keys.txt
+    echo "install this public key into .sops.yaml under the right hostname!"
+    age-keygen -y ~/.config/sops/age/keys.txt
+    echo "SOPS key setup is now complete"
+
 # Generate installer ISO
 iso:
     nix build .#nixosConfigurations.isolate.config.formats.install-iso --show-trace --verbose --option eval-cache false
