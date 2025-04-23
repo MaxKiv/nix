@@ -34,20 +34,8 @@
   #   };
   # };
 
-  # Power manager, seems better on wayland?
-  services.auto-cpufreq = {
-    enable = true;
-    settings = {
-      battery = {
-        governor = "powersave";
-        turbo = "never";
-      };
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-      };
-    };
-  };
+  # Select Power manager
+  my.powerManager = "auto-cpufreq";
 
   # Prevent overheating, manage thermals
   services.thermald.enable = true;
@@ -56,7 +44,7 @@
   services.hardware.bolt.enable = true;
 
   # Trackpad
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Battery stats
   services.upower.enable = true;

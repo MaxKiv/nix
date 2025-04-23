@@ -9,5 +9,6 @@
     ./ssh
     ./security
     ./terminal
+    ./powerManager
   ];
 }
