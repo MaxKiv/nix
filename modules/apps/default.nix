@@ -15,5 +15,6 @@
     ./vlc
     ./ventoy
     ./slack
+    ./nordvpn
   ];
 }

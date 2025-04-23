@@ -218,6 +218,31 @@
           ];
         };
 
+      # Work laptop
+      saxion = let
+        system = "x86_64-linux";
+      in
+        nixpkgs.lib.nixosSystem {
+          specialArgs =
+            {
+              hostname = "saxion";
+              inherit system username dotfilesDir inputs;
+            }
+            // inputs;
+          modules = [
+            {
+              nixpkgs.overlays = self.overlays;
+            }
+            # import default modules through default.nix
+            ./.
+            # Specify host specific modules
+            ./modules/devices/lenovo-p16-gen2
+            ./modules/hardware/network
+            # ./modules/desktop/kde
+            ./modules/desktop/sway
+          ];
+        };
+
       # Install ISO
       isolate = let
         system = "x86_64-linux";
