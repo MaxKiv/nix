@@ -15,23 +15,21 @@ with lib; {
 
   config = mkMerge [
     (mkIf (config.my.powerManager == "power-profiles-daemon") {
-      # make power profiles available over D-Bus
-      services.power-profiles-daemon.enable = true;
-
-      # Automatically switch the power profile on plug and unplug if I'm using power-profiles-daemon
       systemd.user.services.auto-power-profile = {
-        Install.WantedBy = ["default.target"];
-        Service.ExecStart = let
-          script = pkgs.writeShellApplication {
-            name = "auto-power-profile";
-            text = builtins.readFile ../../sway/scripts/ppd-auto-power-profile.sh;
-            runtimeInputs = with pkgs; [
-              inotify-tools
-              power-profiles-daemon
-              coreutils
-            ];
-          };
-        in "${script}/bin/auto-power-profile";
+        wantedBy = ["default.target"];
+        serviceConfig = {
+          ExecStart = let
+            script = pkgs.writeShellApplication {
+              name = "auto-power-profile";
+              text = builtins.readFile ./ppd-auto-power-profile.sh;
+              runtimeInputs = with pkgs; [
+                inotify-tools
+                power-profiles-daemon
+                coreutils
+              ];
+            };
+          in "${script}/bin/auto-power-profile";
+        };
       };
     })
 

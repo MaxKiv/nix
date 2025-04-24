@@ -238,8 +238,8 @@
             # Specify host specific modules
             ./modules/devices/lenovo-p16-gen2
             ./modules/hardware/network
-            # ./modules/desktop/kde
-            ./modules/desktop/sway
+            ./modules/desktop/kde
+            # ./modules/desktop/sway
           ];
         };
 
