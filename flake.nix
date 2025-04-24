@@ -257,9 +257,7 @@
             // inputs;
           modules = [
             {
-              nixpkgs.overlays = [
-                inputs.neovim-nightly-overlay.overlays.default
-              ];
+              nixpkgs.overlays = self.overlays;
             }
             # Expose nixos-generators output formats: https://github.com/nix-community/nixos-generators?tab=readme-ov-file#using-as-a-nixos-module
             self.nixosModules.myFormats

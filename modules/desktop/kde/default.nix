@@ -40,12 +40,12 @@
     #   })
     # sddm-chili-theme
     #hicolor_icon_theme
-    kcalc
-    kleopatra
-    spectacle
-    gwenview
-    dolphin
-    okular
+    kdePackages.kcalc
+    kdePackages.kleopatra
+    kdePackages.spectacle
+    kdePackages.gwenview
+    kdePackages.dolphin
+    kdePackages.okular
     libnotify
     xclip
     wl-clipboard-rs

@@ -4,4 +4,5 @@
   ];
 
   #----Host specific config ----
+  my.powerManager = "auto-cpufreq";
 }

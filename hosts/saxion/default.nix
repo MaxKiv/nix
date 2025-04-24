@@ -4,6 +4,4 @@
   ];
 
   #----Host specific config ----
-
-  # use
 }
