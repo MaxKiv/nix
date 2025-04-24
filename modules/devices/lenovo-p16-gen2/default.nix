@@ -23,7 +23,8 @@ in {
   hardware.nvidia.open = lib.versionAtLeast nvidiaPkg.version "560" && false;
 
   # Set up Nvidia GPU to use prime to use igpu and offload heavy compute to gpu
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = ["modesetting"];
+  # services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
