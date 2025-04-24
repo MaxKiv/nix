@@ -4,7 +4,9 @@
   config,
   ...
 }:
-with lib; {
+with lib; let
+  cfg = config.my.powerManager;
+in {
   options.my.powerManager = mkOption {
     type = types.enum ["power-profiles-daemon" "auto-cpufreq"];
     default = "power-profiles-daemon";
@@ -14,7 +16,9 @@ with lib; {
   };
 
   config = mkMerge [
-    (mkIf (config.my.powerManager == "power-profiles-daemon") {
+    (mkIf (cfg == "power-profiles-daemon") {
+      services.power-profiles-daemon.enable = true;
+      services.auto-cpufreq.enable = false;
       systemd.user.services.auto-power-profile = {
         wantedBy = ["default.target"];
         serviceConfig = {
@@ -34,7 +38,8 @@ with lib; {
     })
 
     # Newer Power manager, seems better on wayland?
-    (mkIf (config.my.powerManager == "auto-cpufreq") {
+    (mkIf (cfg == "auto-cpufreq") {
+      services.power-profiles-daemon.enable = false;
       services.auto-cpufreq = {
         enable = true;
         settings = {
