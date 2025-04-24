@@ -12,9 +12,9 @@
   };
 
   sops.secrets = {
-    "ssh/${hostname}" = {
+    "ssh/personal" = {
       owner = "${username}";
-      path = "/home/${username}/.ssh/${username}";
+      path = "/home/${username}/.ssh/personal";
     };
     "ssh/work" = {
       owner = "${username}";
@@ -24,7 +24,7 @@
 
   home-manager.users.${username} = let
     workKeyPath = config.sops.secrets."ssh/work".path;
-    hostnameKeyPath = config.sops.secrets."ssh/${hostname}".path;
+    personalKeyPath = config.sops.secrets."ssh/personal".path;
   in
     {
       config,
@@ -39,12 +39,12 @@
           github = {
             host = "github.com";
             user = "git";
-            identityFile = hostnameKeyPath;
+            identityFile = personalKeyPath;
           };
           gitlab = {
             host = "gitlab.freedesktop.com";
             user = "git";
-            identityFile = hostnameKeyPath;
+            identityFile = personalKeyPath;
           };
           bitbucket = {
             host = "bitbucket.org";
@@ -58,8 +58,9 @@
       home.file = {
         # TODO make this reference a private repository, see:
         # https://github.com/ryan4yin/nix-config/blob/985beb8bd47189e4b2ef5200ef5c1ab28e3812a8/home/base/desktop/ssh.nix#L4
-        ".ssh/id_ed25519.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/${hostname}.pub";
-        ".ssh/work.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/saxion.pub";
+        #".ssh/config".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/config";
+        ".ssh/personal.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/personal.pub";
+        ".ssh/work.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/work.pub";
       };
     };
 }
