@@ -6,38 +6,63 @@
   username,
   ...
 }: {
-  # enable opengl
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true;
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  services.xserver.desktopManager.plasma5.enable = true;
-  # services.desktopManager.plasma6.enable = true;
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+
+  # services.xserver.desktopManager.plasma5.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   services.displayManager.sddm = {
     enable = true;
     # theme = "chili";
-    wayland.enable = false; # Run sddm in wayland
+    # Run sddm in wayland
+    wayland.enable = true;
   };
 
-  # Set plasma as default session
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
+  hardware.opengl.driSupport32Bit = true; # for 32-bit apps like Steam
+
+  # Set plasma6 as default session
   services.displayManager.defaultSession = "plasma";
 
   # KDE system packages
   environment.systemPackages = with pkgs; [
-    libsForQt5.kcalc
-    libsForQt5.kleopatra
-    libsForQt5.spectacle
-    libsForQt5.gwenview
-    libsForQt5.dolphin
-    libsForQt5.okular
+    # (
+    #   pkgs.where-is-my-sddm-theme.override {
+    #     themeConfig.General = {
+    #       background = "${../../../assets/backgrounds/sunset.png}";
+    #       backgroundMode = "fill";
+    #       cursorColor = "#ffffff";
+    #     };
+    #   })
+    # sddm-chili-theme
+    #hicolor_icon_theme
+    kdePackages.kcalc
+    kdePackages.kleopatra
+    kdePackages.spectacle
+    kdePackages.gwenview
+    kdePackages.dolphin
+    kdePackages.okular
     libnotify
     xclip
+    wl-clipboard-rs
+  ];
+
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    # konsole
   ];
 
   programs.kdeconnect.enable = true;
+  environment.sessionVariables = {
+    QT_QPA_PLATFORM = "wayland";
+  };
 
   networking.firewall = {
     enable = true;
@@ -53,12 +78,6 @@
         to = 1764;
       } # KDE Connect
     ];
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
   };
 
   # Configure plasma using plasma-manager
