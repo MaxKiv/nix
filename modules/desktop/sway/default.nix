@@ -146,6 +146,7 @@ in {
       export XDG_SESSION_DESKTOP=KDE
       export XDG_CURRENT_DESKTOP=KDE
       export XDG_DESKTOP_PORTAL_PREFFERED=kde
+      export WLR_DRM_DEVICES=/dev/dri/card1:/dev/dri/card2
     '';
   };
 

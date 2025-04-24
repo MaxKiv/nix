@@ -6,7 +6,7 @@
 }: {
   # Define a user account
   users.users.${username} = {
-    shell = pkgs.bash;
+    # shell = pkgs.bash;
     isNormalUser = true;
     hashedPasswordFile = config.sops.secrets."pass/${username}".path;
     extraGroups = ["wheel" "input" "video" "render"];

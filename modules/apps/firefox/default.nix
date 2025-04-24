@@ -161,7 +161,7 @@ let
     to-deepl
     ublock-origin
     unpaywall
-    vimium
+    surfingkeys
     sponsorblock
   ];
 

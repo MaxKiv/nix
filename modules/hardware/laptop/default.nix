@@ -5,7 +5,7 @@
   ...
 }: {
   # Ensure latest kernel
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Ensure latest firmware is in there
   hardware.enableAllFirmware = true;

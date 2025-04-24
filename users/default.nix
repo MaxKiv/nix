@@ -7,7 +7,7 @@
   # Setup root user
   users.users."root" = {
     hashedPasswordFile = config.sops.secrets."pass/root".path;
-    shell = pkgs.bash;
+    # shell = pkgs.bash;
   };
 
   # Setup root and user password

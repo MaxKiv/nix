@@ -6,50 +6,33 @@
   username,
   ...
 }: {
+  # enable opengl
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
 
   # services.xserver.desktopManager.plasma5.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   services.displayManager.sddm = {
     enable = true;
-    # theme = "chili";
-    # Run sddm in wayland
     wayland.enable = true;
   };
-
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true; # for 32-bit apps like Steam
 
   # Set plasma6 as default session
   services.displayManager.defaultSession = "plasma";
 
   # KDE system packages
   environment.systemPackages = with pkgs; [
-    # (
-    #   pkgs.where-is-my-sddm-theme.override {
-    #     themeConfig.General = {
-    #       background = "${../../../assets/backgrounds/sunset.png}";
-    #       backgroundMode = "fill";
-    #       cursorColor = "#ffffff";
-    #     };
-    #   })
-    # sddm-chili-theme
-    #hicolor_icon_theme
     kdePackages.kcalc
     kdePackages.kleopatra
     kdePackages.spectacle
     kdePackages.gwenview
     kdePackages.dolphin
     kdePackages.okular
+    kdePackages.qtstyleplugin-kvantum
     libnotify
     xclip
     wl-clipboard-rs
@@ -78,6 +61,12 @@
         to = 1764;
       } # KDE Connect
     ];
+  };
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
   };
 
   # Configure plasma using plasma-manager

@@ -44,12 +44,11 @@ secret:
 init-sops:
     echo "Read about setting up sops here"
     xdg-open https://github.com/Mic92/sops-nix?tab=readme-ov-file#usage-example
-    echo "Generating age key in ~/.config/sops/age"
-    mkdir -p ~/.config/sops/age
-    age-keygen -o ~/.config/sops/age/keys.txt
-    echo "install this public key into .sops.yaml under the right hostname!"
-    age-keygen -y ~/.config/sops/age/keys.txt
-    echo "SOPS key setup is now complete"
+    echo "TODO: think of a safe method to pass the age keys to new machines"
+    echo "Fetch your age key from someplace and put it in ~/.config/sops/age/keys.txt"
+
+fix-gnupg:
+    sudo chown max:users ~/.gnupg
 
 # Generate installer ISO
 iso:
