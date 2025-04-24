@@ -238,8 +238,35 @@
             # Specify host specific modules
             ./modules/devices/lenovo-p16-gen2
             ./modules/hardware/network
-            ./modules/desktop/kde
+            # ./modules/desktop/kde-wayland
+            # ./modules/desktop/i3
+            ./modules/desktop/sway
+          ];
+        };
+
+      # plain
+      plain = let
+        system = "x86_64-linux";
+      in
+        nixpkgs.lib.nixosSystem {
+          specialArgs =
+            {
+              hostname = "plain";
+              inherit system username dotfilesDir inputs;
+            }
+            // inputs;
+          modules = [
+            {
+              nixpkgs.overlays = self.overlays;
+            }
+            ./hosts/plain
+            ./users
+            ./assets
+            ./.
+            # ./modules/devices/lenovo-p16-gen2
+            ./modules/desktop/i3
             # ./modules/desktop/sway
+            ./modules/core
           ];
         };
 

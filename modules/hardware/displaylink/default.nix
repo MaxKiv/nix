@@ -20,13 +20,4 @@
     evdi
   ];
   boot.kernelModules = ["evdi"];
-
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-    # Configure additional DRM devices
-    extraSessionCommands = ''
-      export WLR_DRM_DEVICES=/dev/dri/card0:/dev/dri/card1
-    '';
-  };
 }
