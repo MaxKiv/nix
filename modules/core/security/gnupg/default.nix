@@ -25,7 +25,7 @@
     };
 
     # Import my own public key
-    programs.gpg.publicKeys.${username}.source = config.sops.secrets."gpg".path;
+    programs.gpg.publicKeys.${username}.source = ../../../../dotfiles/.gnupg/max_public.gpg;
   };
 
   # Deploy the gpg private key
