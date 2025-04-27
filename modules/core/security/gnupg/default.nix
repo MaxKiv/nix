@@ -25,7 +25,22 @@
     };
 
     # Import my own public key
-    programs.gpg.publicKeys.${username}.source = ../../../../dotfiles/.gnupg/max_public.gpg;
+    programs.gpg = {
+      enable = true;
+      publicKeys = [
+        {
+          source = ../../../../dotfiles/.gnupg/max_public.gpg;
+          trust = "ultimate";
+        }
+      ];
+    };
+
+    # Script to import private key post-activation
+    home.activation.importGpgKey = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      if [ -f ${config.sops.secrets."gpg-private-key".path} ]; then
+        $DRY_RUN_CMD ${pkgs.gnupg}/bin/gpg --batch --import ${config.sops.secrets."gpg-private-key".path}
+      fi
+    '';
   };
 
   # Deploy the gpg private key
