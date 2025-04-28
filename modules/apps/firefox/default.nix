@@ -133,6 +133,7 @@ let
     };
 
   mimeTypes = [
+    "default-web-browser"
     "application/json"
     "application/pdf"
     "application/x-extension-htm"
