@@ -17,6 +17,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    dotfiles = {
+      url = "git+file:dotfiles";
+      flake = false;
+    };
+
     flake-registry = {
       url = "github:nixos/flake-registry";
       flake = false;
@@ -210,7 +215,7 @@
             # import default modules through default.nix
             ./.
             # Specify host specific modules
-            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
+            ./modules/devices/lenovo-t14
             ./modules/hardware/network
             # ./modules/desktop/kde
             ./modules/desktop/sway
