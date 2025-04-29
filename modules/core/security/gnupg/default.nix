@@ -50,11 +50,12 @@
       ];
     };
 
+    # TODO: script causes hm activation to fail, fix this
     # Script to import private key post-activation
-    home.activation.importGpgKey = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      if [ -f ${osConfig.sops.secrets."gpg-private-key".path} ]; then
-        $DRY_RUN_CMD ${pkgs.gnupg}/bin/gpg --batch --import ${osConfig.sops.secrets."gpg-private-key".path}
-      fi
-    '';
+    # home.activation.importGpgKey = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    #   if [ -f ${osConfig.sops.secrets."gpg-private-key".path} ]; then
+    #     $DRY_RUN_CMD ${pkgs.gnupg}/bin/gpg --batch --import ${osConfig.sops.secrets."gpg-private-key".path}
+    #   fi
+    # '';
   };
 }
