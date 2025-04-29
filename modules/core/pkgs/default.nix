@@ -52,5 +52,6 @@
     picard # GUI to edit music metadata
     zenity # spawn xdg portals
     teams-for-linux
+    zotero # manage & annotate papers & their references
   ];
 }

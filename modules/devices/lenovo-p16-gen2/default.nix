@@ -18,6 +18,7 @@ in {
 
   # Use Lenovo firmware blobs
   hardware.enableRedistributableFirmware = true;
+  hardware.enableAllFirmware = true;
 
   # hardware.nvidia.package = nvidiaPkg;
   # hardware.nvidia.open = lib.versionAtLeast nvidiaPkg.version "560" && false;

@@ -3,8 +3,13 @@
   config,
   username,
   hostname,
+  pkgs,
   ...
 }: {
+  environment.systemPackages = with pkgs; [
+    xorg.xauth
+  ];
+
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = false;
@@ -51,6 +56,16 @@
             user = "git";
             identityFile = workKeyPath;
             identitiesOnly = true;
+          };
+          "10.0.1.70" = {
+            user = "magman";
+            identityFile = workKeyPath;
+            forwardX11 = true;
+            forwardX11Trusted = true;
+            forwardAgent = true;
+            extraOptions = {
+              "XAuthLocation" = "${pkgs.xorg.xauth}/bin/xauth";
+            };
           };
         };
       };
