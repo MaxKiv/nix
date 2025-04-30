@@ -13,6 +13,10 @@ help:
 build:
     sudo nixos-rebuild build --flake .
 
+# Build and deploy this NixOS derivation
+test:
+    sudo nixos-rebuild test --flake .
+
 # Print debug info while attempting to build and deploy this NixOS derivation
 debug:
     sudo nixos-rebuild build --flake . --show-trace --verbose --option eval-cache false

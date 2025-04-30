@@ -4,4 +4,7 @@
   ];
 
   #----Host specific config ----
+  my.firefox = {
+    enable = true;
+  };
 }
