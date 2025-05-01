@@ -4,5 +4,6 @@
     ./print
     ./sound
     ./displaylink
+    ./can
   ];
 }

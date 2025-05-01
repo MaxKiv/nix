@@ -38,12 +38,12 @@ with lib; {
     };
 
     # DisplayLink firmware loading:
-    hardware.firmware = [
-      (pkgs.runCommand "displaylink-firmware" {} ''
-        mkdir -p $out/lib/firmware/displaylink
-        cp ${pkgs.displaylink}/lib/*.spkg $out/lib/firmware/displaylink/
-      '')
-    ];
+    # hardware.firmware = [
+    #   (pkgs.runCommand "displaylink-firmware" {} ''
+    #     mkdir -p $out/lib/firmware/displaylink
+    #     cp ${pkgs.displaylink}/lib/*.spkg $out/lib/firmware/displaylink/
+    #   '')
+    # ];
 
     # Load the evdi module for DisplayLink
     boot.extraModulePackages = with config.boot.kernelPackages; [
