@@ -118,18 +118,33 @@
     dotfilesDir = ./dotfiles;
     inherit (self) outputs;
   in {
-    # overlays = import ./overlays {inherit inputs outputs;};
-    overlays = [
-      # Neovim nightly overlay
-      inputs.neovim-nightly-overlay.overlays.default
-      # (_: _: {
-      #   nil = inputs.nil-lsp.packages."x86_64-linux".default;
-      # })
-      # (import ./overlays/displaylink.nix {
-      #   pkgs = nixpkgs; # Pass nixpkgs as pkgs
-      #   inherit inputs;
-      # })
-    ];
+    overlays = import ./overlays {inherit inputs outputs;};
+    # overlays = [
+    #   # Neovim nightly overlay
+    #   inputs.neovim-nightly-overlay.overlays.default
+    #   # (_: _: {
+    #   #   nil = inputs.nil-lsp.packages."x86_64-linux".default;
+    #   # })
+    #   # (import ./overlays/displaylink.nix {
+    #   #   pkgs = nixpkgs; # Pass nixpkgs as pkgs
+    #   #   inherit inputs;
+    #   # })
+    #
+    #   (final: prev: {
+    #     sway = prev.sway.overrideAttrs (old: {
+    #       wlroots = prev.wlroots_0_18.overrideAttrs (wlrootsOld: {
+    #         patches =
+    #           (wlrootsOld.patches or [])
+    #           ++ [
+    #             (prev.fetchpatch {
+    #               url = "https://gitlab.freedesktop.org/wlroots/wlroots/uploads/bd115aa120d20f2c99084951589abf9c/DisplayLink_v2.patch";
+    #               hash = "sha256-vWQc2e8a5/YZaaHe+BxfAR/Ni8HOs2sPJ8Nt9pfxqiE=";
+    #             })
+    #           ];
+    #       });
+    #     });
+    #   })
+    # ];
 
     # Nixos Generators entrypoint
     nixosModules.myFormats = {config, ...}: {
@@ -209,9 +224,6 @@
             }
             // inputs;
           modules = [
-            {
-              nixpkgs.overlays = self.overlays;
-            }
             # import default modules through default.nix
             ./.
             # Specify host specific modules
@@ -235,9 +247,6 @@
             }
             // inputs;
           modules = [
-            {
-              nixpkgs.overlays = self.overlays;
-            }
             # import default modules through default.nix
             ./.
             # Specify host specific modules
@@ -261,9 +270,6 @@
             }
             // inputs;
           modules = [
-            {
-              nixpkgs.overlays = self.overlays;
-            }
             ./hosts/plain
             ./users
             ./assets
@@ -288,9 +294,6 @@
             }
             // inputs;
           modules = [
-            {
-              nixpkgs.overlays = self.overlays;
-            }
             # Expose nixos-generators output formats: https://github.com/nix-community/nixos-generators?tab=readme-ov-file#using-as-a-nixos-module
             self.nixosModules.myFormats
             # import default modules through default.nix
@@ -330,6 +333,19 @@
           value = generateTemplate dir;
         })
         templateDirs);
+
+    packages = forAllSystems (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+        final = {
+          inherit system;
+          pkgs = pkgs;
+        };
+      in
+        import ./pkgs {
+          inherit inputs final;
+        }
+    );
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
   };
