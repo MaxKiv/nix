@@ -167,6 +167,7 @@ with lib; {
         # link-cleaner
         unpaywall
         surfingkeys
+        zotero-connector
       ];
 
       extra_extensions = with firefox-addons.packages.${pkgs.system}; [
@@ -514,12 +515,13 @@ with lib; {
           };
         };
 
-        # Set XDG mimeTypes 
+        # Set XDG mimeTypes
         xdg.mimeApps.defaultApplications = builtins.listToAttrs (map
           (mimeType: {
             name = mimeType;
             value = ["firefox.desktop"];
-          }) mimeTypes);
+          })
+          mimeTypes);
       };
     }
   );
