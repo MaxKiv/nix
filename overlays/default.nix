@@ -1,19 +1,41 @@
 # shamelessly stolen from https://github.com/Sileanth/nixosik/blob/63354cf060e9ba895ccde81fd6ccb668b7afcfc5/overlays/default.nix
 # This file defines overlays
-{inputs, ...}: {
-  # This one brings our custom packages from the 'pkgs' directory
-  # additions = final: _prev: import ../pkgs {pkgs = final;};
+{
+  inputs,
+  outputs,
+  ...
+}: {
+  # Adds custom packages
+  additions = final: _prev: import ../pkgs final inputs;
 
-  # This one contains whatever you want to overlay
+  # Modifies existing packages
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
-  };
+    sway-displaylink = let
+      wlroots-sway = prev.wlroots.overrideAttrs (_: {
+        # https://gitlab.freedesktop.org/wlroots/wlroots/-/merge_requests/4824
+        patches = [
+          (prev.fetchpatch {
+            name = "scannout-without-mgpu-renderer.patch";
+            url = "https://gitlab.freedesktop.org/wlroots/wlroots/-/merge_requests/4824.patch";
+            sha256 = "19phmcplc1y2rvhvgi6a2vkzflkf9b2xzlyb58dvbffl87vgv224";
+          })
+        ];
+      });
 
-  nvim-nightly = inputs.neovim-nightly-overlay.overlays.default;
+      sway-unwrapped = prev.sway-unwrapped.override {
+        wlroots = wlroots-sway;
+      };
+    in
+      prev.sway.override {
+        inherit sway-unwrapped;
+        extraOptions = ["--unsupported-gpu"];
+      };
+  };
 
   # # When applied, the unstable nixpkgs set (declared in the flake inputs) will
   # # be accessible through 'pkgs.unstable'

@@ -9,8 +9,9 @@
     ./hardware-configuration.nix
   ];
 
-  #----Host specific config ----
   my.firefox = {
     enable = true;
   };
+
+  my.displaylink.enable = true;
 }
