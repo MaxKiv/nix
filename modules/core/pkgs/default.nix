@@ -53,5 +53,6 @@
     zenity # spawn xdg portals
     teams-for-linux
     zotero # manage & annotate papers & their references
+    qdirstat # see whats taking space on filesystem
   ];
 }
