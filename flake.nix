@@ -115,7 +115,6 @@
     forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
     username = "max";
-    dotfilesDir = ./dotfiles;
     inherit (self) outputs;
   in {
     overlays = import ./overlays {inherit inputs outputs;};
@@ -177,7 +176,7 @@
           specialArgs =
             {
               hostname = "terra";
-              inherit system username dotfilesDir;
+              inherit system username;
             }
             // inputs;
           modules = [
@@ -199,7 +198,7 @@
           specialArgs =
             {
               hostname = "downtown";
-              inherit system username dotfilesDir;
+              inherit system username;
             }
             // inputs;
           modules = [
@@ -220,7 +219,7 @@
           specialArgs =
             {
               hostname = "rapanui";
-              inherit system username dotfilesDir inputs;
+              inherit system username inputs;
             }
             // inputs;
           modules = [
@@ -243,7 +242,7 @@
           specialArgs =
             {
               hostname = "saxion";
-              inherit system username dotfilesDir inputs;
+              inherit system username inputs;
             }
             // inputs;
           modules = [
@@ -266,7 +265,7 @@
           specialArgs =
             {
               hostname = "plain";
-              inherit system username dotfilesDir inputs;
+              inherit system username inputs;
             }
             // inputs;
           modules = [
@@ -290,7 +289,7 @@
             {
               hostname = "isolate";
               username = "nixos";
-              inherit system dotfilesDir inputs;
+              inherit system inputs;
             }
             // inputs;
           modules = [
