@@ -7,12 +7,13 @@
   imports = [
     ./aoc
     ./c
+    ./cpp
     ./embedded
     ./leetcode
-    ./markdown
     ./lua
-    ./rust
+    ./markdown
     ./python
+    ./rust
   ];
 
   environment.systemPackages = with pkgs; [
@@ -20,8 +21,6 @@
     gdb
     cmake
     gnumake
-    clang_17
-    clang-tools_17
     python3
     ruby
     nodejs_20
