@@ -42,6 +42,7 @@ in {
       SUBSYSTEM=="usb", ATTRS{idVendor}=="0c72", MODE="0666"
     '';
 
+    # Setup systemd service to set right CAN bitrate
     systemd.services =
       mapAttrs (name: interface: {
         description = "Setup ${name} CAN interface";
@@ -50,9 +51,9 @@ in {
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = true;
-          ExecStartPre = "${pkgs.iproute2}/bin/ip link set ${name} type can bitrate ${toString interface.bitrate}";
-          ExecStart = "${pkgs.iproute2}/bin/ip link set ${name} up";
-          ExecStop = "${pkgs.iproute2}/bin/ip link set ${name} down";
+          ExecStartPre = "${pkgs.bash}/bin/bash -c 'if ${pkgs.iproute2}/bin/ip link show ${name} &>/dev/null; then ${pkgs.iproute2}/bin/ip link set ${name} type can bitrate ${toString interface.bitrate}; fi'";
+          ExecStart = "${pkgs.bash}/bin/bash -c 'if ${pkgs.iproute2}/bin/ip link show ${name} &>/dev/null; then ${pkgs.iproute2}/bin/ip link set ${name} up; fi'";
+          ExecStop = "${pkgs.bash}/bin/bash -c 'if ${pkgs.iproute2}/bin/ip link show ${name} &>/dev/null; then ${pkgs.iproute2}/bin/ip link set ${name} down; fi'";
         };
       })
       cfg.interfaces;

@@ -18,6 +18,4 @@
 
   # Use Lenovo firmware blobs
   hardware.enableRedistributableFirmware = true;
-
-  my.grub-bootloader.enable = true;
 }

@@ -46,6 +46,7 @@ with lib; {
 
           # disable alt menu
           "ui.key.menuAccessKeyFocuses" = false;
+          "ui.key.menuAccesKey" = 17;
 
           # disable updates (pretty pointless with nix)
           "app.update.channel" = "default";
@@ -223,6 +224,12 @@ with lib; {
             tags = ["tweakers"];
             keyword = "tweakers";
             url = "https://tweakers.net/";
+          }
+          {
+            name = "Youtube";
+            tags = ["you" "tube" "youtube"];
+            keyword = "you";
+            url = "https://www.youtube.com/";
           }
           {
             name = "Smoelen";
