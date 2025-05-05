@@ -169,6 +169,7 @@ with lib; {
         unpaywall
         surfingkeys
         zotero-connector
+        firefox-ctrlnumber
       ];
 
       extra_extensions = with firefox-addons.packages.${pkgs.system}; [

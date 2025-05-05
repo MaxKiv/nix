@@ -10,7 +10,7 @@
   # its a laptop!
   imports = [
     nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
-    ../../hardware/laptop
+    ../../laptop
   ];
 
   # Update amd microcode
