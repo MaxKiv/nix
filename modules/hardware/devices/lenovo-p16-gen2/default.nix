@@ -10,7 +10,7 @@
 in {
   # its a laptop!
   imports = [
-    ../../hardware/laptop
+    ../../laptop
   ];
 
   # Update intel microcode

@@ -51,8 +51,14 @@ in {
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = true;
-          ExecStartPre = "${pkgs.bash}/bin/bash -c 'if ${pkgs.iproute2}/bin/ip link show ${name} &>/dev/null; then ${pkgs.iproute2}/bin/ip link set ${name} type can bitrate ${toString interface.bitrate}; fi'";
-          ExecStart = "${pkgs.bash}/bin/bash -c 'if ${pkgs.iproute2}/bin/ip link show ${name} &>/dev/null; then ${pkgs.iproute2}/bin/ip link set ${name} up; fi'";
+          ExecStart = ''
+            ${pkgs.bash}/bin/bash -c '
+              if ${pkgs.iproute2}/bin/ip link show ${name} &>/dev/null; then
+                ${pkgs.iproute2}/bin/ip link set ${name} type can bitrate ${toString interface.bitrate};
+                ${pkgs.iproute2}/bin/ip link set ${name} up;
+              fi
+            '
+          '';
           ExecStop = "${pkgs.bash}/bin/bash -c 'if ${pkgs.iproute2}/bin/ip link show ${name} &>/dev/null; then ${pkgs.iproute2}/bin/ip link set ${name} down; fi'";
         };
       })
