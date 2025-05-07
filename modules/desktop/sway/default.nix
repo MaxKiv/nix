@@ -97,6 +97,7 @@ in {
     ]
     # Add some KDE packages I have become used to
     ++ (with kdePackages; [
+      konsole
       ark
       dolphin
       dolphin-plugins

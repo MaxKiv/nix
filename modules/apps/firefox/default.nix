@@ -524,12 +524,15 @@ with lib; {
         };
 
         # Set XDG mimeTypes
-        xdg.mimeApps.defaultApplications = builtins.listToAttrs (map
-          (mimeType: {
-            name = mimeType;
-            value = ["firefox.desktop"];
-          })
-          mimeTypes);
+        xdg.mimeApps = {
+          enable = true;
+          defaultApplications = builtins.listToAttrs (map
+            (mimeType: {
+              name = mimeType;
+              value = ["firefox.desktop"];
+            })
+            mimeTypes);
+        };
       };
     }
   );

@@ -139,14 +139,32 @@
         "type": "github"
       }
     },
+    "dolphin-overlay": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1743892246,
+        "narHash": "sha256-AHeavUWjnDPT/hffE5hM8RIew+mZJSSr9tUEiSvZW30=",
+        "owner": "rumboon",
+        "repo": "dolphin-overlay",
+        "rev": "55fec3268972876890d6081d3d76a701c37c01d7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rumboon",
+        "repo": "dolphin-overlay",
+        "type": "github"
+      }
+    },
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1745591803,
-        "narHash": "sha256-XNuEk7sNpjPHcKyHPajdqZAEr0o+0KaQt3CFp3fhxCo=",
+        "lastModified": 1746600143,
+        "narHash": "sha256-Wgfl0suR4DgT3NoEOk4pBLiP5aXCmmYRPT0d+HA4ddI=",
         "ref": "refs/heads/main",
-        "rev": "456df324e4093a4ea893fa6280ff7905804c77dc",
-        "revCount": 310,
+        "rev": "65a0eeb6c4955aafc4d5feb9c17b049dd0a8d990",
+        "revCount": 315,
         "type": "git",
         "url": "file:dotfiles"
       },
@@ -1025,7 +1043,7 @@
         "git-hooks": "git-hooks",
         "hercules-ci-effects": "hercules-ci-effects",
         "neovim-src": "neovim-src",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
@@ -1083,7 +1101,7 @@
     "nix-gaming": {
       "inputs": {
         "flake-parts": "flake-parts_3",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1744611256,
@@ -1207,6 +1225,21 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1743890059,
+        "narHash": "sha256-QQLhHHGNtAW8qRpseb40zqZlhZUeRRUg2SGmXjfE+so=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "58a813438464b5295170efe38d8bd5f40fcc1d23",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1744536153,
         "narHash": "sha256-awS2zRgF4uTwrOKwwiJcByDzDOdo3Q1rPZbiHQg/N38=",
         "owner": "NixOS",
@@ -1221,7 +1254,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1744502386,
         "narHash": "sha256-QAd1L37eU7ktL2WeLLLTmI6P9moz9+a/ONO8qNBYJgM=",
@@ -1237,7 +1270,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1744463964,
         "narHash": "sha256-LWqduOgLHCFxiTNYi3Uj5Lgz0SR+Xhw3kr/3Xd0GPTM=",
@@ -1253,7 +1286,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_6": {
       "locked": {
         "lastModified": 1743583204,
         "narHash": "sha256-F7n4+KOIfWrwoQjXrL2wD9RhFYLs2/GGe/MQY1sSdlE=",
@@ -1342,6 +1375,7 @@
       "inputs": {
         "alacritty-catppuccin": "alacritty-catppuccin",
         "chaotic": "chaotic",
+        "dolphin-overlay": "dolphin-overlay",
         "dotfiles": "dotfiles",
         "firefox-addons": "firefox-addons",
         "flake-registry": "flake-registry",
@@ -1353,7 +1387,7 @@
         "nix-gaming": "nix-gaming",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_5",
         "plasma-manager": "plasma-manager",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",
@@ -1451,7 +1485,7 @@
         "git-hooks": "git-hooks_2",
         "gnome-shell": "gnome-shell",
         "home-manager": "home-manager_3",
-        "nixpkgs": "nixpkgs_5",
+        "nixpkgs": "nixpkgs_6",
         "nur": "nur",
         "systems": "systems_5",
         "tinted-foot": "tinted-foot",
