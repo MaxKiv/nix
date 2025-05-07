@@ -10,5 +10,6 @@
     ./security
     ./terminal
     ./powerManager
+    ./xdg
   ];
 }

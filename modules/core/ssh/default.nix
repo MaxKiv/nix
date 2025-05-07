@@ -1,5 +1,5 @@
 {
-  dotfilesDir,
+  inputs,
   config,
   username,
   hostname,
@@ -57,6 +57,20 @@
             identityFile = workKeyPath;
             identitiesOnly = true;
           };
+          rapanui = {
+            hostname = "10.0.1.233";
+            user = "${username}";
+            port = 22;
+            identityFile = personalKeyPath;
+            identitiesOnly = true;
+          };
+          saxion = {
+            hostname = "10.0.1.210";
+            user = "${username}";
+            port = 22;
+            identityFile = personalKeyPath;
+            identitiesOnly = true;
+          };
           "10.0.1.70" = {
             user = "magman";
             identityFile = workKeyPath;
@@ -78,4 +92,9 @@
         ".ssh/work.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/work.pub";
       };
     };
+
+  # Set authorized SSH keys
+  users.users.${username}.openssh.authorizedKeys.keyFiles = [
+    "${inputs.dotfiles}/.ssh/authorized_keys"
+  ];
 }

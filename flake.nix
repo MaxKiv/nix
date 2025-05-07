@@ -108,6 +108,9 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Overlay to fix dolphin's "open with" menu not working under sway/hyprland
+    dolphin-overlay.url = "github:rumboon/dolphin-overlay";
   };
 
   # Outputs this flake produces
@@ -122,7 +125,10 @@
     username = "max";
     inherit (self) outputs;
   in {
-    overlays = import ./overlays {inherit inputs outputs;};
+    overlays = [
+      (import ./overlays {inherit inputs outputs;})
+      inputs.dolphin-overlay.overlays.default
+    ];
 
     # Nixos Generators entrypoint
     nixosModules.myFormats = {config, ...}: {
