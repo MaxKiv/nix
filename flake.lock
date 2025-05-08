@@ -162,15 +162,15 @@
       "locked": {
         "lastModified": 1746600143,
         "narHash": "sha256-Wgfl0suR4DgT3NoEOk4pBLiP5aXCmmYRPT0d+HA4ddI=",
-        "ref": "refs/heads/main",
+        "owner": "maxkiv",
+        "repo": "dotfiles",
         "rev": "65a0eeb6c4955aafc4d5feb9c17b049dd0a8d990",
-        "revCount": 315,
-        "type": "git",
-        "url": "file:dotfiles"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:dotfiles"
+        "owner": "maxkiv",
+        "repo": "dotfiles",
+        "type": "github"
       }
     },
     "fenix": {

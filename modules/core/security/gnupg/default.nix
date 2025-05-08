@@ -9,9 +9,15 @@
   ...
 }: {
   # Deploy the gpg private key
+  # sops.secrets."gpg-private-key" = {
+  #   mode = "0400";
+  #   path = "/home/${username}/.gnupg/private-keys-v1.d/max.key";
+  #   owner = "${username}";
+  # };
+
   sops.secrets."gpg-private-key" = {
     mode = "0400";
-    path = "/home/${username}/.gnupg/private-keys-v1.d/max.key";
+    path = "/home/${username}/.local/share/secret-keys/max_private.asc";
     owner = "${username}";
   };
 
@@ -51,10 +57,9 @@
     };
 
     # TODO: script causes hm activation to fail, fix this
-    # Script to import private key post-activation
     # home.activation.importGpgKey = lib.hm.dag.entryAfter ["writeBoundary"] ''
     #   if [ -f ${osConfig.sops.secrets."gpg-private-key".path} ]; then
-    #     $DRY_RUN_CMD ${pkgs.gnupg}/bin/gpg --batch --import ${osConfig.sops.secrets."gpg-private-key".path}
+    #     ${pkgs.gnupg}/bin/gpg --batch --import ${osConfig.sops.secrets."gpg-private-key".path}
     #   fi
     # '';
   };

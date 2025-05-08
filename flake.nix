@@ -18,7 +18,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     dotfiles = {
-      url = "git+file:dotfiles";
+      url = "github:maxkiv/dotfiles";
       flake = false;
     };
 

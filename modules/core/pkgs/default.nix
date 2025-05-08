@@ -21,6 +21,8 @@
     brightnessctl # CLI for brightness
     playerctl # CLI to control media players
     gparted # manage disk partitions
+    parted # manage disk partitions
+    gptfdisk # manage disk partitions
     kalker # cmdline calculator
     just # simple cmd runner
     bitwarden-cli # CLI for bitwarden

@@ -20,4 +20,7 @@
       bitrate = 250000;
     };
   };
+
+  # Multi-boot system: use GRUB bootloader
+  my.grub-bootloader.enable = true;
 }
