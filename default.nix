@@ -3,6 +3,10 @@
   inputs,
   ...
 }: {
+  nixpkgs.overlays = [
+    inputs.dolphin-overlay.overlays.default
+  ];
+
   imports = [
     # HM import and settings
     home-manager.nixosModules.home-manager
