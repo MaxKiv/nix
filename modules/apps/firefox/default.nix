@@ -116,7 +116,7 @@ with lib; {
           "devtools.theme" = "auto";
 
           # Stop creating ~/Downloads!
-          "browser.download.dir" = "${config.user.home}/downloads";
+          # "browser.download.dir" = "${config.home.homeDirectory}/downloads";
           # Disables built-in password manager -> use external PM!
           "signon.rememberSignons" = false;
           # Firefox, DO NOT CHECK if you are the default browser..

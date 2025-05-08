@@ -53,6 +53,9 @@ init-sops:
 
 fix-gnupg:
     sudo chown max:users ~/.gnupg
+    sudo chown -R $(whoami) ~/.gnupg/
+    sudo chmod 600 ~/.gnupg/*
+    sudo chmod 700 ~/.gnupg
 
 # Generate installer ISO
 iso:
