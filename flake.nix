@@ -125,6 +125,7 @@
     username = "max";
     inherit (self) outputs;
   in {
+    # Specifies global additions and modifications to nixpkgs
     overlays = [
       (import ./overlays {inherit inputs outputs;})
       inputs.dolphin-overlay.overlays.default

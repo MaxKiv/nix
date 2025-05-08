@@ -71,7 +71,6 @@ with lib; {
           "browser.search.region" = "NL";
           "browser.search.widget.inNavBar" = true;
 
-          "browser.shell.checkDefaultBrowser" = false;
           "browser.tabs.loadInBackground" = true;
           "browser.urlbar.placeholderName" = "DuckDuckGo";
           "browser.urlbar.showSearchSuggestionsFirst" = false;
@@ -116,6 +115,13 @@ with lib; {
 
           "devtools.theme" = "auto";
 
+          # Stop creating ~/Downloads!
+          "browser.download.dir" = "${config.user.home}/downloads";
+          # Disables built-in password manager -> use external PM!
+          "signon.rememberSignons" = false;
+          # Firefox, DO NOT CHECK if you are the default browser..
+          "browser.shell.checkDefaultBrowser" = false;
+
           # Silence some stuff
           "services.sync.prefs.sync.browser.safebrowsing.downloads.enabled" = false;
           "services.sync.prefs.sync.browser.safebrowsing.malware.enabled" = false;
@@ -126,7 +132,6 @@ with lib; {
           "signon.passwordEditCapture.enabled" = false;
           "layout.forms.reveal-password-context-menu.enabled" = false;
           "services.sync.engine.passwords" = false;
-          "signon.rememberSignons" = false;
           "general.config.obscure_value" = 0;
         }
         // lib.optionalAttrs (config.networking.hostName == "terra") {
