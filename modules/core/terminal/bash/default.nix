@@ -58,7 +58,7 @@
         gds = "${pkgs.git}/bin/git diff --staged";
         gc = "${pkgs.git}/bin/git commit";
         gcs = "${pkgs.git}/bin/git commit --gpg-sign=\"Max Kivits\"";
-        gf = "${pkgs.git}/bin/git fetch -p -t";
+        gf = "${pkgs.git}/bin/git fetch -p -t --all";
         gl = "${pkgs.git}/bin/git log --oneline --decorate --graph";
         glu = "${pkgs.git}/bin/git log --oneline --decorate --graph \"@{u}\"";
         glp = "${pkgs.git}/bin/git log -p";

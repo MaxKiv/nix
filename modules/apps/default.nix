@@ -13,7 +13,7 @@
     ./spicetify
     ./dolphin
     ./vlc
-    ./ventoy
+    # ./ventoy
     ./slack
     ./nordvpn
   ];
