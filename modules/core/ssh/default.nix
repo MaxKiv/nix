@@ -90,11 +90,7 @@
         #".ssh/config".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/config";
         ".ssh/personal.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/personal.pub";
         ".ssh/work.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/work.pub";
+        ".ssh/authorized_keys".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/authorized_keys";
       };
     };
-
-  # Set authorized SSH keys
-  users.users.${username}.openssh.authorizedKeys.keyFiles = [
-    "${inputs.dotfiles}/.ssh/authorized_keys"
-  ];
 }

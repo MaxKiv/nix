@@ -52,7 +52,7 @@ with lib; {
     boot.kernelModules = ["evdi" "cdc_ncm" "usbnet"];
 
     environment.variables = {
-      WLR_EVDI_RENDER_DEVICE = "/dev/dri/card0";
+      WLR_EVDI_RENDER_DEVICE = "/dev/dri/card2";
     };
 
     # nixpkgs.overlays = [

@@ -11,6 +11,7 @@
     ./embedded
     ./leetcode
     ./lua
+    ./vscode
     ./markdown
     ./python
     ./rust

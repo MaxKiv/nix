@@ -17,10 +17,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    dotfiles = {
-      url = "github:maxkiv/dotfiles";
-      flake = false;
-    };
+    # dotfiles = {
+    #   url = "github:maxkiv/dotfiles";
+    #   flake = false;
+    # };
 
     flake-registry = {
       url = "github:nixos/flake-registry";
@@ -208,6 +208,7 @@
           specialArgs = {inherit hostname system username inputs;} // inputs;
           modules = [
             ./.
+            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p16s-intel-gen2
             ./modules/hardware/devices/lenovo-p16-gen2
             ./modules/hardware/network
             # ./modules/desktop/kde-wayland
@@ -268,6 +269,7 @@
       };
     });
 
+    # nix flake init --template github:maxkiv/nix#
     templates = let
       templateDirs = builtins.attrNames (builtins.readDir ./templates);
       generateTemplate = dir: {

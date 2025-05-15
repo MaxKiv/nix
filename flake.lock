@@ -157,22 +157,6 @@
         "type": "github"
       }
     },
-    "dotfiles": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1746600143,
-        "narHash": "sha256-Wgfl0suR4DgT3NoEOk4pBLiP5aXCmmYRPT0d+HA4ddI=",
-        "owner": "maxkiv",
-        "repo": "dotfiles",
-        "rev": "65a0eeb6c4955aafc4d5feb9c17b049dd0a8d990",
-        "type": "github"
-      },
-      "original": {
-        "owner": "maxkiv",
-        "repo": "dotfiles",
-        "type": "github"
-      }
-    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -1376,7 +1360,6 @@
         "alacritty-catppuccin": "alacritty-catppuccin",
         "chaotic": "chaotic",
         "dolphin-overlay": "dolphin-overlay",
-        "dotfiles": "dotfiles",
         "firefox-addons": "firefox-addons",
         "flake-registry": "flake-registry",
         "home-manager": "home-manager_2",

@@ -11,7 +11,7 @@
   hardware.enableAllFirmware = true;
 
   # Enable firmware updates
-  # services.fwupd.enable = true;
+  services.fwupd.enable = true;
 
   # Select Power manager
   my.powerManager = "auto-cpufreq";
