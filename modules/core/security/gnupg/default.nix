@@ -5,7 +5,6 @@
   home-manager,
   username,
   hostname,
-  dotfiles,
   ...
 }: {
   # Deploy the gpg private key
@@ -50,7 +49,7 @@
       enable = true;
       publicKeys = [
         {
-          source = "${dotfiles}/.gnupg/max_public.gpg";
+          source = "${config.home.homeDirectory}/git/nix/dotfiles/.gnupg/max_public.gpg";
           trust = "ultimate";
         }
       ];
