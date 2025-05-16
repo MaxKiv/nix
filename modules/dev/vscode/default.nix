@@ -11,11 +11,10 @@
   }: {
     programs.vscode = {
       enable = true;
-      extensions = with pkgs.vscode-extensions; [
+      profiles.default.extensions = with pkgs.vscode-extensions; [
         vscodevim.vim
         yzhang.markdown-all-in-one
-        ms-vscode.cpptools
-        ms-vscode.cpptools-extension-pack
+        llvm-vs-code-extensions.vscode-clangd
         ms-vscode.cmake-tools
         ms-python.python
         rust-lang.rust-analyzer
