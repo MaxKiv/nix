@@ -9,5 +9,6 @@
     pylint
     basedpyright
     ruff
+    python312Packages.debugpy
   ];
 }
