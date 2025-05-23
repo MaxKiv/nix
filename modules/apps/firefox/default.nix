@@ -272,7 +272,12 @@ with lib; {
 
       search = {
         force = true;
+        default = "ddg";
         engines = {
+          "amazondotcom-us".metaData.hidden = true;
+          "bing".metaData.hidden = true;
+          "ebay".metaData.hidden = true;
+
           "Nix Packages" = {
             urls = [
               {
