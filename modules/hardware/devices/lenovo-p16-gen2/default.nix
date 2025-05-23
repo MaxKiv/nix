@@ -41,6 +41,7 @@ in {
     # WLR_DRM_DEVICES = "/dev/dri/intel_gpu:/dev/dri/card0:/dev/dri/card1";
     WLR_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1";
     # WLR_DRM_DEVICES = "/dev/dri/intel_gpu";
+    WLR_DRM_NO_MODIFIERS = "1";
   };
 
   # Set up Nvidia GPU to use prime to use igpu and offload heavy compute to gpu

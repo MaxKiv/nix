@@ -49,7 +49,7 @@
     pandoc # classic haskell lib for file type conversions
     texlive.combined.scheme-small # required for pandoc to convert md to pdf
     ffmpeg # its ffmpeg
-    tdesktop # telegram desktop
+    # tdesktop # telegram desktop
     qimgv # image viewer
     picard # GUI to edit music metadata
     zenity # spawn xdg portals
