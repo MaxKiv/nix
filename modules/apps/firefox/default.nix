@@ -180,6 +180,7 @@ with lib; {
       extra_extensions = with firefox-addons.packages.${pkgs.system}; [
         privacy-badger
         i-dont-care-about-cookies
+        cookie-autodelete
         ublock-origin
         sponsorblock
       ];
