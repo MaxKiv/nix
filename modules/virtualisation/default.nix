@@ -4,14 +4,46 @@
   username,
   ...
 }: {
-  programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = [username];
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    virt-viewer
+  imports = [
+    ./docker
   ];
+
+  # https://wiki.nixos.org/wiki/Libvirt
+  # https://wiki.nixos.org/wiki/Virt-manager
+
+  # Enable libvirtd service
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        # Enable UEFI support
+        ovmf.packages = [pkgs.OVMFFull.fd];
+        # Enable TPM and secure boot emulation, for Windows 11
+        swtpm.enable = true;
+      };
+    };
+  };
+
+  # TODO: enable kvm-amd or kvm-intel based on CPU
+  # boot.kernelModules = ["kvm-intel"];
+
+  programs.virt-manager.enable = true;
+
+  users.groups.libvirtd.members = [username];
+
+  # Install necessary packages
+  environment.systemPackages = with pkgs; [
+    virt-manager
+    virt-viewer
+    spice spice-gtk
+    spice-protocol
+    win-virtio
+    win-spice
+    adwaita-icon-theme
+  ];
+
+
   home-manager.users.${username} = {
     config,
     pkgs,
@@ -24,4 +56,5 @@
       };
     };
   };
+
 }

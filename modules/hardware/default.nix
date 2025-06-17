@@ -5,5 +5,6 @@
     ./sound
     ./displaylink
     ./can
+    ./nuphy
   ];
 }
