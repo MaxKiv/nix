@@ -497,7 +497,7 @@ with lib; {
           "Confluence" = {
             # https://www.google.com/maps/place/Curio+Bay
             template = "https://mechatronica.atlassian.net/wiki/search?text={searchTerms}";
-            definedAliases = ["@f"];
+            definedAliases = ["@j"];
           };
         };
       };
