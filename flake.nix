@@ -214,6 +214,7 @@
             # ./modules/desktop/kde-wayland
             # ./modules/desktop/i3
             ./modules/desktop/sway
+            ./modules/virtualisation
           ];
         };
 

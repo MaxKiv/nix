@@ -6,6 +6,6 @@
     ./hardware
     ./dev
     ./stylix
-    ./virtualisation
+    # ./virtualisation
   ];
 }
