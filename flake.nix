@@ -111,6 +111,11 @@
 
     # Overlay to fix dolphin's "open with" menu not working under sway/hyprland
     dolphin-overlay.url = "github:rumboon/dolphin-overlay";
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # Outputs this flake produces
@@ -128,9 +133,10 @@
     # Specifies global additions and modifications to nixpkgs
     overlays = [
       (import ./overlays {inherit inputs outputs;})
+      # TODO: these two below don't seem to apply to the nixpkgs that the nixosConfigurations see
       inputs.dolphin-overlay.overlays.default
+      inputs.niri.overlays.niri
     ];
-
     # Nixos Generators entrypoint
     nixosModules.myFormats = {config, ...}: {
       imports = [
@@ -195,6 +201,7 @@
             ./modules/hardware/network
             # ./modules/desktop/kde
             ./modules/desktop/sway
+            ./modules/desktop/niri
             ./modules/gaming
           ];
         };

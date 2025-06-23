@@ -33,4 +33,7 @@
     bash-language-server
     harper # grammar lsp
   ];
+
+  # influxdb3 http endpoint
+  networking.firewall.allowedTCPPorts = [8086];
 }

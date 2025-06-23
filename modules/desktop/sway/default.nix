@@ -66,6 +66,8 @@ in {
     ../components/playerctld
   ];
 
+  my.sddm.autoLoginSession = "sway";
+
   environment.systemPackages = with pkgs;
     [
       dbus-sway-environment

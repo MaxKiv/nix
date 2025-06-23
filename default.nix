@@ -4,7 +4,10 @@
   ...
 }: {
   nixpkgs.overlays = [
+    # TODO: with this the nixpkgs overlays are visible to nixosConfigurations
+    # Find a way to put this in the main overlay section of flake.nix
     inputs.dolphin-overlay.overlays.default
+    inputs.niri.overlays.niri
   ];
 
   imports = [
@@ -13,7 +16,9 @@
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.sharedModules = [inputs.plasma-manager.homeManagerModules.plasma-manager];
+      home-manager.sharedModules = [
+        inputs.plasma-manager.homeManagerModules.plasma-manager
+      ];
       home-manager.backupFileExtension = "backup";
       home-manager.extraSpecialArgs = {inherit inputs;};
     }
