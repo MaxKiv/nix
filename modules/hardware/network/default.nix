@@ -28,10 +28,10 @@
   # https://github.com/NixOS/nixpkgs/issues/342140
   # https://mynixos.com/nixpkgs/option/networking.wireless.secretsFile
   networking.wireless.networks = {
-    home.psk = "@home_psk@";
-    hotspot.psk = "@hotspot_psk@";
-    soof_spot.psk = "@soof_spot_spk@";
-    leushuis.psk = "@leushuis_psk@";
+    home.pskRaw = "ext.home_psk";
+    hotspot.pskRaw = "ext.hotspot_psk";
+    soof_spot.pskRaw = "ext.soof_spot_psk";
+    leus.pskRaw = "ext.leus_psk";
   };
 
   users.users.${username} = {

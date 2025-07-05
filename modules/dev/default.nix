@@ -32,5 +32,8 @@
     nodePackages_latest.prettier
     bash-language-server
     harper # grammar lsp
+    asciinema # record terminal
+    asciinema-agg # convert asciinema recordings to GIF
+    postman # POST/GET API call GUI
   ];
 }
