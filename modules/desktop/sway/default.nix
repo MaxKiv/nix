@@ -117,6 +117,7 @@ in {
       # plasma-workspace
       qtwayland
       kdialog
+      tesseract # OCR engine
     ]);
 
   # Enable the gnome-keyring secrets vault.

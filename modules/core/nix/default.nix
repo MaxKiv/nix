@@ -69,4 +69,8 @@
 
   # Enable envfs for fhs compatibility
   services.envfs.enable = true;
+
+  # Enable nix-index, a file database for nixpkgs (nix-locate)
+  programs.nix-index.enable = true;
+  programs.command-not-found.enable = false; # mutually exlusive with above, does the same
 }
