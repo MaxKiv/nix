@@ -63,6 +63,7 @@
         glu = "${pkgs.git}/bin/git log --oneline --decorate --graph \"@{u}\"";
         glp = "${pkgs.git}/bin/git log -p";
         gp = "${pkgs.git}/bin/git push";
+        gpa = "${pkgs.git}/bin/git remote | ${pkgs.findutils}/bin/xargs -I R ${pkgs.git}/bin/git push R";
         gpf = "${pkgs.git}/bin/git push --force-with-lease";
         gau = "${pkgs.git}/bin/git add -u";
         gaa = "${pkgs.git}/bin/git add .";

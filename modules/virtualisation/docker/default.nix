@@ -13,8 +13,12 @@ username,
   users.users.${username}.extraGroups = [ "docker" ];
 
   # Change data root
-  virtualisation.docker.daemon.settings = {
-    data-root = "/some-place/to-store-the-docker-data";
+  virtualisation.docker = {
+    # extraOptions = "--add-host=host.docker.internal:host-gateway";
+
+    daemon.settings = {
+      data-root = "/docker/data";
+    };
   };
 
   # Turn of the userland-proxy, which is mostly used in Windows
