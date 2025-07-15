@@ -27,6 +27,11 @@
     };
   };
 
+  users.users.${username}.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7JCVDfafziVeBcBoTjw5rutrBJhnOXCxPW52+tk9hw max@rapanui"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBDg4NiAu5ELDpnDRzUZWuZTP2DVgXAGtOHjXe2CJClt m.p.w.kivits@saxion.nl"
+  ];
+
   home-manager.users.${username} = let
     workKeyPath = config.sops.secrets."ssh/work".path;
     personalKeyPath = config.sops.secrets."ssh/personal".path;
@@ -71,16 +76,6 @@
             identityFile = personalKeyPath;
             identitiesOnly = true;
           };
-          "10.0.1.70" = {
-            user = "magman";
-            identityFile = workKeyPath;
-            forwardX11 = true;
-            forwardX11Trusted = true;
-            forwardAgent = true;
-            extraOptions = {
-              "XAuthLocation" = "${pkgs.xorg.xauth}/bin/xauth";
-            };
-          };
         };
       };
 
@@ -90,7 +85,7 @@
         #".ssh/config".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/config";
         ".ssh/personal.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/personal.pub";
         ".ssh/work.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/work.pub";
-        ".ssh/authorized_keys".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/authorized_keys";
+        # ".ssh/authorized_keys".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/authorized_keys";
       };
     };
 }

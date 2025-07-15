@@ -15,6 +15,7 @@
     ./markdown
     ./python
     ./rust
+    ./work
   ];
 
   environment.systemPackages = with pkgs; [
@@ -34,6 +35,5 @@
     harper # grammar lsp
     asciinema # record terminal
     asciinema-agg # convert asciinema recordings to GIF
-    postman # POST/GET API call GUI
   ];
 }
