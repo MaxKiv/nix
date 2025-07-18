@@ -171,6 +171,10 @@ in {
 
   # bluetooth manager
   services.blueman.enable = true;
+  services.dbus.packages = [ pkgs.blueman ];
+  users.users.${username} = {
+    extraGroups = ["bluetooth"];
+  };
 
   # symlink to sway config file in dotfiles repo
   home-manager.users.${username} = {
