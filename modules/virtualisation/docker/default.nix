@@ -1,8 +1,8 @@
 {
-pkgs,
-inputs,
-username,
-...
+  pkgs,
+  inputs,
+  username,
+  ...
 }: {
   # https://nixos.wiki/wiki/Docker
 
@@ -10,7 +10,7 @@ username,
   virtualisation = {
     docker.enable = true;
   };
-  users.users.${username}.extraGroups = [ "docker" ];
+  users.users.${username}.extraGroups = ["docker"];
 
   # Change data root
   virtualisation.docker = {
@@ -30,9 +30,8 @@ username,
     fixed-cidr-v6 = "fd00::/80";
   };
 
-
   # Enable GPU passthrough
   hardware.nvidia-container-toolkit.enable = true;
   # Then run a container with
-  # --device=nvidia.com/gpu=all 
+  # --device=nvidia.com/gpu=all
 }

@@ -11,9 +11,15 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ros2, ... }:
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    ros2,
+    ...
+  }:
     flake-utils.lib.eachDefaultSystem (system: let
-      overlays = [ ros2.overlays.default ];
+      overlays = [ros2.overlays.default];
       pkgs = import nixpkgs {
         inherit system overlays;
         config.allowUnfree = true;

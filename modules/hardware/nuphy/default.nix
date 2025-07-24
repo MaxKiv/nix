@@ -1,8 +1,5 @@
-
-{...}:
-{
-
-  # Nuphy Air96 v2 -> 3265   
+{...}: {
+  # Nuphy Air96 v2 -> 3265
   # Nuphy Air75 v2 -> 3245
   # Nuphy Air60 v2 -> 3255
   # Nuphy Air60 HE -> fee0
