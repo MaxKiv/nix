@@ -171,7 +171,7 @@ in {
 
   # bluetooth manager
   services.blueman.enable = true;
-  services.dbus.packages = [ pkgs.blueman ];
+  services.dbus.packages = [pkgs.blueman];
   users.users.${username} = {
     extraGroups = ["bluetooth"];
   };
