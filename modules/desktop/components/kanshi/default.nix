@@ -6,9 +6,11 @@
     ...
   }: {
     home.packages = with pkgs; [
-      kanshi
+      # kanshi
       wl-mirror
     ];
+
+    services.kanshi.enable = true;
 
     xdg.configFile = {
       "kanshi/config" = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/kanshi/config";};
