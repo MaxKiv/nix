@@ -20,12 +20,12 @@
   };
 
   # Set static ip on ethernet interface
-  networking.interfaces.enp0s20f0u1.ipv4.addresses = [
-    {
-      address = "192.168.0.1";
-      prefixLength = 24;
-    }
-  ];
+  # networking.interfaces.enp0s20f0u1.ipv4.addresses = [
+  #   {
+  #     address = "192.168.0.1";
+  #     prefixLength = 24;
+  #   }
+  # ];
 
   home-manager.users.${username} = let
     workKeyPath = config.sops.secrets."ssh/work".path;
