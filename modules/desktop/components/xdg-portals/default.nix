@@ -26,7 +26,6 @@
 
     # TODO: this is laptop only
     wlr.settings.screencast = {
-      output_name = "eDP-1";
       chooster_type = "simple";
       chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
     };
@@ -49,8 +48,7 @@
       ];
     };
 
-    # gtk portals backend implementations
-    extraPortals = with pkgs; [
+    extraPortals = with pkgs; lib.mkForce [
       xdg-desktop-portal-gtk
       # xdg-desktop-portal-hyprland
       # xdg-desktop-portal-shana

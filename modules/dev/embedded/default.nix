@@ -28,4 +28,16 @@
     pkgs.picotool
     pkgs.qmk-udev-rules
   ];
+
+  home-manager.users.${username} = {
+    config,
+    pkgs,
+    ...
+  }: {
+    xdg.configFile = {
+      "gdb" = {
+        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/gdb/config";
+      };
+    };
+  };
 }

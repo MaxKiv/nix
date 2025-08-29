@@ -77,6 +77,11 @@
         gru = "${pkgs.git}/bin/git reset \"@{u}\"";
         g- = "${pkgs.git}/bin/git switch -";
 
+        # Cargo
+        cb = "cargo build";
+        cr = "cargo run";
+        ct = "cargo test";
+
         # Tmux
         tms = "${pkgs.tmux}/bin/tmux new-session -s";
         tml = "${pkgs.tmux}/bin/tmux list-session";
