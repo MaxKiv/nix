@@ -165,6 +165,8 @@ with lib; {
         "x-scheme-handler/https"
       ];
 
+      # Find addons here
+      # https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/generated-firefox-addons.nix?ref_type=heads
       minimal_extensions = with firefox-addons.packages.${pkgs.system}; [
         bitwarden
         darkreader
@@ -172,9 +174,10 @@ with lib; {
         # auto-accepts cookies, use only with privacy-badger & ublock-origin
         # link-cleaner
         unpaywall
-        surfingkeys
+        # surfingkeys # more shitty version of vimium, but works well in pdfs...
+        vimium
         zotero-connector
-        firefox-ctrlnumber
+        ctrl-number-to-switch-tabs
       ];
 
       extra_extensions = with firefox-addons.packages.${pkgs.system}; [
