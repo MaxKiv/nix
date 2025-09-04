@@ -65,15 +65,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # firefox-addons = {
-    #   url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     firefox-addons = {
-      url = "gitlab:MaxKivits/nur-expressions/firefox-ctlnumber?dir=pkgs/firefox-addons";
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # firefox-addons = {
+    #   url = "gitlab:MaxKivits/nur-expressions/chore?dir=pkgs/firefox-addons";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # source = "https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml";
     alacritty-catppuccin = {
