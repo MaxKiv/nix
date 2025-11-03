@@ -49,7 +49,7 @@
 
   # Use system level nixpkgs, this captures our overlays too
   home-manager.useUserPackages = true;
-  home-manager.sharedModules = [inputs.plasma-manager.homeManagerModules.plasma-manager];
+  home-manager.sharedModules = [inputs.plasma-manager.homeModules.plasma-manager];
   home-manager.useGlobalPkgs = true;
   home-manager.verbose = true;
 

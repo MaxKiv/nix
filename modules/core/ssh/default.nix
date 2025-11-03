@@ -44,23 +44,25 @@
       services.ssh-agent.enable = true;
       programs.ssh = {
         enable = true;
-        addKeysToAgent = "yes";
         matchBlocks = {
           github = {
             host = "github.com";
             user = "git";
             identityFile = personalKeyPath;
+            addKeysToAgent = "yes";
           };
           gitlab = {
             host = "gitlab.freedesktop.com";
             user = "git";
             identityFile = personalKeyPath;
+            addKeysToAgent = "yes";
           };
           bitbucket = {
             host = "bitbucket.org";
             user = "git";
             identityFile = workKeyPath;
             identitiesOnly = true;
+            addKeysToAgent = "yes";
           };
           rapanui = {
             hostname = "10.0.1.233";
@@ -68,6 +70,7 @@
             port = 22;
             identityFile = personalKeyPath;
             identitiesOnly = true;
+            addKeysToAgent = "yes";
           };
           saxion = {
             hostname = "10.0.1.210";
@@ -75,6 +78,7 @@
             port = 22;
             identityFile = personalKeyPath;
             identitiesOnly = true;
+            addKeysToAgent = "yes";
           };
         };
       };

@@ -136,6 +136,7 @@
     overlays = [
       (import ./overlays {inherit inputs outputs;})
       inputs.dolphin-overlay.overlays.default
+      (import ./overlays/flashfocus.nix)
     ];
 
     # Nixos Generators entrypoint
@@ -222,6 +223,8 @@
             # ./modules/desktop/i3
             ./modules/desktop/sway
             ./modules/virtualisation
+
+            {nixpkgs.overlays = [(import ./overlays/flashfocus.nix)];}
           ];
         };
 
