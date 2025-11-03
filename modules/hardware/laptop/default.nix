@@ -30,5 +30,5 @@
 
   # Do not sleep on lid close
   # https://nixos.org/manual/nixos/stable/options#opt-services.logind.lidSwitch
-  services.logind.lidSwitch = "ignore";
+  services.logind.settings.Login.HandleLidSwitch = "ignore";
 }

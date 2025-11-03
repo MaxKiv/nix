@@ -8,6 +8,6 @@
   environment.systemPackages = with pkgs; [
     neocmakelsp
     clang-tools
-    clang_17
+    clang
   ];
 }

@@ -16,8 +16,6 @@
     libvirtd = {
       enable = true;
       qemu = {
-        # Enable UEFI support
-        ovmf.packages = [pkgs.OVMFFull.fd];
         # Enable TPM and secure boot emulation, for Windows 11
         swtpm.enable = true;
       };
@@ -38,7 +36,7 @@
     spice
     spice-gtk
     spice-protocol
-    win-virtio
+    virtio-win
     win-spice
     adwaita-icon-theme
   ];

@@ -45,7 +45,7 @@
     nethogs # network monitor tool
     sniffnet # network monitor tool
     imagemagick # a classic
-    poppler_utils # pdfunite and other pdf utils
+    poppler-utils # pdfunite and other pdf utils
     pandoc # classic haskell lib for file type conversions
     texlive.combined.scheme-small # required for pandoc to convert md to pdf
     ffmpeg # its ffmpeg
