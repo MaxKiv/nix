@@ -201,6 +201,13 @@
         xdg-open "$(fzf)"
       }
 
+      # fid - open video
+      fid() {
+        find ~/Downloads -type f \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.mov" -o -iname "*.avi" -o -iname "*.webm" \) \
+          | fzf --preview 'ffprobe -v error -show_entries format=duration:stream=codec_name -of default=noprint_wrappers=1:nokey=1 {} 2>/dev/null | head -n 10' \
+          | xargs -r xdg-open
+      }
+
       # fkill - kill processes - list only the ones you can kill. Modified the earlier script.
       fkill() {
         local pid

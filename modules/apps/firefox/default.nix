@@ -423,9 +423,14 @@ with lib; {
             definedAliases = ["@s"];
           };
 
-          "Cargo" = {
+          "Crates" = {
             urls = [{template = "https://crates.io/crates/{searchTerms}";}];
             definedAliases = ["@c"];
+          };
+
+          "Docs" = {
+            urls = [{template = "https://docs.rs/{searchTerms}";}];
+            definedAliases = ["@d"];
           };
 
           "CPPReference" = {

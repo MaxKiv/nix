@@ -55,7 +55,7 @@ in {
     ../components/mako
     ../components/wofi
     ../components/clipman
-    ../components/flashfocus
+    # ../components/flashfocus
     # ../components/satty
     ../components/swappy
     ../components/kanshi
@@ -90,7 +90,6 @@ in {
       pulsemixer # CLI to control puleaudio
       alsa-utils # for amixer to mute mic
       # power-profiles-daemon # make power profiles available over D-Bus
-      flashfocus # Python script that flashes window I switch focus to
       wdisplays # xrandr type gui to mess with monitor placement
       wl-mirror # simple wayland display mirror program
       # kanshi # hotswap monitors, wayland arandr, in its own module now
@@ -128,7 +127,8 @@ in {
   programs.sway = {
     enable = true;
 
-    package = pkgs.sway;
+    # package = pkgs.sway;
+    package = pkgs.swayfx;
     extraOptions = ["--unsupported-gpu"];
 
     wrapperFeatures.gtk = true;
