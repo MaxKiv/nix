@@ -5,19 +5,20 @@
   username,
   ...
 }: {
-  environment.systemPackages = with pkgs; [
-    xdg-desktop-portal # Desktop integration portals for sandboxed apps
-  ];
 
-  systemd.user.services.xdg-desktop-portal = {
-    serviceConfig.Environment = "XDG_CURRENT_DESKTOP=KDE";
-  };
+  # environment.systemPackages = with pkgs; [
+  #   xdg-desktop-portal # Desktop integration portals for sandboxed apps
+  # ];
 
-  programs.sway = {
-    extraSessionCommands = ''
-      export XDG_DESKTOP_PORTAL_PREFFERED=kde
-    '';
-  };
+  # systemd.user.services.xdg-desktop-portal = {
+  #   serviceConfig.Environment = "XDG_CURRENT_DESKTOP=KDE";
+  # };
+
+  # programs.sway = {
+  #   extraSessionCommands = ''
+  #     export XDG_DESKTOP_PORTAL_PREFFERED=kde
+  #   '';
+  # };
 
   xdg.portal = {
     enable = true;
@@ -30,30 +31,30 @@
       chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
     };
 
-    configPackages = with pkgs; [
-      kdePackages.xdg-desktop-portal-kde
-      xdg-desktop-portal-wlr
-    ];
+    # configPackages = with pkgs; [
+    #   kdePackages.xdg-desktop-portal-kde
+    #   xdg-desktop-portal-wlr
+    # ];
 
-    config.sway = lib.mkForce {
-      common = [
-        "kde"
-      ];
-      default = [
-        "kde"
-        "wlr"
-      ];
-      file-chooser = [
-        "kde"
-      ];
-    };
+    # config.sway = lib.mkForce {
+    #   common = [
+    #     "kde"
+    #   ];
+    #   default = [
+    #     "kde"
+    #     "wlr"
+    #   ];
+    #   file-chooser = [
+    #     "kde"
+    #   ];
+    # };
 
     extraPortals = with pkgs; lib.mkForce [
-      xdg-desktop-portal-gtk
+      # xdg-desktop-portal-gtk
       # xdg-desktop-portal-hyprland
       # xdg-desktop-portal-shana
       xdg-desktop-portal-wlr
-      kdePackages.xdg-desktop-portal-kde
+      # kdePackages.xdg-desktop-portal-kde
     ];
   };
 
@@ -62,21 +63,21 @@
     pkgs,
     ...
   }: {
-    xdg.configFile = {
-      "xdg-desktop-portal/portals.conf" = {
-        text = ''
-          [preferred]
-          default=kde
-          org.freedesktop.impl.portal.FileChooser=kde
-        '';
-      };
-      "systemd/user/xdg-desktop-portal.service.d/override.conf" = {
-        text = ''
-          [Service]
-          Environment="XDG_CURRENT_DESKTOP=KDE"
-        '';
-      };
-    };
+    # xdg.configFile = {
+    #   "xdg-desktop-portal/portals.conf" = {
+    #     text = ''
+    #       [preferred]
+    #       default=kde
+    #       org.freedesktop.impl.portal.FileChooser=kde
+    #     '';
+    #   };
+    #   "systemd/user/xdg-desktop-portal.service.d/override.conf" = {
+    #     text = ''
+    #       [Service]
+    #       Environment="XDG_CURRENT_DESKTOP=KDE"
+    #     '';
+    #   };
+    # };
 
     # "xdg-desktop-portal-shana/config.toml" = {
     #   text = ''

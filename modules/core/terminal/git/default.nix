@@ -1,9 +1,9 @@
 {
-  config,
-  pkgs,
-  home-manager,
-  username,
-  ...
+config,
+pkgs,
+home-manager,
+username,
+...
 }: let
   email = "maxkivits42@gmail.com";
   gitName = "MaxKiv";
@@ -40,9 +40,12 @@ in {
           conflictstyle = "diff3";
           stat = true;
         };
-      };
 
-      signing.key = email;
+        # Dubious fix for esp32s3 related tooling
+        safe.directory = "*";
+
+        signing.key = email;
+      };
     };
 
     # Better diffs

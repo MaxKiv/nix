@@ -1,20 +1,21 @@
 {...}: {
   imports = [
+    # ./ventoy
     ./bitwarden
     ./chromium
     ./deluge
     ./discord
+    ./dolphin
     ./firefox
     ./freecad
     ./kicad
     ./libreoffice
     ./mpd
-    ./obsidian
-    ./spicetify
-    ./dolphin
-    ./vlc
-    # ./ventoy
-    ./slack
     ./nordvpn
+    ./obsidian
+    ./signal
+    ./slack
+    ./spicetify
+    ./vlc
   ];
 }

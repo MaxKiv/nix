@@ -17,10 +17,10 @@
 
   environment.systemPackages = with pkgs; [
     mangohud # overlay for fps, temp etc
-    protonup # installer for proton GE
+    protonup-ng # installer for proton GE
     lutris # unix game runner that managers wine/proton versions
     heroic # another game launcher for epic / GOG
-    bottles # wine prefix manager for all games not runnable by above
+    # bottles # wine prefix manager for all games not runnable by above
     # dwarf-fortress-packages.dwarf-fortress-full # DF classic with bells
     starsector # open-world single-player space-combat, roleplaying, exploration, and economic game
   ];
