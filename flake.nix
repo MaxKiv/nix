@@ -170,7 +170,7 @@
             ./.
             ./modules/hardware/network
             ./modules/hardware/nvidia
-            ./modules/desktop/kde
+            ./modules/desktop/sway
             ./modules/gaming
           ];
         };
