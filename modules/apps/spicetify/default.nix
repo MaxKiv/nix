@@ -5,7 +5,6 @@
   ...
 }: {
   # allow spotify to be installed if you don't have unfree enabled already
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) ["spotify"];
 
   home-manager.users.${username} = {
     config,

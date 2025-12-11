@@ -1,5 +1,5 @@
 {
-  sops-nix,
+  inputs,
   config,
   home-manager,
   hostname,
@@ -7,7 +7,7 @@
   ...
 }: {
   imports = [
-    sops-nix.nixosModules.sops
+    inputs.sops-nix.nixosModules.sops
   ];
 
   sops.defaultSopsFile = ../../../../secrets/secrets.yaml;

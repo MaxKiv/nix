@@ -1,33 +1,8 @@
-# Much of the flake structure is shamelessly stolen from
-# https://github.com/erictossell/nixflakes/blob/main/flake.nix
 {
-  description = "MaxKiv's Nixos config flake";
+  description = "MaxKiv's NixOS configurations";
 
-  # the nixConfig here only affects the flake itself, not the system configuration!
-  # for more information, see:
-  # https://nixos-and-flakes.thiscute.world/nixos-with-flakes/add-custom-cache-servers
-  nixConfig = {
-    extra-substituters = [
-      "https://nix-gaming.cachix.org"
-      "https://ros.cachix.org"
-    ];
-
-    # for more detail see:
-    # https://nixos-and-flakes.thiscute.world/nixos-with-flakes/add-custom-cache-servers
-    extra-trusted-public-keys = [
-      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-      "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
-    ];
-  };
-
-  # Inputs to the flake
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    # dotfiles = {
-    #   url = "github:maxkiv/dotfiles";
-    #   flake = false;
-    # };
 
     flake-registry = {
       url = "github:nixos/flake-registry";
@@ -38,8 +13,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # flake-utils.url = "github:numtide/flake-utils";
 
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
@@ -70,11 +43,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # firefox-addons = {
-    #   url = "gitlab:MaxKivits/nur-expressions/chore?dir=pkgs/firefox-addons";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     # source = "https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml";
     alacritty-catppuccin = {
       url = "github:catppuccin/alacritty";
@@ -85,11 +53,6 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # NixOS-WSL = {
-    #   url = "github:nix-community/NixOS-WSL";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
 
     # NixOS modules for specific hardware
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
@@ -118,195 +81,88 @@
 
     # Overlay to fix dolphin's "open with" menu not working under sway/hyprland
     dolphin-overlay.url = "github:rumboon/dolphin-overlay";
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  # Outputs this flake produces
   outputs = {
     self,
     nixpkgs,
     ...
   } @ inputs: let
-    supportedSystems = ["x86_64-linux"];
-    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-    nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
-    username = "max";
-    inherit (self) outputs;
+    mkSystem = import ./lib/mkSystem.nix {inherit inputs self;};
+    forAllSystems = nixpkgs.lib.genAttrs ["x86_64-linux"];
   in {
-    # Specifies global additions and modifications to nixpkgs
-    overlays = [
-      (import ./overlays {inherit inputs outputs;})
-      inputs.dolphin-overlay.overlays.default
-      (import ./overlays/flashfocus.nix)
-    ];
+    # Overlays
+    overlays.default = import ./overlays {inherit inputs;};
 
-    # Nixos Generators entrypoint
-    nixosModules.myFormats = {config, ...}: {
-      imports = [
-        inputs.nixos-generators.nixosModules.all-formats
-      ];
-      nixpkgs.hostPlatform = "x86_64-linux";
+    # NixOS Configurations
+    nixosConfigurations = {
+      # Desktop
+      terra = mkSystem {
+        hostname = "terra";
+        modules = [
+          ./modules/hardware/nvidia
+          ./modules/desktop/sway
+          ./modules/gaming
+          ./modules/virtualisation
+        ];
+      };
 
-      # customize an existing format
-      formatConfigs.install-iso = {config, ...}: {
-        users.users.root = {
-          hashedPassword = nixpkgs.lib.mkForce null; # Explicitly remove this setting, we use the password in SOPS
-        };
-        users.users.nixos = {
-          hashedPassword = nixpkgs.lib.mkForce null; # Explicitly remove this setting, we use the password in SOPS
-        };
-        networking.wireless.enable = false; # Disable wpa_supplicant, we use network manager
-        isoImage.squashfsCompression = "zstd -Xcompression-level 6";
+      # "new" T14 laptop
+      rapanui = mkSystem {
+        hostname = "rapanui";
+        modules = [
+          ./modules/desktop/sway
+          ./modules/hardware/devices/lenovo-t14
+          ./modules/gaming
+        ];
+      };
+
+      # Craptop
+      downtown = mkSystem {
+        hostname = "downtown";
+        modules = [
+          ./modules/hardware/laptop
+          ./modules/desktop/sway
+        ];
+      };
+
+      # Work laptop
+      saxion = mkSystem {
+        hostname = "saxion";
+        modules = [
+          ./modules/hardware/devices/lenovo-p16-gen2
+          ./modules/desktop/sway
+          ./modules/virtualisation
+        ];
       };
     };
 
-    nixosConfigurations = {
-      terra = let
-        system = "x86_64-linux";
-        hostname = "terra";
-      in
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit system hostname username inputs;} // inputs;
-          modules = [
-            ./.
-            ./modules/hardware/network
-            ./modules/hardware/nvidia
-            ./modules/desktop/sway
-            ./modules/gaming
-          ];
+    # Per-system outputs
+    packages = forAllSystems (system:
+      import ./pkgs {
+        inherit inputs;
+        final = {
+          inherit system;
+          pkgs = import nixpkgs {inherit system;};
         };
-
-      # Craptop
-      downtown = let
-        system = "x86_64-linux";
-        hostname = "downtown";
-      in
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit system hostname username inputs;} // inputs;
-          modules = [
-            ./.
-            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t440s
-            ./modules/hardware/network
-            ./modules/desktop/kde
-          ];
-        };
-
-      # Thinkpad
-      rapanui = let
-        system = "x86_64-linux";
-        hostname = "rapanui";
-      in
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit system hostname username inputs;} // inputs;
-          modules = [
-            ./.
-            ./modules/hardware/devices/lenovo-t14
-            ./modules/hardware/network
-            # ./modules/desktop/kde
-            ./modules/desktop/sway
-            ./modules/gaming
-          ];
-        };
-
-      # Work laptop
-      saxion = let
-        system = "x86_64-linux";
-        hostname = "saxion";
-      in
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit hostname system username inputs;} // inputs;
-          modules = [
-            ./.
-            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p16s-intel-gen2
-            ./modules/hardware/devices/lenovo-p16-gen2
-            ./modules/hardware/network
-            # ./modules/desktop/kde-wayland
-            # ./modules/desktop/i3
-            ./modules/desktop/sway
-            ./modules/virtualisation
-
-            {nixpkgs.overlays = [(import ./overlays/flashfocus.nix)];}
-          ];
-        };
-
-      # plain
-      plain = let
-        system = "x86_64-linux";
-        hostname = "plain";
-      in
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit system hostname username inputs;} // inputs;
-          modules = [
-            ./hosts/plain
-            ./users
-            ./assets
-            ./.
-            # ./modules/devices/lenovo-p16-gen2
-            ./modules/desktop/i3
-            # ./modules/desktop/sway
-            ./modules/core
-          ];
-        };
-
-      # Install ISO
-      isolate = let
-        system = "x86_64-linux";
-        hostname = "isolate";
-        username = "nixos";
-      in
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit hostname username system inputs;} // inputs;
-          modules = [
-            # Expose nixos-generators output formats: https://github.com/nix-community/nixos-generators?tab=readme-ov-file#using-as-a-nixos-module
-            self.nixosModules.myFormats
-            ./.
-            ./modules/hardware/network
-            # ./modules/desktop/kde
-            ./modules/desktop/sway
-          ];
-        };
-    }; # nixosConfigurations
+      });
 
     devShells = forAllSystems (system: let
-      pkgs = nixpkgsFor.${system};
+      pkgs = import nixpkgs {inherit system;};
     in {
       default = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          sops
-          just
-          age
-          alejandra
-          statix
-        ];
+        buildInputs = with pkgs; [sops just age alejandra];
       };
     });
 
-    # nix flake init --template github:maxkiv/nix#
-    templates = let
-      templateDirs = builtins.attrNames (builtins.readDir ./templates);
-      generateTemplate = dir: {
-        description = "Create a new ${dir} template linked to system flake nixpkgs";
-        path = ./templates/${dir};
-      };
-    in
-      builtins.listToAttrs (map (dir: {
-          name = dir;
-          value = generateTemplate dir;
-        })
-        templateDirs);
-
-    packages = forAllSystems (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-        final = {
-          inherit system;
-          pkgs = pkgs;
-        };
-      in
-        import ./pkgs {
-          inherit inputs final;
-        }
+    formatter = forAllSystems (
+      system:
+        nixpkgs.legacyPackages.${system}.alejandra
     );
-
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
   };
 }

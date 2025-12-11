@@ -1,10 +1,10 @@
 {
-  firefox-addons,
   lib,
   config,
   pkgs,
   home-manager,
   username,
+  inputs,
   ...
 }:
 with lib; {
@@ -167,7 +167,7 @@ with lib; {
 
       # Find addons here
       # https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/generated-firefox-addons.nix?ref_type=heads
-      minimal_extensions = with firefox-addons.packages.${pkgs.system}; [
+      minimal_extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
         bitwarden
         darkreader
         ff2mpv
@@ -180,7 +180,7 @@ with lib; {
         ctrl-number-to-switch-tabs
       ];
 
-      extra_extensions = with firefox-addons.packages.${pkgs.system}; [
+      extra_extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
         privacy-badger
         i-dont-care-about-cookies
         cookie-autodelete

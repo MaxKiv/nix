@@ -11,7 +11,7 @@
     ./kicad
     ./libreoffice
     ./mpd
-    ./nordvpn
+    # ./nordvpn
     ./obsidian
     ./signal
     ./slack

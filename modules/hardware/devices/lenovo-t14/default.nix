@@ -4,12 +4,12 @@
   lib,
   config,
   pkgs,
-  nixos-hardware,
+  inputs,
   ...
 }: {
   # its a laptop!
   imports = [
-    nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
     ../../laptop
   ];
 
