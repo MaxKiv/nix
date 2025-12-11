@@ -3,7 +3,7 @@
   pkgs,
   home-manager,
   lib,
-  alacritty-catppuccin,
+  inputs,
   username,
   ...
 }: {
@@ -24,7 +24,7 @@
       };
 
       "alacritty/catppuccin-mocha.toml" = {
-        source = "${alacritty-catppuccin}/catppuccin-mocha.toml";
+        source = "${inputs.alacritty-catppuccin}/catppuccin-mocha.toml";
       };
     };
   };

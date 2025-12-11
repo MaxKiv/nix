@@ -34,7 +34,13 @@
     leus.pskRaw = "ext.leus_psk";
   };
 
+  networking = {
+    # Cloudflare & Google DNS
+    nameservers = [ "1.1.1.1" "8.8.8.8" ];
+  };
+
   users.users.${username} = {
     extraGroups = ["networkmanager"];
   };
+
 }

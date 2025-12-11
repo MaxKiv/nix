@@ -1,10 +1,6 @@
 # shamelessly stolen from https://github.com/Sileanth/nixosik/blob/63354cf060e9ba895ccde81fd6ccb668b7afcfc5/overlays/default.nix
 # This file defines overlays
-{
-  inputs,
-  outputs,
-  ...
-}: {
+{inputs, ...}: {
   # Adds custom packages
   additions = final: _prev: import ../pkgs final inputs;
 

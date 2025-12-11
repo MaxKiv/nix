@@ -8,9 +8,6 @@
   # Required for nix flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # Set system flake registry to speed up nix shells
   # See: https://yusef.napora.org/blog/pinning-nixpkgs-flake/
   nix.registry.nixpkgs.flake = inputs.nixpkgs;

@@ -55,7 +55,6 @@ in {
     ../components/mako
     ../components/wofi
     ../components/clipman
-    # ../components/flashfocus
     # ../components/satty
     ../components/swappy
     ../components/kanshi

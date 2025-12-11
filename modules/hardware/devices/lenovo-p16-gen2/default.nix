@@ -4,9 +4,11 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p16s-intel-gen2
     ../../laptop
   ];
 
