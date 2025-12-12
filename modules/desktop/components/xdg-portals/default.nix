@@ -5,7 +5,6 @@
   username,
   ...
 }: {
-
   # environment.systemPackages = with pkgs; [
   #   xdg-desktop-portal # Desktop integration portals for sandboxed apps
   # ];
@@ -49,13 +48,14 @@
     #   ];
     # };
 
-    extraPortals = with pkgs; lib.mkForce [
-      # xdg-desktop-portal-gtk
-      # xdg-desktop-portal-hyprland
-      # xdg-desktop-portal-shana
-      xdg-desktop-portal-wlr
-      # kdePackages.xdg-desktop-portal-kde
-    ];
+    extraPortals = with pkgs;
+      lib.mkForce [
+        xdg-desktop-portal-gtk
+        # xdg-desktop-portal-hyprland
+        # xdg-desktop-portal-shana
+        xdg-desktop-portal-wlr
+        # kdePackages.xdg-desktop-portal-kde
+      ];
   };
 
   home-manager.users.${username} = {

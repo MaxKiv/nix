@@ -12,7 +12,7 @@ in {
 
   stylix.enable = true;
 
-  stylix.image = ../../assets/backgrounds/future-windmill.png;
+  stylix.image = ../../assets/backgrounds/disknee.jpg;
   # colorschemes: https://github.com/tinted-theming/base16-schemes
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
@@ -38,8 +38,8 @@ in {
       name = "Roboto";
     };
     serif = {
-      package = pkgs.dejavu_fonts;
-      name = "Roboto";
+      package = pkgs.nerd-fonts.hasklug;
+      name = "Hasklug Nerd Font";
     };
   };
 
@@ -51,7 +51,7 @@ in {
   };
 
   stylix.opacity = {
-    applications = 1.0;
+    applications = 0.8;
     terminal = 0.8;
     desktop = 1.0;
     popups = 1.0;

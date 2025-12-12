@@ -55,14 +55,10 @@ in {
     ../components/mako
     ../components/wofi
     ../components/clipman
-    # ../components/satty
     ../components/swappy
-    ../components/kanshi
-    # TODO: fix this
-    # ../components/xdg-desktop-portal-termfilechooser
-    ../components/sddm
     ../components/xdg-portals
     ../components/playerctld
+    ../components/tumbler
   ];
 
   environment.systemPackages = with pkgs;
@@ -118,37 +114,6 @@ in {
       tesseract # OCR engine
     ]);
 
-  # Enable the gnome-keyring secrets vault.
-  # Will be exposed through DBus to programs willing to store secrets.
-  services.gnome.gnome-keyring.enable = true;
-
-  # enable Sway window manager
-  programs.sway = {
-    enable = true;
-
-    # package = pkgs.sway;
-    package = pkgs.swayfx;
-    extraOptions = ["--unsupported-gpu"];
-
-    wrapperFeatures.gtk = true;
-    xwayland.enable = true;
-
-    # clear out default packages
-    extraPackages = [];
-
-    extraSessionCommands = ''
-      export SDL_VIDEODRIVER=wayland
-      export QT_QPA_PLATFORM=wayland
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-      export _JAVA_AWT_WM_NONREPARENTING=1
-      export MOZ_ENABLE_WAYLAND=1
-      export XDG_SESSION_TYPE=wayland
-      export XDG_SESSION_DESKTOP=KDE
-      export XDG_CURRENT_DESKTOP=KDE
-      export XDG_DESKTOP_PORTAL_PREFFERED=kde
-    '';
-  };
-
   services.libinput.enable = true;
   services.pipewire = {
     enable = true;
@@ -175,17 +140,142 @@ in {
     extraGroups = ["bluetooth"];
   };
 
-  # symlink to sway config file in dotfiles repo
+  # use greetd with tuigreet as login manager
+  services.greetd = {
+    enable = true;
+    restart = true;
+    # vt = 2;
+    settings = {
+      default_session = {
+        # command = "${pkgs.tuigreet}/bin/tuigreet --remember --time --cmd 'sway --unsupported-gpu'";
+        # command = "${pkgs.tuigreet}/bin/tuigreet --remember --time --cmd '${pkgs.swayfx}/bin/sway --unsupported-gpu'";
+        command = "${pkgs.tuigreet}/bin/tuigreet --remember --time --cmd ${pkgs.writeScript "start-sway" ''
+          export XDG_SESSION_TYPE=wayland
+          export SDL_VIDEODRIVER=wayland
+          export QT_QPA_PLATFORM=wayland
+          export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+          export _JAVA_AWT_WM_NONREPARENTING=1
+          export MOZ_ENABLE_WAYLAND=1
+          export XDG_SESSION_TYPE=wayland
+          export XDG_SESSION_DESKTOP=sway
+          export XDG_CURRENT_DESKTOP=sway
+          export XDG_DESKTOP_PORTAL_PREFFERED=wlr
+
+          exec dbus-run-session -- sway --unsupported-gpu
+        ''}";
+        user = "greeter";
+      };
+    };
+  };
+
+  # Enable the gnome-keyring secrets vault.
+  # Will be exposed through DBus to programs willing to store secrets.
+  services.gnome.gnome-keyring.enable = true;
+  # Must be enabled for home-manager sway
+  security.polkit.enable = true;
+  security.pam = {
+    services.greetd = {
+      enableGnomeKeyring = true;
+      sshAgentAuth = true;
+    };
+    sshAgentAuth.enable = true;
+  };
+
+  programs.sway = {
+    enable = true;
+    package = pkgs.swayfx;
+    wrapperFeatures.gtk = true;
+
+    # These are the flags GDM will use when launching sway
+    extraOptions = [
+      "--unsupported-gpu"
+    ];
+
+    extraPackages = [];
+  };
+
   home-manager.users.${username} = {
     config,
     pkgs,
     ...
   }: {
+    # enable Sway window manager
+    wayland.windowManager.sway = {
+      enable = true;
+      systemd = {
+        enable = true;
+        xdgAutostart = true;
+        variables = [
+          "--all"
+        ];
+      };
+
+      package = pkgs.swayfx;
+      extraOptions = ["--unsupported-gpu"];
+
+      # Get rid of the default config, I overwrite this in my own config below
+      config = {
+        keybindings = {};
+        modifier = "Mod4";
+        modes = {};
+        bars = [];
+      };
+
+      # Tell sway to include my config
+      extraConfig = ''
+        include ~/.config/sway/config.d/*.conf
+      '';
+
+      wrapperFeatures.gtk = true;
+      xwayland = true;
+
+      extraSessionCommands = ''
+        export SDL_VIDEODRIVER=wayland
+        export QT_QPA_PLATFORM=wayland
+        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        export MOZ_ENABLE_WAYLAND=1
+        export XDG_SESSION_TYPE=wayland
+        export XDG_SESSION_DESKTOP=sway
+        export XDG_CURRENT_DESKTOP=sway
+        export XDG_DESKTOP_PORTAL_PREFFERED=wlr
+      '';
+
+      # This check fails for reasons unknown, see:
+      # https://github.com/nix-community/home-manager/issues/5379
+      checkConfig = false;
+    };
+
+    # Enable kanshi display management daemon
+    services.kanshi = {
+      enable = true;
+      systemdTarget = "sway-session.target";
+      settings = [
+        {
+          profile = {
+            name = "default";
+            outputs = [
+              {
+                criteria = "Philips Consumer Electronics Company 25M2N3200W UK02314010834";
+                status = "enable";
+                mode = "1920x1080@240.006Hz";
+                scale = 1.0;
+              }
+            ];
+          };
+        }
+      ];
+    };
+
     # Services required for a smooth sway/waybar experience
+    # TODO: only start on laptops
     services.batsignal.enable = true;
 
     # Automount sd/usb
-    services.udiskie.enable = true;
+    services.udiskie = {
+      enable = true;
+      tray = "always";
+    };
 
     # Enable the playerctld to be able to control music players and mpris-proxy to proxy bluetooth devices.
     services.playerctld.enable = true;
@@ -194,12 +284,12 @@ in {
     home.packages = [pkgs.dconf];
     dconf.settings."org/blueman/plugins/powermanager".auto-power-on = false;
 
-    # stylix.targets.kde.enable = false;
-
-    xdg.configFile = {
-      "sway/config" = {
-        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/sway/config";
-      };
+    # symlink to sway config file in dotfiles repo
+    xdg.configFile."sway/config.d/99-user.conf" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/sway/config";
     };
+
+    # Block auto-sway reload, Sway crashes if allowed to reload this way.
+    xdg.configFile."sway/config".onChange = lib.mkForce "";
   };
 }
