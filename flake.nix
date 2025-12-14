@@ -98,6 +98,7 @@
   in {
     # Overlays
     overlays.default = import ./overlays {inherit inputs;};
+    overlays.dolphin = inputs.dolphin-overlay.overlays.default;
 
     # NixOS Configurations
     nixosConfigurations = {
@@ -106,7 +107,8 @@
         hostname = "terra";
         modules = [
           ./modules/hardware/nvidia
-          ./modules/desktop/sway
+          ./modules/desktop/hyprland
+          # ./modules/desktop/sway
           ./modules/gaming
           ./modules/virtualisation
         ];
@@ -141,16 +143,6 @@
         ];
       };
     };
-
-    # Per-system outputs
-    packages = forAllSystems (system:
-      import ./pkgs {
-        inherit inputs;
-        final = {
-          inherit system;
-          pkgs = import nixpkgs {inherit system;};
-        };
-      });
 
     devShells = forAllSystems (system: let
       pkgs = import nixpkgs {inherit system;};
