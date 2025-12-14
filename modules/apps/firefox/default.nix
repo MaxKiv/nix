@@ -517,6 +517,12 @@ with lib; {
           "personal"
         ];
 
+        dconf.settings = {
+          "org/gtk/settings/file-chooser" = {
+            show-location-entry = true;
+          };
+        };
+
         programs.firefox = {
           enable = true;
 
