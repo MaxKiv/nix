@@ -59,11 +59,15 @@
   # Plumb hyprlock to PAM
   security.pam.services.hyprlock = {};
 
+  security.polkit.enable = true;
+
   home-manager.users.${username} = {
     config,
     pkgs,
     ...
   }: {
+    services.hyprpolkitagent.enable = true;
+
     wayland.windowManager.hyprland = {
       enable = true;
       # set the flake package
