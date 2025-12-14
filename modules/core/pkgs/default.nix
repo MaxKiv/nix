@@ -57,5 +57,6 @@
     zotero # manage & annotate papers & their references
     qdirstat # see whats taking space on filesystem
     kdePackages.kcalc # KDE calculator
+    ethtool # Utility for controlling network drivers and hardware
   ];
 }

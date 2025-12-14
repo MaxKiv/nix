@@ -2,7 +2,7 @@
 # This file defines overlays
 {inputs, ...}: {
   # Adds custom packages
-  additions = final: _prev: import ../pkgs final inputs;
+  additions = final: _prev: import ../pkgs {pkgs = final;};
 
   # Modifies existing packages
   # You can change versions, add patches, set compilation flags, anything really.

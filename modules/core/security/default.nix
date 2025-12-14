@@ -3,5 +3,6 @@
     ./gnupg
     ./polkit
     ./sops
+    ./sudo
   ];
 }

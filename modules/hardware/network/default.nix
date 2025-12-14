@@ -4,14 +4,24 @@
   config,
   ...
 }: {
+  hardware.enableRedistributableFirmware = true;
+
   networking = {
     networkmanager = {
       enable = true;
-
       # NOTE: dramatic effect on bandwidth https://gist.github.com/jcberthon/ea8cfe278998968ba7c5a95344bc8b55
       # wifi.powersave = true;
     };
+    # Set hostname
     hostName = hostname;
+
+    # Manually set DNS
+    nameservers = [
+      "1.1.1.1" # Cloudflare
+      "1.0.0.1"
+      "2606:4700:4700::1112" #ipv6 Cloudflare + malware filtering #1
+      "2606:4700:4700::1002" #ipv6 Cloudflare + malware filtering #2
+    ];
   };
 
   # Setup wifi SSID and psk
@@ -35,12 +45,9 @@
   };
 
   networking = {
-    # Cloudflare & Google DNS
-    nameservers = [ "1.1.1.1" "8.8.8.8" ];
   };
 
   users.users.${username} = {
     extraGroups = ["networkmanager"];
   };
-
 }

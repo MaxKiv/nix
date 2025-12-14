@@ -1,9 +1,11 @@
 {
   pkgs,
-  config,
   username,
   ...
 }: {
+  # nix-gaming suggests to use the xanmod kernel
+  # boot.kernelPackages = pkgs.linuxKernel.kernels.linux_xanmod;
+
   # Enable OpenGL
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;

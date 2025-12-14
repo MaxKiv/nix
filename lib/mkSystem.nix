@@ -12,10 +12,11 @@
 
     config.allowUnfree = true;
 
-    # overlays = [
-    #   self.overlays.default
-    #   self.overlays.dolphin
-    # ];
+    overlays = [
+      self.overlays.default.modifications
+      self.overlays.default.additions
+      self.overlays.dolphin
+    ];
   };
 in
   inputs.nixpkgs.lib.nixosSystem {
