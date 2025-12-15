@@ -118,7 +118,8 @@
       rapanui = mkSystem {
         hostname = "rapanui";
         modules = [
-          ./modules/desktop/sway
+          # ./modules/desktop/sway
+          ./modules/desktop/hyprland
           ./modules/hardware/devices/lenovo-t14
           ./modules/gaming
         ];
