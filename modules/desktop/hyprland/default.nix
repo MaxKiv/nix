@@ -124,10 +124,10 @@
         ####################
         monitor = [
           # Laptop / single monitor example
-          "eDP-1,preferred,0x0,1"
+          # "eDP-1,highrgr,auto,1"
           # Home
-          "HDMI-A-1,highrr,0x0,1"
-          "HDMI-A-2,highrr,0x0,1"
+          "desc:Philips Consumer Electronics Company 25M2N3200W UK02314010834,1920x1080@240.006,auto,1"
+          # "HDMI-A-2,highrr,auto,1"
           # Others
           ", preferred, auto, 1"
         ];

@@ -12,7 +12,6 @@
       # NOTE: dramatic effect on bandwidth https://gist.github.com/jcberthon/ea8cfe278998968ba7c5a95344bc8b55
       # wifi.powersave = true;
     };
-    # Set hostname
     hostName = hostname;
 
     # Manually set DNS
