@@ -57,9 +57,41 @@
   };
 
   # Plumb hyprlock to PAM
-  security.pam.services.hyprlock = {};
+  security = {
+    polkit.enable = true;
+    pam.services = {
+      hyprlock = {};
+    };
+    pam.services.swaylock = {
+      text = ''
+        auth include login
+      '';
+    };
+  };
 
-  security.polkit.enable = true;
+  services = {
+    gnome = {
+      gnome-keyring.enable = true;
+    };
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+    };
+
+    # Automount sd cards
+    udisks2.enable = true;
+
+    # Automount "devices"
+    devmon.enable = true;
+
+    # Set up upower to be able to get battery levels of connected devices.
+    upower.enable = true;
+
+    # Filesystem interface implemented by local/remote fileSystems: Mount, trash, and other functionalities for file explorer
+    gvfs.enable = true;
+  };
 
   home-manager.users.${username} = {
     config,
