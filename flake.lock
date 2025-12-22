@@ -140,6 +140,26 @@
         "type": "github"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1766150702,
+        "narHash": "sha256-P0kM+5o+DKnB6raXgFEk3azw8Wqg5FL6wyl9jD+G5a4=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "916506443ecd0d0b4a0f4cf9d40a3c22ce39b378",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "dolphin-overlay": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -1193,6 +1213,7 @@
       "inputs": {
         "alacritty-catppuccin": "alacritty-catppuccin",
         "chaotic": "chaotic",
+        "disko": "disko",
         "dolphin-overlay": "dolphin-overlay",
         "firefox-addons": "firefox-addons",
         "flake-registry": "flake-registry",
