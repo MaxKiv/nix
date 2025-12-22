@@ -27,6 +27,10 @@
     };
   };
 
+  users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7JCVDfafziVeBcBoTjw5rutrBJhnOXCxPW52+tk9hw max@rapanui"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBDg4NiAu5ELDpnDRzUZWuZTP2DVgXAGtOHjXe2CJClt m.p.w.kivits@saxion.nl"
+  ];
   users.users.${username}.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7JCVDfafziVeBcBoTjw5rutrBJhnOXCxPW52+tk9hw max@rapanui"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBDg4NiAu5ELDpnDRzUZWuZTP2DVgXAGtOHjXe2CJClt m.p.w.kivits@saxion.nl"
@@ -75,6 +79,20 @@
           saxion = {
             hostname = "10.0.1.210";
             user = "${username}";
+            port = 22;
+            identityFile = personalKeyPath;
+            identitiesOnly = true;
+            addKeysToAgent = "yes";
+          };
+          "192.168.1.2" = {
+            user = "root";
+            port = 22;
+            identityFile = personalKeyPath;
+            identitiesOnly = true;
+            addKeysToAgent = "yes";
+          };
+          "192.168.1.3" = {
+            user = "root";
             port = 22;
             identityFile = personalKeyPath;
             identitiesOnly = true;

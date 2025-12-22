@@ -80,9 +80,10 @@
       pulse.enable = true;
     };
 
-    # Automount sd cards
+    # Automount sd cards backend
     udisks2.enable = true;
 
+    # Frontend for udisks2 sd/usb automount
     # Automount "devices"
     devmon.enable = true;
 
@@ -98,7 +99,15 @@
     pkgs,
     ...
   }: {
-    services.hyprpolkitagent.enable = true;
+    services = {
+      hyprpolkitagent.enable = true;
+
+      # Automount sd/usb
+      udiskie = {
+        enable = true;
+        tray = "always";
+      };
+    };
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -114,6 +123,10 @@
         debug = {
           disable_logs = false;
           enable_stdout_logs = true;
+        };
+
+        general = {
+          no_focus_fallback = true;
         };
 
         env = [

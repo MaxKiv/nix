@@ -86,6 +86,11 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -129,7 +134,8 @@
       downtown = mkSystem {
         hostname = "downtown";
         modules = [
-          ./modules/hardware/laptop
+          ./modules/hardware/devices/lenovo-t440
+          ./modules/homelab
           ./modules/desktop/sway
         ];
       };

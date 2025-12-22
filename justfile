@@ -60,3 +60,9 @@ fix-gnupg:
 # Generate installer ISO
 iso:
     nix build .#nixosConfigurations.isolate.config.formats.install-iso --show-trace --verbose --option eval-cache false
+
+install host ip:
+    nix run github:nix-community/nixos-anywhere -- --flake .#{{ host }} --target-host root@{{ ip }} --generate-hardware-config nixos-generate-config /home/max/git/nix/hosts/{{ host }}/hardware-configuration.nix
+
+homelab ip:
+    nixos-rebuild switch   --flake .#downtown   --target-host root@{{ ip }}
