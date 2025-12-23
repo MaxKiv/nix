@@ -1,6 +1,7 @@
 {username, ...}: {
   imports = [
-    ./home-assistant.nix
+    ./hass
+    # ./gitea.nix
   ];
 
   # Enable openSSH service
@@ -22,5 +23,12 @@
   services.openssh.settings = {
     PermitRootLogin = "prohibit-password";
     PasswordAuthentication = false;
+  };
+
+  # Run the nginx reverse proxy
+  services.nginx = {
+    enable = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
   };
 }
