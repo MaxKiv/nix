@@ -1,7 +1,13 @@
-{username, ...}: {
+{
+  username,
+  lib,
+  ...
+}: {
   imports = [
     ./hass
-    # ./gitea.nix
+    ./gitea.nix
+    # ./tailscale.nix # included in modules/networking
+    ../network/tailscale/server.nix
   ];
 
   # Enable openSSH service

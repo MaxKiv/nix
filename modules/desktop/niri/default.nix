@@ -14,20 +14,19 @@
     ../components/swappy
   ];
 
-  environment.systemPackages = with pkgs;
-    [
-      swaylock-fancy # Fancy lock screen
-      wev # wayland event viewer (find out key names)
-      notify-desktop # provides the notify-send binary to trigger mako
-      grim # screenshot functionality
-      slurp # screenshot functionality
-      wl-clipboard-rs # wl-copy and wl-paste for copy/paste from stdin / stdout
-      xclip # TODO: figure out why I still need this
-      brightnessctl # CLI to control brightness
-      pulsemixer # CLI to control puleaudio
-      alsa-utils # for amixer to mute mic
-      wdisplays # xrandr type gui to mess with monitor placement
-    ];
+  environment.systemPackages = with pkgs; [
+    swaylock-fancy # Fancy lock screen
+    wev # wayland event viewer (find out key names)
+    notify-desktop # provides the notify-send binary to trigger mako
+    grim # screenshot functionality
+    slurp # screenshot functionality
+    wl-clipboard-rs # wl-copy and wl-paste for copy/paste from stdin / stdout
+    xclip # TODO: figure out why I still need this
+    brightnessctl # CLI to control brightness
+    pulsemixer # CLI to control puleaudio
+    alsa-utils # for amixer to mute mic
+    wdisplays # xrandr type gui to mess with monitor placement
+  ];
 
   # Enable the gnome-keyring secrets vault.
   # Will be exposed through DBus to programs willing to store secrets.
@@ -73,23 +72,23 @@
     config,
     pkgs,
     ...
-    }: {
-      imports = [
-        inputs.niri.homeModules.niri
-      ];
+  }: {
+    imports = [
+      inputs.niri.homeModules.niri
+    ];
 
-      # Polkit: Toolkit for defining and handling the policy that allows unprivileged processes to speak to privileged processes
-      services.polkit-gnome.enable = true; # polkit
+    # Polkit: Toolkit for defining and handling the policy that allows unprivileged processes to speak to privileged processes
+    services.polkit-gnome.enable = true; # polkit
 
-      # idle management daemon
-      services.swayidle.enable = true; 
+    # idle management daemon
+    services.swayidle.enable = true;
 
-      programs.niri = {
-        enable = true;
-        settings = {
-          outputs."eDP-1".scale = 1.0;
-          environment."NIXOS_OZONE_WL" = "1";
-        };
+    programs.niri = {
+      enable = true;
+      settings = {
+        outputs."eDP-1".scale = 1.0;
+        environment."NIXOS_OZONE_WL" = "1";
       };
     };
+  };
 }

@@ -48,7 +48,15 @@
       services.ssh-agent.enable = true;
       programs.ssh = {
         enable = true;
-        matchBlocks = {
+        matchBlocks = let
+          myMachineSettings = {
+            user = "root";
+            port = 22;
+            identityFile = personalKeyPath;
+            identitiesOnly = true;
+            addKeysToAgent = "yes";
+          };
+        in {
           github = {
             host = "github.com";
             user = "git";
@@ -84,20 +92,12 @@
             identitiesOnly = true;
             addKeysToAgent = "yes";
           };
-          "192.168.1.2" = {
-            user = "root";
-            port = 22;
-            identityFile = personalKeyPath;
-            identitiesOnly = true;
-            addKeysToAgent = "yes";
-          };
-          "192.168.1.3" = {
-            user = "root";
-            port = 22;
-            identityFile = personalKeyPath;
-            identitiesOnly = true;
-            addKeysToAgent = "yes";
-          };
+          "router.local" = myMachineSettings;
+          "downtown.local" = myMachineSettings;
+          "rapanui.local" = myMachineSettings;
+          "terra.local" = myMachineSettings;
+          "192.168.1.2" = myMachineSettings;
+          "192.168.1.3" = myMachineSettings;
         };
       };
 

@@ -1,9 +1,9 @@
 {
-config,
-pkgs,
-home-manager,
-username,
-...
+  config,
+  pkgs,
+  home-manager,
+  username,
+  ...
 }: let
   email = "maxkivits42@gmail.com";
   gitName = "MaxKiv";
