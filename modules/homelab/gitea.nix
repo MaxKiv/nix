@@ -20,9 +20,9 @@ in {
   };
   users.groups.${giteaUser} = {};
 
-  sops.secrets."postgres/gitea_dbpass" = {
-    owner = config.services.gitea.user;
-  };
+  # sops.secrets."postgres/gitea_dbpass" = {
+  #   owner = config.services.gitea.user;
+  # };
 
   services.gitea = {
     enable = true;
@@ -80,7 +80,7 @@ in {
         useACMEHost = fqdn;
 
         locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString cfg.privatePort}";
+          proxyPass = "http://127.0.0.1:${toString privatePort}";
         };
       };
     };
