@@ -1,4 +1,8 @@
-{hostname, ...}: {
+{
+  hostname,
+  lib,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -11,11 +15,16 @@
   # Multi-boot system: use GRUB bootloader
   my.grub-bootloader.enable = true;
 
+  my.networking.tailscale = {
+    enable = true;
+    nodeType = "client";
+  };
+
   networking = {
     networkmanager = {
       enable = true;
       # Disable NetworkManager's internal DNS resolution
-      dns = "none";
+      dns = lib.mkForce "none";
     };
 
     # Disable ipv6, odido's 5g modem has a shitty impl

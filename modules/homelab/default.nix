@@ -6,9 +6,13 @@
   imports = [
     ./hass
     ./gitea.nix
-    # ./tailscale.nix # included in modules/networking
-    ../network/tailscale/server.nix
   ];
+
+  # A homelab device should be a tailscale server
+  my.networking.tailscale = {
+    enable = true;
+    nodeType = lib.mkForce "server";
+  };
 
   # Enable openSSH service
   services.openssh.enable = true;
