@@ -12,10 +12,9 @@
     enable = true;
   };
 
-  my.networking.can.interfaces = {
-    can0 = {
-      bitrate = 250000;
-    };
+  my.networking.tailscale = {
+    enable = true;
+    nodeType = "client";
   };
 
   networking = {

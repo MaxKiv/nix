@@ -3,6 +3,7 @@
   username,
   config,
   lib,
+  pkgs,
   ...
 }: {
   imports = [
@@ -10,6 +11,10 @@
   ];
 
   config = {
+    environment.systemPackages = with pkgs; [
+      dig
+    ];
+
     hardware.enableRedistributableFirmware = true;
 
     networking = {
