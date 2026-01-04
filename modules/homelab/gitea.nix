@@ -5,6 +5,12 @@
   giteaUser = "git";
   fqdn = "${hostname}.${domain}";
 in {
+  networking.firewall = {
+    allowedTCPPorts = [
+      privatePort
+    ];
+  };
+
   # use git as user to have `git clone git@git.domain`
   users.users.${giteaUser} = {
     description = "Gitea Service";
@@ -86,14 +92,30 @@ in {
     };
   };
 
-  security.acme.certs.${fqdn}.extraDomainNames = ["git.${domain}"];
+  users.users.nginx.extraGroups = ["acme"];
+
+  sops.secrets.acme-dns = {
+    owner = "acme";
+    group = "acme";
+    mode = "0400";
+  };
+
+  security.acme = {
+    acceptTerms = true;
+    security.acme.defaults.email = "maxkivits42@gmail.com";
+  };
+
+  security.acme.certs."git.demtah.top" = {
+    dnsProvider = "acme-dns";
+    credentialsFile = config.sops.secrets.acme-dns.path;
+  };
 
   services.postgresql = {
     ensureDatabases = [config.services.gitea.user];
     ensureUsers = [
       {
         name = config.services.gitea.database.user;
-        ensurePermissions."DATABASE ${config.services.gitea.database.name}" = "ALL PRIVILEGES";
+        ensureDBOwnership = true;
       }
     ];
   };
