@@ -1,16 +1,15 @@
-{config, ...}: let
-  hostname = config.networking.hostName;
-  domain = "git.test.tld";
+{
+  self,
+  config,
+  ...
+}: let
+  domain = "demtah.top";
+  hostname = "git";
+  fqdn = "${hostname}.${domain}";
   privatePort = 8082;
   giteaUser = "git";
-  fqdn = "${hostname}.${domain}";
+  sopsFile = self + "/secrets/acme-dns.env";
 in {
-  networking.firewall = {
-    allowedTCPPorts = [
-      privatePort
-    ];
-  };
-
   # use git as user to have `git clone git@git.domain`
   users.users.${giteaUser} = {
     description = "Gitea Service";
@@ -26,10 +25,6 @@ in {
   };
   users.groups.${giteaUser} = {};
 
-  # sops.secrets."postgres/gitea_dbpass" = {
-  #   owner = config.services.gitea.user;
-  # };
-
   services.gitea = {
     enable = true;
     user = giteaUser;
@@ -40,11 +35,9 @@ in {
       # user needs to be the same as gitea user
       user = giteaUser;
       name = giteaUser;
+      # When postgres and gitea run as the same user, unix socket is used to auth
       # passwordFile = config.sops.secrets."postgres/gitea_dbpass".path;
     };
-
-    domain = "git.test.tld";
-    rootUrl = "https://git.test.tld/";
 
     lfs.enable = true;
 
@@ -56,8 +49,8 @@ in {
 
     settings = {
       server = {
-        ROOT_URL = "https://git.${domain}/";
-        DOMAIN = "git.${domain}";
+        ROOT_URL = "https://${fqdn}/";
+        DOMAIN = fqdn;
         HTTP_ADDR = "127.0.0.1";
         HTTP_PORT = privatePort;
       };
@@ -81,9 +74,9 @@ in {
 
   services.nginx = {
     virtualHosts = {
-      "git.${domain}" = {
+      "git.demtah.top" = {
         forceSSL = true;
-        useACMEHost = fqdn;
+        useACMEHost = "git.demtah.top";
 
         locations."/" = {
           proxyPass = "http://127.0.0.1:${toString privatePort}";
@@ -92,22 +85,25 @@ in {
     };
   };
 
+  # Allow nginx to access acme
   users.users.nginx.extraGroups = ["acme"];
 
-  sops.secrets.acme-dns = {
+  sops.secrets.acme-dns-env = {
+    inherit sopsFile;
     owner = "acme";
     group = "acme";
     mode = "0400";
+    format = "dotenv";
   };
 
   security.acme = {
     acceptTerms = true;
-    security.acme.defaults.email = "maxkivits42@gmail.com";
+    defaults.email = "maxkivits42@gmail.com";
   };
 
   security.acme.certs."git.demtah.top" = {
     dnsProvider = "acme-dns";
-    credentialsFile = config.sops.secrets.acme-dns.path;
+    environmentFile = config.sops.secrets.acme-dns-env.path;
   };
 
   services.postgresql = {

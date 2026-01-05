@@ -5,7 +5,7 @@
 }: {
   imports = [
     ./hass
-    ./gitea.nix
+    ./gitea
   ];
 
   # A homelab device should be a tailscale server
