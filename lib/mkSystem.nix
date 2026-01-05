@@ -23,7 +23,7 @@ in
     inherit system;
 
     specialArgs = {
-      inherit inputs hostname username system;
+      inherit inputs hostname username system self;
       inherit (inputs) home-manager;
     };
 

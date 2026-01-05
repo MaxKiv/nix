@@ -7,3 +7,9 @@ creation_rules:
     - age:
       - *rapanui
       - *boston
+
+  - path_regex: secrets/nginx/acme.json
+    key_groups:
+    - age:
+      - *rapanui
+      - *boston
