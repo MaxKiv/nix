@@ -4,6 +4,7 @@
 }: {
   hostname,
   username ? "max",
+  email ? "maxkivits42@gmail.com",
   system ? "x86_64-linux",
   modules ? [],
 }: let
@@ -18,12 +19,14 @@
       self.overlays.dolphin
     ];
   };
+
+  sshKeys = import (self + "/lib/ssh.nix");
 in
   inputs.nixpkgs.lib.nixosSystem {
     inherit system;
 
     specialArgs = {
-      inherit inputs hostname username system self;
+      inherit inputs hostname username system self email sshKeys;
       inherit (inputs) home-manager;
     };
 

@@ -1,11 +1,13 @@
 {
   username,
   lib,
+  sshKeys,
   ...
 }: {
   imports = [
     ./hass
     ./gitea
+    ./nginx
   ];
 
   # A homelab device should be a tailscale server
@@ -20,12 +22,14 @@
   # Add authorized keys
   users.users.${username} = {
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7JCVDfafziVeBcBoTjw5rutrBJhnOXCxPW52+tk9hw max@rapanui"
+      sshKeys.personal
+      sshKeys.work
     ];
   };
   users.users.root = {
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7JCVDfafziVeBcBoTjw5rutrBJhnOXCxPW52+tk9hw max@rapanui"
+      sshKeys.personal
+      sshKeys.work
     ];
   };
 

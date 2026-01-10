@@ -4,6 +4,7 @@
   username,
   hostname,
   pkgs,
+  sshKeys,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -28,17 +29,17 @@
   };
 
   users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7JCVDfafziVeBcBoTjw5rutrBJhnOXCxPW52+tk9hw max@rapanui"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBDg4NiAu5ELDpnDRzUZWuZTP2DVgXAGtOHjXe2CJClt m.p.w.kivits@saxion.nl"
+      sshKeys.personal
+      sshKeys.work
   ];
   users.users.${username}.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7JCVDfafziVeBcBoTjw5rutrBJhnOXCxPW52+tk9hw max@rapanui"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBDg4NiAu5ELDpnDRzUZWuZTP2DVgXAGtOHjXe2CJClt m.p.w.kivits@saxion.nl"
+      sshKeys.personal
+      sshKeys.work
   ];
 
   home-manager.users.${username} = let
-    workKeyPath = config.sops.secrets."ssh/work".path;
-    personalKeyPath = config.sops.secrets."ssh/personal".path;
+    workKey = config.sops.secrets."ssh/work".path;
+    personalKey = config.sops.secrets."ssh/personal".path;
   in
     {
       config,
@@ -52,7 +53,7 @@
           myMachineSettings = {
             user = "root";
             port = 22;
-            identityFile = personalKeyPath;
+            identityFile = personalKey;
             identitiesOnly = true;
             addKeysToAgent = "yes";
           };
@@ -60,19 +61,19 @@
           github = {
             host = "github.com";
             user = "git";
-            identityFile = personalKeyPath;
+            identityFile = personalKey;
             addKeysToAgent = "yes";
           };
           gitlab = {
             host = "gitlab.freedesktop.com";
             user = "git";
-            identityFile = personalKeyPath;
+            identityFile = personalKey;
             addKeysToAgent = "yes";
           };
           bitbucket = {
             host = "bitbucket.org";
             user = "git";
-            identityFile = workKeyPath;
+            identityFile = workKey;
             identitiesOnly = true;
             addKeysToAgent = "yes";
           };
@@ -80,7 +81,7 @@
             hostname = "10.0.1.233";
             user = "${username}";
             port = 22;
-            identityFile = personalKeyPath;
+            identityFile = personalKey;
             identitiesOnly = true;
             addKeysToAgent = "yes";
           };
@@ -88,7 +89,7 @@
             hostname = "10.0.1.210";
             user = "${username}";
             port = 22;
-            identityFile = personalKeyPath;
+            identityFile = personalKey;
             identitiesOnly = true;
             addKeysToAgent = "yes";
           };
@@ -105,8 +106,10 @@
         # TODO make this reference a private repository, see:
         # https://github.com/ryan4yin/nix-config/blob/985beb8bd47189e4b2ef5200ef5c1ab28e3812a8/home/base/desktop/ssh.nix#L4
         #".ssh/config".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/config";
-        ".ssh/personal.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/personal.pub";
-        ".ssh/work.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/work.pub";
+        # ".ssh/personal.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/personal.pub";
+        # ".ssh/work.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/work.pub";
+        ".ssh/personal.pub".text = sshKeys.personal;
+        ".ssh/work.pub".text = sshKeys.work;
         # ".ssh/authorized_keys".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/authorized_keys";
       };
     };
