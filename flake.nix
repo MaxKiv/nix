@@ -136,7 +136,6 @@
         modules = [
           ./modules/hardware/devices/lenovo-t440
           ./modules/homelab
-          ./modules/desktop/sway
         ];
       };
 

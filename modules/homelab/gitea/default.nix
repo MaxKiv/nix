@@ -1,6 +1,10 @@
 {
   self,
   config,
+  pkgs,
+  sshKeys,
+  username,
+  email,
   ...
 }: let
   domain = "demtah.top";
@@ -8,7 +12,6 @@
   fqdn = "${hostname}.${domain}";
   privatePort = 8082;
   giteaUser = "git";
-  sopsFile = self + "/secrets/acme-dns.env";
 in {
   # use git as user to have `git clone git@git.domain`
   users.users.${giteaUser} = {
@@ -22,13 +25,17 @@ in {
     extraGroups = ["gitea"];
 
     isSystemUser = true;
+    openssh.authorizedKeys.keys = [
+      sshKeys.personal
+      sshKeys.work
+    ];
   };
   users.groups.${giteaUser} = {};
 
   services.gitea = {
     enable = true;
     user = giteaUser;
-    appName = "My personal forge";
+    appName = "Git forge of Max";
 
     database = {
       type = "postgres";
@@ -72,40 +79,6 @@ in {
     };
   };
 
-  services.nginx = {
-    virtualHosts = {
-      "git.demtah.top" = {
-        forceSSL = true;
-        useACMEHost = "git.demtah.top";
-
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString privatePort}";
-        };
-      };
-    };
-  };
-
-  # Allow nginx to access acme
-  users.users.nginx.extraGroups = ["acme"];
-
-  sops.secrets.acme-dns-env = {
-    inherit sopsFile;
-    owner = "acme";
-    group = "acme";
-    mode = "0400";
-    format = "dotenv";
-  };
-
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "maxkivits42@gmail.com";
-  };
-
-  security.acme.certs."git.demtah.top" = {
-    dnsProvider = "acme-dns";
-    environmentFile = config.sops.secrets.acme-dns-env.path;
-  };
-
   services.postgresql = {
     ensureDatabases = [config.services.gitea.user];
     ensureUsers = [
@@ -114,5 +87,24 @@ in {
         ensureDBOwnership = true;
       }
     ];
+  };
+
+  services.nginx = {
+    virtualHosts = {
+      "${fqdn}" = {
+        default = false;
+        forceSSL = true;
+        useACMEHost = fqdn;
+
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${toString privatePort}";
+        };
+      };
+    };
+  };
+
+  security.acme.certs."${fqdn}" = {
+    dnsProvider = "acme-dns";
+    environmentFile = config.sops.secrets.acme-dns-env.path;
   };
 }
