@@ -51,7 +51,7 @@ in {
     # Allow Gitea to take a dump (backup zip)
     dump = {
       enable = true;
-      interval = "weekly";
+      interval = "daily";
     };
 
     settings = {
