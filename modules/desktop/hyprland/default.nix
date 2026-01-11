@@ -230,20 +230,18 @@
         };
 
         ####################
-        # Window rules (v2)
+        # Window rules
         ####################
-        windowrulev2 = [
-          "float,class:^(blueman-manager)$"
-          "size 960 540,class:^(blueman-manager)$"
-
-          "float,class:^(com.gabm.satty)$"
-          "size 1280 1024,class:^(com.gabm.satty)$"
-
-          "float,class:^(swappy)$"
-          "size 1280 1024,class:^(swappy)$"
-
-          "float,title:^(.*Bitwarden.*)$"
-        ];
+        extraConfig = ''
+            windowrule = float on, size 960 540, match:class ^(blueman-manager)$
+            windowrule = float on, size 1280 1024, match:class ^(com.gabm.satty)$
+            windowrule = float on, size 1280 1024, match:class ^(swappy)$
+            windowrule = float on, match:title ^(.*Bitwarden.*)$
+            windowrule = workspace 8, match:class ^(signal)$
+            windowrule = workspace 7, match:class ^(discord)$
+            windowrule = workspace 7, match:class ^(Slack)$
+            windowrule = workspace 6, match:class ^(spotify)$
+          '';
 
         ####################
         # Keybindings
