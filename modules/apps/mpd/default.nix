@@ -3,24 +3,25 @@
   services.mpd = {
     enable = true;
     user = username; # run as main user
-    musicDirectory = "/home/max/music";
-    extraConfig = ''
-      restore_paused "yes"
-      replaygain "auto"
-      follow_outside_symlinks "yes"
-      auto_update "yes"
+    settings = {
+      music_directory = "/home/max/music";
+      audio_output = [
+        {
+          type = "fifo";
+          name = "Visualizer";
+          format = "44100:16:2";
+          path = "/tmp/mpd.fifo";
+        }
+        {
+          type = "pipewire";
+          name = "My PipeWire Output";
+        }
+      ];
 
-      audio_output {
-        type "fifo"
-        name "Visualizer"
-        format "44100:16:2"
-        path "/tmp/mpd.fifo"
-      }
-      audio_output {
-        type "pipewire"
-        name "My PipeWire Output"
-      }
-    '';
+      restore_paused = true;
+      follow_outside_symlinks = true;
+      auto_update = true;
+    };
   };
 
   systemd.services.mpd.environment = {
