@@ -36,25 +36,29 @@ in {
       extraDaemonFlags = [
         "-no-logs-no-support"
       ];
+
       useRoutingFeatures = tailCfg.nodeType;
       # Let clients handle their own DNS, required for clients to stay connected when tailscale down
-      extraUpFlags = mkIf (tailCfg.nodeType == "client") [
+      # accept-routes required for bad eduroam/corpo dnssec
+      extraSetFlags = mkIf (tailCfg.nodeType == "client") [
         "--accept-dns=false"
+        "--accept-routes=false"
       ];
     };
 
     networking.nameservers = mkIf (tailCfg.nodeType == "server") (mkForce [
-      "100.100.100.100"
+      "100.100.100.100" # Tailscale DNS
       "1.1.1.1" # Cloudflare
       "8.8.8.8" # Doogle
     ]);
 
     services.resolved = mkIf (tailCfg.nodeType == "client") {
       enable = true;
-      dnssec = "allow-downgrade";
-      dnsovertls = "opportunistic";
-      domains = ["~."];
-      fallbackDns = config.networking.nameservers;
+      dnssec = "false";  # Works with "allow-downgrade" on all but Eduroam
+      dnsovertls = "false"; # Works with "opportunistic" on all but Eduroam
+      # domains = ["~."];
+      fallbackDns = []; # do NOT override DHCP
+      # fallbackDns = config.networking.nameservers;
     };
 
     networking.firewall = {

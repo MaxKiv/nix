@@ -144,7 +144,7 @@
         hostname = "saxion";
         modules = [
           ./modules/hardware/devices/lenovo-p16-gen2
-          ./modules/desktop/sway
+          ./modules/desktop/hyprland
           ./modules/virtualisation
         ];
       };
