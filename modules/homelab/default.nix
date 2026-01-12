@@ -8,6 +8,7 @@
     ./hass
     ./gitea
     ./nginx
+    ./adguard
   ];
 
   # A homelab device should be a tailscale server
