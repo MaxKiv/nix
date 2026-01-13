@@ -58,5 +58,6 @@
     qdirstat # see whats taking space on filesystem
     kdePackages.kcalc # KDE calculator
     ethtool # Utility for controlling network drivers and hardware
+    calibre # ebook tool
   ];
 }
