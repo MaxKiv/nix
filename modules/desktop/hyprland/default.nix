@@ -15,6 +15,7 @@
     ../components/tumbler
     ../components/mako
     ../components/waybar
+    ../components/kanshi/kanshi_hyprland.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -233,15 +234,15 @@
         # Window rules
         ####################
         extraConfig = ''
-            windowrule = float on, size 960 540, match:class ^(blueman-manager)$
-            windowrule = float on, size 1280 1024, match:class ^(com.gabm.satty)$
-            windowrule = float on, size 1280 1024, match:class ^(swappy)$
-            windowrule = float on, match:title ^(.*Bitwarden.*)$
-            windowrule = workspace 8, match:class ^(signal)$
-            windowrule = workspace 7, match:class ^(discord)$
-            windowrule = workspace 7, match:class ^(Slack)$
-            windowrule = workspace 6, match:class ^(spotify)$
-          '';
+          windowrule = float on, size 960 540, match:class ^(blueman-manager)$
+          windowrule = float on, size 1280 1024, match:class ^(com.gabm.satty)$
+          windowrule = float on, size 1280 1024, match:class ^(swappy)$
+          windowrule = float on, match:title ^(.*Bitwarden.*)$
+          windowrule = workspace 8, match:class ^(signal)$
+          windowrule = workspace 7, match:class ^(discord)$
+          windowrule = workspace 7, match:class ^(Slack)$
+          windowrule = workspace 6, match:class ^(spotify)$
+        '';
 
         ####################
         # Keybindings

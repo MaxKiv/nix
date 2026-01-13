@@ -1,4 +1,4 @@
-# Kanshi is a daemon to hotswap monitors
+# Kanshi is a daemon to hotswap monitors, defaults to sway
 {username, ...}: {
   home-manager.users.${username} = {
     config,
