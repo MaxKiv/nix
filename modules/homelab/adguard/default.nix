@@ -46,6 +46,19 @@ in {
         locations."/" = {
           proxyPass = "http://127.0.0.1:${toString adguardPort}";
         };
+
+        # taken from https://github.com/AdguardTeam/AdGuardHome/issues/4266#issuecomment-1033955642
+        extraConfig = ''
+          proxy_pass https://localhost:${toString adguardPort}/;
+          proxy_redirect / /aghome/;
+          proxy_cookie_path / /aghome/;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header X-Forwarded-Protocol $scheme;
+          #proxy_set_header X-Url-Scheme $scheme;
+        '';
       };
     };
   };
