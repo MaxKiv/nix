@@ -49,7 +49,6 @@ in {
 
         # taken from https://github.com/AdguardTeam/AdGuardHome/issues/4266#issuecomment-1033955642
         extraConfig = ''
-          proxy_pass https://localhost:${toString adguardPort}/;
           proxy_redirect / /aghome/;
           proxy_cookie_path / /aghome/;
           proxy_set_header Host $host;

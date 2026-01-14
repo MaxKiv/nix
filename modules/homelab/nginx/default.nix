@@ -15,6 +15,9 @@ in {
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedTlsSettings = true;
   };
 
   # Allow nginx to access acme
@@ -35,4 +38,3 @@ in {
     defaults.email = "maxkivits42@gmail.com";
   };
 }
-
