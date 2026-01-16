@@ -18,7 +18,18 @@
       #   "kanshi/config" = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.config/kanshi/config";};
       # };
 
+      # hyprctl monitors all
       profiles = {
+        work_undocked = {
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 1.3;
+              status = "enable";
+            }
+          ];
+        };
+
         undocked = {
           outputs = [
             {

@@ -49,11 +49,16 @@
     enable = true;
     restart = true;
     # vt = 2;
-    settings = {
-      default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --remember --time --cmd hyprland";
-        user = "greeter";
+    settings = rec {
+      initial_session = {
+        command = "${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}/bin/start-hyprland";
+        user = username;
       };
+      default_session = initial_session;
+      # default_session = {
+      #   command = "${pkgs.tuigreet}/bin/tuigreet --remember --time --cmd hyprland";
+      #   user = "greeter";
+      # };
     };
   };
 
