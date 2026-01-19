@@ -10,6 +10,7 @@
     ./nginx
     ./adguard
     ./mealie
+    ./samba
   ];
 
   # A homelab device should be a tailscale server
@@ -17,6 +18,10 @@
     enable = true;
     nodeType = lib.mkForce "server";
   };
+
+  # powertop --autotune to reduce power usage, might conflict with cpu-autofreq?
+  # Note: This causes services to be unavailable :(
+  # powerManagement.powertop.enable = true;
 
   # Enable openSSH service
   services.openssh.enable = true;

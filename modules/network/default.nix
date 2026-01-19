@@ -8,6 +8,7 @@
 }: {
   imports = [
     ./tailscale
+    ./avahi
   ];
 
   config = {
