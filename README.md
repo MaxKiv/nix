@@ -18,9 +18,9 @@ config.
 
 If you would like to try out this system, clone this flake and run `just help`.
 This will invoke the `Just` command runner to give an overview of possibly
-useful commands. 
+useful commands.
 
-To build just run `just`. 
+To build just run `just`.
 
 In case you want to specify which system to build run `sudo nixos-rebuild switch --flake {path/to/flake.nix}#{flake_output_you_want}`.
 
@@ -29,7 +29,7 @@ configuration is done using `sudo nixos-rebuild switch --flake .#rapanui`.
 
 ### Can I steal this?
 
-Ofcourse 😉
+You don't need my permission, there isn't even a license.
 
 ### Notes on Design
 
@@ -68,18 +68,11 @@ decision if I'm actively using MacOS or WSL in the future.
 - nvim: try out [perfanno](https://github.com/t-troebst/perfanno.nvim)
 
 - Separate nixos and home-manager flake outputs, so this can be more easily
-used in WSL/MacOS
+  used in WSL/MacOS
 
 - fix live boot medium output
 
-- Nas/homelab server setup
-
-- switch to grub?
-
-- setup disko?
-
 - setup impermanence?
-
 
 ### This is the stuff I always forget:
 
@@ -112,4 +105,3 @@ nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
 ```
 
 [dotfiles]: https://github.com/MaxKiv/dotfiles
-
