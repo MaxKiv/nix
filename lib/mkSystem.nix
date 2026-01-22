@@ -44,6 +44,7 @@ in
         ../hosts/${hostname}
         ../users
         ../modules
+        ../modules/homelab/nfs/client.nix
 
         # Home Manager
         inputs.home-manager.nixosModules.home-manager

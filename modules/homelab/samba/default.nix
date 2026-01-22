@@ -88,8 +88,15 @@ in {
     extraGroups = [sambaUser];
   };
 
+  users.users."nobody" = {
+    extraGroups = ["nas"];
+  };
+
   # Create samba user group
-  users.groups.${sambaUser} = {};
+  users.groups.${sambaUser} = {
+    gid = 982;
+    members = [username "nas" "nobody"];
+  };
 
   # Avahi for service discovery (already enabled in your config)
   services.avahi = {
