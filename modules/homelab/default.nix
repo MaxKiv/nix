@@ -11,6 +11,7 @@
     ./adguard
     ./mealie
     ./samba
+    ./nfs/server.nix
   ];
 
   # A homelab device should be a tailscale server
