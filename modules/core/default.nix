@@ -11,5 +11,6 @@
     ./terminal
     ./powerManager
     ./xdg
+    ./earlyoom
   ];
 }
