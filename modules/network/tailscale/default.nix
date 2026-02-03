@@ -54,11 +54,11 @@ in {
 
     services.resolved = mkIf (tailCfg.nodeType == "client") {
       enable = true;
-      dnssec = "false";  # Works with "allow-downgrade" on all but Eduroam
-      dnsovertls = "false"; # Works with "opportunistic" on all but Eduroam
-      # domains = ["~."];
-      fallbackDns = []; # do NOT override DHCP
-      # fallbackDns = config.networking.nameservers;
+      settings = {
+        Resolve.DNSOverTLS = "false"; # Works with "allow-downgrade" on all but Eduroam
+        Resolve.DNSSEC = "false"; # Works with "opportunistic" on all but Eduroam
+        Resolve.FallbackDNS = []; # do NOT override DHCP
+      };
     };
 
     networking.firewall = {
