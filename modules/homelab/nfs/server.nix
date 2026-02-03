@@ -19,7 +19,7 @@
 
     # NFS share configs
     exports = ''
-      /nas/data 192.168.1.0/24(rw,sync,no_subtree_check,root_squash,anonuid=1001,anongid=982)
+      /nas/data 192.168.1.0/24(rw,sync,no_subtree_check,all_squash,anonuid=1001,anongid=982)
     '';
   };
 
