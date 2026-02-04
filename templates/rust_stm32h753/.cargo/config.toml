@@ -1,0 +1,26 @@
+[target.thumbv7em-none-eabihf]
+# runner = 'probe-rs run --chip STM32H753ZITx'
+runner = 'probe-rs run --chip STM32H753ZITx'
+
+[alias]
+attach = 'probe-rs attach --chip STM32H753ZITx'
+
+[build]
+target = "thumbv7em-none-eabihf" # Cortex-M4F and Cortex-M7F (with FPU)
+
+[env]
+# DEFMT_LOG = "trace"
+DEFMT_LOG = "debug"
+# DEFMT_LOG = "info"
+
+[profile.release]
+# symbols are nice and they don't increase the size on Flash
+debug = true
+# or "z"
+# opt-level = "s"
+# lto = "fat"
+
+[profile.debug]
+opt-level = "s"
+lto = "fat"
+
