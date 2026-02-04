@@ -1,0 +1,14 @@
+[package]
+name = "l9110"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+embedded-hal = { version = "1.0.0", features = ["defmt-03"] }
+embedded-hal-async = { version = "1.0.0", features = ["defmt-03"] }
+embassy-stm32 = {version = "0.4.0", features = [ "defmt", "stm32h753zi", "time-driver-tim15", "rt", "memory-x", "unstable-pac", "chrono", "exti"]}
+thiserror = { version = "2.0.17",  default-features = false }
+defmt = "1.0.1"
+uom = { version = "0.37.0", default-features = false, features = ["f32", "si"] }
+static_cell = "2"
+embassy-sync = { version = "0.7.2", features = ["defmt"] }

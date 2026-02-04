@@ -1,0 +1,3 @@
+[workspace]
+resolver = "3"
+members = [ "ethernet", "button", "lcd", "motor", "tb6600", "full", "maxon", "l9110", "as5048-pwm", "hmi"]

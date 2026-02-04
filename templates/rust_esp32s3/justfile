@@ -1,0 +1,15 @@
+# Print all available just commands
+help:
+    @just --list
+
+build:
+    cargo build
+
+run:
+    cargo run
+
+clean:
+    cargo clean
+
+monitor:
+    espflash monitor

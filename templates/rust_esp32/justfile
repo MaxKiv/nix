@@ -1,0 +1,17 @@
+export RUST_BACKTRACE := "1"
+
+# Print all available just commands
+help:
+    @just --list
+
+build:
+    cargo build
+
+run CRATE:
+    cargo run --bin {{ CRATE }}
+
+clean:
+    cargo clean
+
+monitor:
+    espflash monitor

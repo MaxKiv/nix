@@ -1,0 +1,7 @@
+/.embuild
+/target
+/Cargo.lock
+/.cargo/*
+!/.cargo/config.toml
+
+/.rustup
