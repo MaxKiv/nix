@@ -154,10 +154,13 @@
         "$browser" = "firefox";
         "$menu" = "wofi --show drun --prompt search";
         "$emoji" = "wofi-emoji";
+        "$diacritics" = "sh -c 'echo -n \"$(wofi --dmenu -p \"Pick a symbol\" < ~/.config/wofi/diacritics.txt | cut -d \" \" -f 1)\" | wl-copy'";
         "$file" = "alacritty -e yazi";
+        "$explorer" = "dolphin";
         "$top" = "alacritty -e zenith";
         "$system" = "alacritty -e zellij attach nix";
         "$notes" = "alacritty -e zellij attach notes";
+        "$slack" = "slack";
         "$lock" = "hyprlock";
 
         ####################
@@ -257,11 +260,15 @@
           "$mod,Return,exec,$term"
           "$mod,D,exec,$menu"
           "$mod,E,exec,$file"
+          "$mod,A,exec,$explorer"
           "$mod,B,exec,$browser"
           "$mod,I,exec,$system"
           "$mod,N,exec,$notes"
+          "$mod,S,exec,$slack"
           "$mod,period,exec,$emoji"
+          "$mod, comma, exec, $diacritics"
           "$mod CTRL,L,exec,$lock"
+          "CONTROL SHIFT, Escape, exec, $top"
 
           # Lifecycle
           "$mod,Q,killactive"
@@ -270,6 +277,7 @@
 
           # Layout / state
           "$mod,F,fullscreen"
+          "$mod,SPACE,focusmode,0"
           "$mod SHIFT,SPACE,togglefloating"
 
           # Focus (hjkl)
@@ -283,6 +291,7 @@
           "$mod SHIFT,J,movewindow,d"
           "$mod SHIFT,K,movewindow,u"
           "$mod SHIFT,L,movewindow,r"
+          "$mod, C, centerwindow,"
 
           # Workspaces
           "$mod,1,workspace,1"
@@ -353,6 +362,7 @@
           ",XF86AudioPlay,exec,playerctl play-pause"
           ",XF86AudioNext,exec,playerctl next"
           ",XF86AudioPrev,exec,playerctl previous"
+
         ];
       };
     };
