@@ -12,7 +12,7 @@ in {
 
   stylix.enable = true;
 
-  stylix.image = ../../assets/backgrounds/disknee.jpg;
+  stylix.image = ../../assets/backgrounds/tycho_pastel.png;
   # colorschemes: https://github.com/tinted-theming/base16-schemes
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
@@ -51,8 +51,8 @@ in {
   };
 
   stylix.opacity = {
-    applications = 0.8;
-    terminal = 0.8;
+    applications = 0.7;
+    terminal = 0.7;
     desktop = 1.0;
     popups = 1.0;
   };
