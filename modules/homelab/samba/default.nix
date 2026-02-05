@@ -40,8 +40,8 @@ in {
         "server max protocol" = "SMB3";
 
         # Authentication settings
-        # "map to guest" = "never";
-        # "guest account" = "nobody";
+        "guest account" = "nobody"; # windows needs this
+        "map to guest" = "Bad User"; # windows needs this
         "invalid users" = ["root"];
 
         # Performance & correctness
