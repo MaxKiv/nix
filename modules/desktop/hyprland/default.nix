@@ -224,6 +224,9 @@
           repeat_delay = 250;
           repeat_rate = 75;
 
+          follow_mouse = 2;
+          # float_switch_override_focus = 0;
+
           accel_profile = "flat";
           sensitivity = 0;
 
@@ -277,7 +280,8 @@
 
           # Layout / state
           "$mod,F,fullscreen"
-          "$mod,SPACE,focusmode,0"
+          "$mod,SPACE,cyclenext"
+          "$mod,SPACE,bringactivetotop"
           "$mod SHIFT,SPACE,togglefloating"
 
           # Focus (hjkl)
@@ -362,7 +366,6 @@
           ",XF86AudioPlay,exec,playerctl play-pause"
           ",XF86AudioNext,exec,playerctl next"
           ",XF86AudioPrev,exec,playerctl previous"
-
         ];
       };
     };
