@@ -39,6 +39,7 @@
     virtio-win
     win-spice
     adwaita-icon-theme
+    virtiofsd
   ];
 
   home-manager.users.${username} = {
