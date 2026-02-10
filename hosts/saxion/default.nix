@@ -43,4 +43,6 @@
     useDHCP = false;
     dhcpcd.enable = false;
   };
+
+  services.flatpak.enable = true;
 }
