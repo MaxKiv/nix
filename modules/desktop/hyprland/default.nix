@@ -276,7 +276,6 @@
           # Lifecycle
           "$mod,Q,killactive"
           "$mod SHIFT,R,exec,hyprctl reload"
-          "$mod SHIFT,E,exit"
 
           # Layout / state
           "$mod,F,fullscreen"
