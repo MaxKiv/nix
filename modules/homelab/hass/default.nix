@@ -13,7 +13,7 @@ in {
     recommendedProxySettings = true;
     virtualHosts = {
       "home.demtah.top" = {
-        default = true;
+        default = false;
         forceSSL = true;
         useACMEHost = serviceHostname;
         http2 = false;
@@ -110,4 +110,3 @@ in {
     "f ${config.services.home-assistant.configDir}/scenes.yaml 0755 hass hass"
   ];
 }
-
