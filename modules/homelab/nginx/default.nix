@@ -20,6 +20,14 @@ in {
     recommendedTlsSettings = true;
   };
 
+  # Setup default / catch all vhost
+  services.nginx.virtualHosts."_default" = {
+    default = true;
+    locations."/" = {
+      return = "444";
+    };
+  };
+
   # Allow nginx to access acme
   users.users.nginx.extraGroups = ["acme"];
 
