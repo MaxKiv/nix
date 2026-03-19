@@ -29,12 +29,12 @@
   };
 
   users.users.root.openssh.authorizedKeys.keys = [
-      sshKeys.personal
-      sshKeys.work
+    sshKeys.personal
+    sshKeys.work
   ];
   users.users.${username}.openssh.authorizedKeys.keys = [
-      sshKeys.personal
-      sshKeys.work
+    sshKeys.personal
+    sshKeys.work
   ];
 
   home-manager.users.${username} = let
@@ -95,6 +95,7 @@
           };
           "router.local" = myMachineSettings;
           "downtown.local" = myMachineSettings;
+          "nassie.local" = myMachineSettings;
           "rapanui.local" = myMachineSettings;
           "terra.local" = myMachineSettings;
           "192.168.1.2" = myMachineSettings;
@@ -103,14 +104,8 @@
       };
 
       home.file = {
-        # TODO make this reference a private repository, see:
-        # https://github.com/ryan4yin/nix-config/blob/985beb8bd47189e4b2ef5200ef5c1ab28e3812a8/home/base/desktop/ssh.nix#L4
-        #".ssh/config".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/config";
-        # ".ssh/personal.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/personal.pub";
-        # ".ssh/work.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/work.pub";
         ".ssh/personal.pub".text = sshKeys.personal;
         ".ssh/work.pub".text = sshKeys.work;
-        # ".ssh/authorized_keys".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/nix/dotfiles/.ssh/authorized_keys";
       };
     };
 }

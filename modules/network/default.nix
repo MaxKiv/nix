@@ -33,6 +33,7 @@
         "192.168.1.2" = ["downtown.local"];
         "192.168.1.3" = ["terra.local"];
         "192.168.1.4" = ["rapanui.local"];
+        "192.168.1.10" = ["nassie.local"];
       };
 
       networkmanager = {

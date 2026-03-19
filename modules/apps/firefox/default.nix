@@ -10,10 +10,6 @@
 with lib; {
   options.my.firefox.enable = mkEnableOption "Enable the Firefox browser";
 
-  # config = let
-  #   cfg = config.my.firefox;
-  # in mkIf.cfg.enable {
-
   config = lib.mkIf config.my.firefox.enable (
     let
       # I might have stolen this from

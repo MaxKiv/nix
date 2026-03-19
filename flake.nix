@@ -99,6 +99,7 @@
     ...
   } @ inputs: let
     mkSystem = import ./lib/mkSystem.nix {inherit inputs self;};
+    mkServer = import ./lib/mkServer.nix {inherit inputs self;};
     forAllSystems = nixpkgs.lib.genAttrs ["x86_64-linux"];
   in {
     # Overlays
@@ -146,6 +147,17 @@
           ./modules/hardware/devices/lenovo-p16-gen2
           ./modules/desktop/hyprland
           ./modules/virtualisation
+        ];
+      };
+
+      # NAS
+      nassie = mkSystem {
+        hostname = "nassie";
+        modules = [
+          ./modules/homelab
+          inputs.nixos-hardware.nixosModules.common-cpu-intel
+          inputs.nixos-hardware.nixosModules.common-pc
+          inputs.nixos-hardware.nixosModules.common-pc-ssd
         ];
       };
     };

@@ -4,8 +4,7 @@
   esp-dev,
   self,
   ...
-}:
-let
+}: let
   toolchainVersion = "1.88.0.0";
 
   espRustSource = pkgs.stdenv.mkDerivation {
@@ -25,7 +24,7 @@ let
       patchShebangs $out/install.sh
     '';
 
-    outputs = [ "out" ];
+    outputs = ["out"];
 
     installPhase = ''
       $out/install.sh --destdir=$out --prefix="" --disable-ldconfig
@@ -87,7 +86,7 @@ let
 
   combinedVendoredCargoDeps = pkgs.stdenv.mkDerivation {
     name = "combined-vendored-cargo-deps";
-    buildInputs = with pkgs; [ rsync ];
+    buildInputs = with pkgs; [rsync];
 
     unpackPhase = ''
       export src=""
@@ -126,14 +125,14 @@ let
     ];
 
     buildInputs = with pkgs; [
-      (rustPlatform.bindgenHook.override { inherit (pkgs.llvmPackages_20) clang; })
+      (rustPlatform.bindgenHook.override {inherit (pkgs.llvmPackages_20) clang;})
       openssl
       glibc_multi.dev
     ];
 
     target = "xtensa-esp32-espidf";
 
-    bindgenExtraClangArgs = [ "-include ${pkgs.glibc_multi.dev}/include/features.h" ];
+    bindgenExtraClangArgs = ["-include ${pkgs.glibc_multi.dev}/include/features.h"];
 
     environmentVariables = {
       CARGO_TARGET_XTENSA_ESP32_ESPIDF_LINKER = "ldproxy";
@@ -148,13 +147,11 @@ let
     };
   };
 
-  attrSetToEnv =
-    as:
+  attrSetToEnv = as:
     pkgs.lib.concatStringsSep "\n" (
       pkgs.lib.mapAttrsToList (name: value: "export ${name}=\"${value}\"") as
     );
-in
-{
+in {
   devShells.esp32 = pkgs.mkShell {
     name = "esp32";
 
@@ -171,10 +168,9 @@ in
     '';
   };
 
-  packages.esp32 =
-    let
-      packageName = "esp32";
-    in
+  packages.esp32 = let
+    packageName = "esp32";
+  in
     pkgs.rustPlatform.buildRustPackage {
       name = packageName;
       pname = "esp32";

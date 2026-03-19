@@ -18,5 +18,6 @@
     ./slack
     ./spicetify
     ./vlc
+    ./general
   ];
 }
