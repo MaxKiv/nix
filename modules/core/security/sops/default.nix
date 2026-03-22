@@ -16,5 +16,5 @@ in {
   sops.defaultSopsFile = sopsFile;
   sops.defaultSopsFormat = "yaml";
 
-  sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+  sops.age.keyFile = "/var/lib/sops-nix/key.txt";
 }
