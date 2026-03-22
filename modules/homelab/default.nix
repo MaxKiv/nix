@@ -13,7 +13,7 @@
     ./samba
     ./nfs/server.nix
     ./nextcloud
-    ./onlyoffice
+    # ./onlyoffice
   ];
 
   # A homelab device should be a tailscale server

@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     inputs.disko.nixosModules.disko
     ./disk-config.nix
@@ -26,4 +30,8 @@
 
   # Multi-boot system: use GRUB bootloader
   my.grub-bootloader.enable = true;
+
+  # Install grub to the fallback path, nassie's current mobo doesn't boot without these 2
+  boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
 }

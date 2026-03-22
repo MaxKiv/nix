@@ -43,7 +43,6 @@ in
         ../hosts/${hostname}
         ../users
         ../modules/core
-        ../modules/desktop
         ../modules/hardware
         ../modules/dev
         ../modules/stylix

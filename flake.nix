@@ -99,7 +99,6 @@
     ...
   } @ inputs: let
     mkSystem = import ./lib/mkSystem.nix {inherit inputs self;};
-    mkServer = import ./lib/mkServer.nix {inherit inputs self;};
     forAllSystems = nixpkgs.lib.genAttrs ["x86_64-linux"];
   in {
     # Overlays
@@ -114,9 +113,9 @@
         modules = [
           ./modules/hardware/nvidia
           ./modules/desktop/hyprland
-          # ./modules/desktop/sway
           ./modules/gaming
           ./modules/virtualisation
+          ./modules/homelab/nfs/client.nix
         ];
       };
 
@@ -124,19 +123,10 @@
       rapanui = mkSystem {
         hostname = "rapanui";
         modules = [
-          # ./modules/desktop/sway
           ./modules/desktop/hyprland
           ./modules/hardware/devices/lenovo-t14
           ./modules/gaming
-        ];
-      };
-
-      # Craptop
-      downtown = mkSystem {
-        hostname = "downtown";
-        modules = [
-          ./modules/hardware/devices/lenovo-t440
-          ./modules/homelab
+          ./modules/homelab/nfs/client.nix
         ];
       };
 
@@ -150,8 +140,19 @@
         ];
       };
 
+      # Craptop
+      downtown = mkSystem {
+        hostname = "downtown";
+        role = "server";
+        modules = [
+          ./modules/hardware/devices/lenovo-t440
+          ./modules/homelab
+        ];
+      };
+
       # NAS
       nassie = mkSystem {
+        role = "server";
         hostname = "nassie";
         modules = [
           ./modules/homelab

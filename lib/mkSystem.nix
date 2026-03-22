@@ -7,6 +7,7 @@
   email ? "maxkivits42@gmail.com",
   system ? "x86_64-linux",
   modules ? [],
+  role ? "generic",
 }: let
   pkgs = import inputs.nixpkgs {
     inherit system;
@@ -20,6 +21,8 @@
     ];
   };
 
+  lib = pkgs.lib;
+
   sshKeys = import (self + "/lib/ssh.nix");
 in
   inputs.nixpkgs.lib.nixosSystem {
@@ -31,7 +34,8 @@ in
     };
 
     modules =
-      [
+      modules
+      ++ [
         # Global nixpkgs config
         {
           nixpkgs = {
@@ -43,8 +47,11 @@ in
         # Base configuration
         ../hosts/${hostname}
         ../users
-        ../modules
-        ../modules/homelab/nfs/client.nix
+        ../modules/core
+        ../modules/hardware
+        ../modules/dev
+        ../modules/stylix
+        ../modules/network
 
         # Home Manager
         inputs.home-manager.nixosModules.home-manager
@@ -60,5 +67,5 @@ in
           };
         }
       ]
-      ++ modules;
+      ++ lib.optional (role != "server") ../modules/apps;
   }

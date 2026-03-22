@@ -34,6 +34,7 @@
     isNormalUser = true;
     initialPassword = "Proverdi12";
     extraGroups = ["wheel" "input" "video" "render"];
+    createHome = true;
   };
 
   services.getty.autologinUser = lib.mkForce "${username}";
