@@ -1,7 +1,5 @@
 {...}: {
   imports = [
-    # ./nordvpn
-    # ./ventoy
     ./bitwarden
     ./chromium
     ./deluge
@@ -10,14 +8,17 @@
     ./element
     ./firefox
     ./freecad
+    ./general
     ./kicad
     ./libreoffice
+    ./ltspice
     ./mpd
+    # ./nordvpn
     ./obsidian
     ./signal
     ./slack
     ./spicetify
+    # ./ventoy
     ./vlc
-    ./general
   ];
 }

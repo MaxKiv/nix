@@ -43,7 +43,7 @@
         work = {
           outputs = [
             {
-              criteria = "Dell Inc. DELL U2518D 3C4YP8BH245L";
+              criteria = "*";
               position = "0,0";
               mode = "2560x1440@59.951Hz";
             }
