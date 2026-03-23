@@ -2,6 +2,7 @@
   username,
   lib,
   sshKeys,
+  pkgs,
   ...
 }: {
   imports = [
@@ -14,6 +15,10 @@
     ./nfs/server.nix
     ./nextcloud
     # ./onlyoffice
+  ];
+
+  environment.systemPackages = with pkgs; [
+    smartmontools
   ];
 
   # A homelab device should be a tailscale server

@@ -61,8 +61,14 @@ fix-gnupg:
 iso:
     nix build .#nixosConfigurations.isolate.config.formats.install-iso --show-trace --verbose --option eval-cache false
 
+# Install a host at given IP
 install host ip:
-    nix run github:nix-community/nixos-anywhere -- --flake .#{{ host }} --target-host root@{{ ip }} --generate-hardware-config nixos-generate-config /home/max/git/nix/hosts/{{ host }}/hardware-configuration.nix
+    # Prepare age key structure
+    mkdir -p /tmp/extra-files/var/lib/sops-nix/
+    sudo cp /var/lib/sops-nix/key.txt /tmp/extra-files/var/lib/sops-nix/key.txt
+    # Install host system closure at given ip, generating a new hardware-configuration and copying over the age key
+    # NOTE: nixos-anywhere phase "reboot" is optional, leave it out if you want to debug
+    nix run github:nix-community/nixos-anywhere -- --flake .#{{ host }} --target-host root@{{ ip }} --generate-hardware-config nixos-generate-config /home/max/git/nix/hosts/{{ host }}/hardware-configuration.nix --extra-files /tmp/extra-files --phases kexec,disko,install,reboot
 
 homelab host ip:
     nixos-rebuild switch   --flake .#{{ host }}   --target-host root@{{ ip }}
