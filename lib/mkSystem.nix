@@ -29,7 +29,7 @@ in
     inherit system;
 
     specialArgs = {
-      inherit inputs hostname username system self email sshKeys;
+      inherit inputs hostname username system self email sshKeys role lib;
       inherit (inputs) home-manager;
     };
 
@@ -48,10 +48,8 @@ in
         ../hosts/${hostname}
         ../users
         ../modules/core
-        ../modules/hardware
-        ../modules/dev
-        ../modules/stylix
         ../modules/network
+        ../modules/stylix
 
         # Home Manager
         inputs.home-manager.nixosModules.home-manager
@@ -67,5 +65,9 @@ in
           };
         }
       ]
-      ++ lib.optional (role != "server") ../modules/apps;
+      ++ lib.optional (role != "server") [
+        ../modules/dev
+        ../modules/apps
+        ../modules/hardware
+      ];
   }

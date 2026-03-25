@@ -1,4 +1,4 @@
-{...}: {
+{role, ...}: {
   # EarlyOOM prevents freezes due to running out of memory.
   # Checks the amount of available memory and free swap up to
   # 10 times a second (less often if there is a lot of free memory).
@@ -15,6 +15,7 @@
     # analog is true for freeMemThreshold the killing begins
     freeSwapThreshold = 10;
     # Send notifications about killed processes via the system d-bus.
-    enableNotifications = true;
+
+    enableNotifications = role != "server";
   };
 }

@@ -6,14 +6,16 @@
   ...
 }: {
   imports = [
-    ./hass
-    ./gitea
-    ./nginx
-    ./adguard
-    ./mealie
-    ./samba
-    ./nfs/server.nix
-    ./nextcloud
+    # ./hass
+    # ./gitea
+    # ./nginx
+    # ./adguard
+    # ./mealie
+    # ./samba
+    # ./nfs/server.nix
+    # ./nextcloud
+    ./zfs
+    ./sanoid
     # ./onlyoffice
   ];
 

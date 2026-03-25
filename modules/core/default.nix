@@ -1,16 +1,23 @@
-{...}: {
-  imports = [
-    ./boot
-    ./fonts
-    ./locale
-    ./man
-    ./nix
-    ./pkgs
-    ./ssh
-    ./security
-    ./terminal
-    ./powerManager
-    ./xdg
-    ./earlyoom
-  ];
+{
+  lib,
+  role,
+  ...
+}: {
+  imports =
+    [
+      ./boot
+      ./locale
+      ./man
+      ./nix
+      ./ssh
+      ./security
+      ./terminal
+      ./powerManager
+      ./xdg
+      ./earlyoom
+    ]
+    ++ lib.optional (role != "server") [
+      ./fonts
+      ./pkgs
+    ];
 }
