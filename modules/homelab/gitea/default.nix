@@ -37,6 +37,9 @@ in {
     user = giteaUser;
     appName = "Git forge of Max";
 
+    # Explicit default
+    stateDir = "/var/lib/gitea";
+
     database = {
       type = "postgres";
       # user needs to be the same as gitea user
@@ -80,6 +83,8 @@ in {
   };
 
   services.postgresql = {
+    # Specific postgresql ZFS dataset, versioned by psql schema
+    dataDir = "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
     ensureDatabases = [config.services.gitea.user];
     ensureUsers = [
       {

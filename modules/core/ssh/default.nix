@@ -100,6 +100,7 @@
           "terra.local" = myMachineSettings;
           "192.168.1.2" = myMachineSettings;
           "192.168.1.3" = myMachineSettings;
+          "*.demtah.top" = myMachineSettings;
         };
       };
 

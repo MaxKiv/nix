@@ -7,8 +7,8 @@
 }: {
   imports = [
     # ./hass
-    # ./gitea
-    # ./nginx
+    ./gitea
+    ./nginx
     # ./adguard
     # ./mealie
     # ./samba

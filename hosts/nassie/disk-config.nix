@@ -196,6 +196,13 @@
               recordsize = "32K";
             };
           };
+
+          "services/acme" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/var/lib/acme";
+            };
+          };
         };
       };
 
