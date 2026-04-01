@@ -9,7 +9,7 @@
     # ./hass
     ./gitea
     ./nginx
-    # ./adguard
+    ./adguard
     # ./mealie
     # ./samba
     # ./nfs/server.nix
@@ -20,6 +20,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    file
     smartmontools
   ];
 

@@ -12,10 +12,11 @@ in {
   services.adguardhome = {
     enable = true;
     host = "0.0.0.0";
+    mutableSettings = true;
     settings = {
       dns.upstream_dns = [
-        "1.1.1.1"
         "9.9.9.9"
+        "1.1.1.1"
       ];
       filtering.protection_enabled = true;
       filtering.filtering_enabled = true;
@@ -36,6 +37,12 @@ in {
     };
   };
 
+  # Bind mount adguards private state dir to the correct zfs dataset
+  fileSystems."/var/lib/private/AdGuardHome" = {
+    device = "/var/lib/adguardhome";
+    options = ["bind"];
+  };
+
   services.nginx = {
     virtualHosts = {
       "${fqdn}" = {
@@ -49,6 +56,7 @@ in {
 
         # taken from https://github.com/AdguardTeam/AdGuardHome/issues/4266#issuecomment-1033955642
         extraConfig = ''
+          # proxy_pass https://localhost:444/;
           proxy_redirect / /aghome/;
           proxy_cookie_path / /aghome/;
           proxy_set_header Host $host;
@@ -56,7 +64,7 @@ in {
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header X-Forwarded-Proto $scheme;
           proxy_set_header X-Forwarded-Protocol $scheme;
-          #proxy_set_header X-Url-Scheme $scheme;
+          # proxy_set_header X-Url-Scheme $scheme;
         '';
       };
     };

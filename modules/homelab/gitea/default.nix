@@ -13,6 +13,10 @@
   privatePort = 8082;
   giteaUser = "git";
 in {
+  # Fixes
+  # bash: line 1: git-upload-pack: command not found
+  programs.git.enable = true;
+
   # use git as user to have `git clone git@git.domain`
   users.users.${giteaUser} = {
     description = "Gitea Service";
