@@ -1,6 +1,7 @@
 {
   self,
   pkgs,
+  username,
   ...
 }: {
   services.zfs.autoScrub.enable = true;
@@ -10,6 +11,19 @@
     zfs
     httm # browse snapshots
   ];
+
+  # Make sure the default user is able to touch data on the slow pool
+  users.users.${username} = {
+    extraGroups = ["data"];
+  };
+
+  # Set appropriate ACL default on the /data dirs
+  system.activationScripts.dataPermissions.text = ''
+    for dir in /data/books /data/documents /data/movies /data/music /data/photos; do
+      chmod g+s "$dir"
+      ${pkgs.acl}/bin/setfacl -R -d -m u::rwx,g::rwx,o::rwx "$dir"
+    done
+  '';
 
   boot = {
     zfs.extraPools = ["slow"]; # fast is imported automatically as it contains root

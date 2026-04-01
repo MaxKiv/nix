@@ -9,7 +9,7 @@
   sambaExportPath = "/export";
 in {
   # Host Setup:
-  # Set up sambaUser password: `sudo smbpasswd -a sam`
+  # Set up sambaUser password: `sudo smbpasswd -a nas`
   # Check samba share directory permissions with `ls -ld /nas/data`, should be owned by ${sambaUser}
   # If not, change with `sudo chown -R ${sambaUser}:${sambaUser} /nas/data`
   #
@@ -32,19 +32,14 @@ in {
 
         # Security
         "security" = "user";
-        "server min protocol" = "SMB2";
-        "server max protocol" = "SMB3";
+        # "server min protocol" = "SMB2";
+        # "server max protocol" = "SMB3";
 
         # Authentication settings
         "guest account" = "nobody"; # windows needs this
         "map to guest" = "Bad User"; # windows needs this
         "invalid users" = ["root"];
 
-        # Performance & correctness
-        "ea support" = "yes";
-        "vfs objects" = "acl_xattr";
-        "map acl inherit" = "yes";
-        "store dos attributes" = "yes";
         # "socket options" = "TCP_NODELAY SO_RCVBUF=524288 SO_SNDBUF=524288";
         "use sendfile" = "yes";
 
@@ -62,55 +57,62 @@ in {
       data = {
         path = sambaExportPath;
         browseable = "yes";
+        writable = "true";
         "guest ok" = "yes";
         "read only" = "no";
         "force user" = sambaUser;
         "force group" = sambaUser;
-        "create mask" = "0664"; # New files: rw-rw-r--
-        "directory mask" = "0775"; # New directories: rwxrwxr-x
+        "create mask" = "0666"; # New files: rw-rw-rw-
+        "directory mask" = "0777"; # New directories: rwxrwxrwx
         # "valid users" = "@${sambaUser}";
       };
     };
   };
 
-  # Activation scripts run every time nixos switches build profiles. So if you're
-  # pulling the user/samba password from a file then it will be updated during
-  # nixos-rebuild. Again, in this example we're using sops-nix with a "samba" entry
-  # to avoid cleartext password, but this could be replaced with a static path.
-  system.activationScripts = {
-    # The "init_smbpasswd" script name is arbitrary, but a useful label for tracking
-    # failed scripts in the build output. An absolute path to smbpasswd is necessary
-    # as it is not in $PATH in the activation script's environment. The password
-    # is repeated twice with newline characters as smbpasswd requires a password
-    # confirmation even in non-interactive mode where input is piped in through stdin.
-    init_smbpasswd.text = ''
-      /run/current-system/sw/bin/printf "$(/run/current-system/sw/bin/cat ${config.sops.secrets.samba.path})\n$(/run/current-system/sw/bin/cat ${config.sops.secrets.samba.path})\n" | /run/current-system/sw/bin/smbpasswd -sa ${sambaUser}
-    '';
+  # Bind mount /slow/data into /export so Samba serves it
+  fileSystems = {
+    "/export/books" = {
+      device = "/data/books";
+      fsType = "none";
+      options = ["bind"];
+    };
+    "/export/movies" = {
+      device = "/data/movies";
+      fsType = "none";
+      options = ["bind"];
+    };
+    "/export/music" = {
+      device = "/data/music";
+      fsType = "none";
+      options = ["bind"];
+    };
+    "/export/photos" = {
+      device = "/data/photos";
+      fsType = "none";
+      options = ["bind"];
+    };
+    "/export/documents" = {
+      device = "/data/documents";
+      fsType = "none";
+      options = ["bind"];
+    };
   };
 
-  sops.secrets = {
-    samba = {};
-  };
-
-  # Samba user must exist
+  # Create samba user, add them to data group to allow SMB clients to touch slow pool
   users.users.${sambaUser} = {
     isNormalUser = true;
     home = "/home/${sambaUser}";
-    extraGroups = [sambaUser];
+    extraGroups = [sambaUser "data"];
   };
 
   users.users.${username} = {
     extraGroups = [sambaUser];
   };
 
-  users.users."nobody" = {
-    extraGroups = ["nas"];
-  };
-
   # Create samba user group
   users.groups.${sambaUser} = {
     gid = 982;
-    members = [username "nas" "nobody"];
+    members = [username "nas"];
   };
 
   # Enable web service discovery daemon, should allow windows clients to find the samba share
@@ -127,5 +129,25 @@ in {
     };
     nssmdns4 = true;
     openFirewall = true;
+
+    # Advertise SMB shares
+    extraServiceFiles = {
+      smb = ''
+        <?xml version="1.0" standalone='no'?>
+        <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+        <service-group>
+          <name replace-wildcards="yes">%h</name>
+          <service>
+            <type>_smb._tcp</type>
+            <port>445</port>
+          </service>
+          <service>
+            <type>_device-info._tcp</type>
+            <port>0</port>
+            <txt-record>model=Xserve</txt-record>
+          </service>
+        </service-group>
+      '';
+    };
   };
 }

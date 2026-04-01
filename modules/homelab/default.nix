@@ -11,7 +11,7 @@
     ./nginx
     ./adguard
     ./mealie
-    ./samba
+    ./samba/server.nix
     # ./nfs/server.nix
     # ./nextcloud
     ./zfs

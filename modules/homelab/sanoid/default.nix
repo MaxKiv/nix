@@ -12,22 +12,32 @@
       };
 
       # Daily snapshots only for bulk media. It barely changes, hourly is wasteful
-      "slow/media" = {
+      "slow/data/media" = {
         useTemplate = ["media"];
         recursive = true;
       };
 
-      "slow/photos" = {
+      "slow/data/photos" = {
         useTemplate = ["media"];
         recursive = false;
       };
 
-      "slow/books" = {
+      "slow/data/books" = {
         useTemplate = ["media"];
         recursive = false;
       };
 
-      "slow/nextcloud" = {
+      "slow/data/music" = {
+        useTemplate = ["service"];
+        recursive = false;
+      };
+
+      "slow/data/documents" = {
+        useTemplate = ["service"];
+        recursive = false;
+      };
+
+      "slow/data/nextcloud" = {
         useTemplate = ["service"];
         recursive = false;
       };
@@ -47,7 +57,7 @@
         hourly = 0; # no hourlies — media doesn't change that fast
         daily = 7;
         weekly = 4;
-        monthly = 2;
+        monthly = 12;
         autosnap = true;
         autoprune = true;
       };
