@@ -65,7 +65,7 @@ in
           };
         }
       ]
-      ++ lib.optional (role != "server") [
+      ++ lib.optionals (role != "server") [
         ../modules/dev
         ../modules/apps
         ../modules/hardware

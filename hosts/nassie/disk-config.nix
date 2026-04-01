@@ -203,6 +203,11 @@
               mountpoint = "/var/lib/acme";
             };
           };
+
+          "mealie" = {
+            type = "zfs_fs";
+            options.mountpoint = "/var/lib/private/mealie";
+          };
         };
       };
 

@@ -8,7 +8,7 @@
   users.users.${username} = {
     isNormalUser = true;
     hashedPasswordFile = config.sops.secrets."pass/${username}".path;
-    extraGroups = ["wheel" "input" "video" "render"];
+    extraGroups = ["wheel" "input" "video" "render" "fuse"];
   };
 
   # Setup root and user password

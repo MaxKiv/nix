@@ -6,12 +6,12 @@
   ...
 }: {
   imports = [
-    # ./hass
+    ./hass
     ./gitea
     ./nginx
     ./adguard
-    # ./mealie
-    # ./samba
+    ./mealie
+    ./samba
     # ./nfs/server.nix
     # ./nextcloud
     ./zfs

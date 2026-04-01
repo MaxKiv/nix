@@ -16,7 +16,7 @@
       ./xdg
       ./earlyoom
     ]
-    ++ lib.optional (role != "server") [
+    ++ lib.optionals (role != "server") [
       ./fonts
       ./pkgs
     ];

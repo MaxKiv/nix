@@ -103,4 +103,23 @@ in [
       }
     ];
   }
+
+  {
+    alias = "Button toggle all lights";
+    description = ''
+      Either button press toggles all 3 lights together based on grouped state.
+      If ANY light is on, all turn off. If ALL are off, all turn on.
+    '';
+    mode = "single";
+    max_exceeded = "silent";
+
+    triggers = [
+      {
+        trigger = "sun";
+        id = "sunset";
+        event = "sunset";
+        offset = 0;
+      }
+    ];
+  }
 ]

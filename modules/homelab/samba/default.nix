@@ -1,10 +1,12 @@
 {
+  config,
   username,
   lib,
   sshKeys,
   ...
 }: let
   sambaUser = "nas";
+  sambaExportPath = "/export";
 in {
   # Host Setup:
   # Set up sambaUser password: `sudo smbpasswd -a sam`
@@ -17,12 +19,6 @@ in {
   #
   # Windows clients:
   # in explorer: \\${SambaHostIp}\data
-
-  # Enable web service discovery daemon, should allow windows clients to find the samba share
-  services.samba-wsdd = {
-    enable = true;
-    openFirewall = true;
-  };
 
   # Configure samba
   services.samba = {
@@ -64,7 +60,7 @@ in {
       };
 
       data = {
-        path = "/nas/data";
+        path = sambaExportPath;
         browseable = "yes";
         "guest ok" = "yes";
         "read only" = "no";
@@ -75,6 +71,25 @@ in {
         # "valid users" = "@${sambaUser}";
       };
     };
+  };
+
+  # Activation scripts run every time nixos switches build profiles. So if you're
+  # pulling the user/samba password from a file then it will be updated during
+  # nixos-rebuild. Again, in this example we're using sops-nix with a "samba" entry
+  # to avoid cleartext password, but this could be replaced with a static path.
+  system.activationScripts = {
+    # The "init_smbpasswd" script name is arbitrary, but a useful label for tracking
+    # failed scripts in the build output. An absolute path to smbpasswd is necessary
+    # as it is not in $PATH in the activation script's environment. The password
+    # is repeated twice with newline characters as smbpasswd requires a password
+    # confirmation even in non-interactive mode where input is piped in through stdin.
+    init_smbpasswd.text = ''
+      /run/current-system/sw/bin/printf "$(/run/current-system/sw/bin/cat ${config.sops.secrets.samba.path})\n$(/run/current-system/sw/bin/cat ${config.sops.secrets.samba.path})\n" | /run/current-system/sw/bin/smbpasswd -sa ${sambaUser}
+    '';
+  };
+
+  sops.secrets = {
+    samba = {};
   };
 
   # Samba user must exist
@@ -98,31 +113,19 @@ in {
     members = [username "nas" "nobody"];
   };
 
+  # Enable web service discovery daemon, should allow windows clients to find the samba share
+  services.samba-wsdd = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # Avahi for service discovery (already enabled in your config)
   services.avahi = {
     publish = {
       enable = true;
       userServices = true;
     };
-
-    # Advertise SMB shares
-    extraServiceFiles = {
-      smb = ''
-        <?xml version="1.0" standalone='no'?>
-        <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
-        <service-group>
-          <name replace-wildcards="yes">%h</name>
-          <service>
-            <type>_smb._tcp</type>
-            <port>445</port>
-          </service>
-          <service>
-            <type>_device-info._tcp</type>
-            <port>0</port>
-            <txt-record>model=Xserve</txt-record>
-          </service>
-        </service-group>
-      '';
-    };
+    nssmdns4 = true;
+    openFirewall = true;
   };
 }
