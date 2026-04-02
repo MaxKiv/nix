@@ -300,14 +300,5 @@
 
   users.groups.data = {};
 
-  systemd.tmpfiles.rules = [
-    "d /data/books     0775 root data - -"
-    "d /data/documents 0775 root data - -"
-    "d /data/movies    0775 root data - -"
-    "d /data/music     0775 root data - -"
-    "d /data/photos    0775 root data - -"
-    "d /data/nextcloud 0775 root data - -"
-  ];
-
   users.users.${username}.extraGroups = ["data"];
 }

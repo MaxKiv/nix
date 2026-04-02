@@ -22,6 +22,9 @@
   environment.systemPackages = with pkgs; [
     file
     smartmontools
+    busybox # iostat et al
+    linuxKernel.packages.linux_6_18.turbostat
+    powertop
   ];
 
   # A homelab device should be a tailscale server

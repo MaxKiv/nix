@@ -6,7 +6,7 @@
   ...
 }: let
   sambaUser = "nas";
-  sambaExportPath = "/export";
+  sambaExportPath = "/data";
 in {
   # Host Setup:
   # Set up sambaUser password: `sudo smbpasswd -a nas`
@@ -66,35 +66,6 @@ in {
         "directory mask" = "0777"; # New directories: rwxrwxrwx
         # "valid users" = "@${sambaUser}";
       };
-    };
-  };
-
-  # Bind mount /slow/data into /export so Samba serves it
-  fileSystems = {
-    "/export/books" = {
-      device = "/data/books";
-      fsType = "none";
-      options = ["bind"];
-    };
-    "/export/movies" = {
-      device = "/data/movies";
-      fsType = "none";
-      options = ["bind"];
-    };
-    "/export/music" = {
-      device = "/data/music";
-      fsType = "none";
-      options = ["bind"];
-    };
-    "/export/photos" = {
-      device = "/data/photos";
-      fsType = "none";
-      options = ["bind"];
-    };
-    "/export/documents" = {
-      device = "/data/documents";
-      fsType = "none";
-      options = ["bind"];
     };
   };
 
