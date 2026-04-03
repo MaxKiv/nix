@@ -14,9 +14,9 @@
     ./samba/server.nix
     # ./nfs/server.nix
     # ./nextcloud
-    ./zfs
-    ./sanoid
     # ./onlyoffice
+    ./zfs
+    ./backup
   ];
 
   environment.systemPackages = with pkgs; [

@@ -6,6 +6,7 @@
   ...
 }: let
   fqdn = "cloud.demtah.top";
+  homeDir = "/data/nextcloud";
 in {
   sops.secrets = {
     "nextcloud/admin" = {};
@@ -16,6 +17,7 @@ in {
     enable = true;
     hostName = fqdn;
     https = true;
+    home = homeDir;
 
     database.createLocally = true;
 
@@ -33,7 +35,7 @@ in {
     package = pkgs.nextcloud32;
     extraAppsEnable = true;
     extraApps = {
-      inherit (config.services.nextcloud.package.packages.apps) contacts calendar tasks onlyoffice;
+      inherit (config.services.nextcloud.package.packages.apps) contacts calendar tasks; #onlyoffice;
     };
   };
 

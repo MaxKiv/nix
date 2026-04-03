@@ -131,8 +131,7 @@
           "services" = {
             type = "zfs_fs";
             options = {
-              mountpoint = "none";
-              canmount = "off";
+              mountpoint = "/var/lib";
             };
           };
 
@@ -292,6 +291,30 @@
           "nfs" = {
             type = "zfs_fs";
             options.mountpoint = "/export";
+          };
+
+          "backup" = {
+            type = "zfs_fs";
+            options = {
+              compression = "zstd"; # Take extra time to compress backups
+              mountpoint = "none";
+              canmount = "off";
+            };
+          };
+
+          "backup/local" = {
+            type = "zfs_fs";
+            options.mountpoint = "/backup/local";
+          };
+
+          "backup/local/services" = {
+            type = "zfs_fs";
+            options.mountpoint = "/backup/local/services";
+          };
+
+          "backup/timon" = {
+            type = "zfs_fs";
+            options.mountpoint = "/backup/timon";
           };
         };
       };

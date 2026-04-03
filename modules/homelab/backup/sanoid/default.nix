@@ -11,34 +11,28 @@
         recursive = true; # applies to all children: gitea, postgres, vaultwarden, etc.
       };
 
-      # Daily snapshots only for bulk media. It barely changes, hourly is wasteful
-      "slow/data/media" = {
-        useTemplate = ["media"];
-        recursive = true;
-      };
-
-      "slow/data/photos" = {
-        useTemplate = ["media"];
-        recursive = false;
-      };
-
       "slow/data/books" = {
         useTemplate = ["media"];
         recursive = false;
       };
 
-      "slow/data/music" = {
-        useTemplate = ["service"];
+      "slow/data/documents" = {
+        useTemplate = ["media"];
         recursive = false;
       };
 
-      "slow/data/documents" = {
-        useTemplate = ["service"];
+      "slow/data/movies" = {
+        useTemplate = ["media"];
+        recursive = false;
+      };
+
+      "slow/data/music" = {
+        useTemplate = ["media"];
         recursive = false;
       };
 
       "slow/data/nextcloud" = {
-        useTemplate = ["service"];
+        useTemplate = ["media"];
         recursive = false;
       };
     };
@@ -49,30 +43,20 @@
         daily = 7; # keep 7 daily snapshots
         weekly = 4; # keep 4 weekly snapshots
         monthly = 3; # keep 3 monthly snapshots
+        yearly = 2;
         autosnap = true;
         autoprune = true;
       };
 
       media = {
-        hourly = 0; # no hourlies — media doesn't change that fast
+        hourly = 1;
         daily = 7;
         weekly = 4;
         monthly = 12;
+        yearly = 2;
         autosnap = true;
         autoprune = true;
       };
     };
   };
-
-  # Syncoid handles zfs send replication to an offsite backup.
-  # services.syncoid = {
-  #   enable = true;
-  #   commands = {
-  #     "fast/services" = {
-  #       target = "user@backup-host:tank/nas-services";
-  #       recursive = true;
-  #       extraArgs = ["--compressed"];
-  #     };
-  #   };
-  # };
 }

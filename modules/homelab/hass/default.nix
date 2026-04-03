@@ -6,6 +6,7 @@
 }: let
   homeAssistantPort = 8234;
   serviceHostname = "home.demtah.top";
+  stateDir = "/var/lib/hass";
 in {
   # Reverse proxy vhost settings
   services.nginx = {
@@ -41,6 +42,8 @@ in {
   # Set up Home Assistant
   services.home-assistant = {
     enable = true;
+    configDir = stateDir;
+
     extraComponents = [
       # Components required to complete the onboarding
       "analytics"
