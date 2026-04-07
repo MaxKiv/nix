@@ -273,6 +273,13 @@
             };
           };
 
+          "data/photos/immich" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/data/photos/immich";
+            };
+          };
+
           "data/books" = {
             type = "zfs_fs";
             options = {

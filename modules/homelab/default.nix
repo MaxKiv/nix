@@ -11,7 +11,9 @@
     ./nginx
     ./adguard
     ./mealie
+    ./immich
     ./samba/server.nix
+    ./database/postgresql.nix
     # ./nfs/server.nix
     # ./nextcloud
     # ./onlyoffice
