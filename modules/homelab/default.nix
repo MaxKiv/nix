@@ -14,7 +14,7 @@
     ./immich
     ./samba/server.nix
     ./database/postgresql.nix
-    # ./nfs/server.nix
+    ./nfs/server.nix
     # ./nextcloud
     # ./onlyoffice
     ./zfs
@@ -27,6 +27,7 @@
     busybox # iostat et al
     linuxKernel.packages.linux_6_18.turbostat
     powertop
+    nload
   ];
 
   # A homelab device should be a tailscale server

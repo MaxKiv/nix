@@ -1,7 +1,7 @@
 {...}: {
   # FSTAB entry for the nas SMB share
   fileSystems."/mnt/nas/smb" = {
-    device = "//192.168.1.10/data";
+    device = "//100.91.14.3/data";
     fsType = "cifs";
     options = [
       "guest"

@@ -4,17 +4,14 @@
   ...
 }: let
   mountUser = username;
-  server = "downtown.local";
-  dataDir = "/nas/data";
+  server = "100.91.14.3";
+  dataDir = "/data";
 in {
   # Install NFS utilities
   environment.systemPackages = with pkgs; [
     nfs-utils # NFS client and server utilities
     rpcbind # RPC port mapper
   ];
-
-  # Working manual command:
-  # mount -t cifs //192.168.1.2/data /mnt/nas -o vers=3.1.1,guest,uid=$(id -u max),gid=$(id -g max),file_mode=0775,dir_mode=0775
 
   # make sure the mount dir exists
   systemd.tmpfiles.rules = [
