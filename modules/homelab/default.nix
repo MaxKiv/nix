@@ -15,7 +15,7 @@
     ./samba/server.nix
     ./database/postgresql.nix
     ./nfs/server.nix
-    # ./nextcloud
+    ./nextcloud
     # ./onlyoffice
     ./zfs
     ./backup
