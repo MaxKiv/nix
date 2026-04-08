@@ -36,7 +36,7 @@ in {
         # Slow pool datasets
         "/data/books"
         "/data/documents"
-        "/data/movies"
+        # "/data/movies" # easily replaced
         "/data/music"
         "/data/nextcloud"
         "/data/photos"

@@ -161,14 +161,6 @@
             options.mountpoint = "/var/lib/adguardhome";
           };
 
-          "services/arr" = {
-            type = "zfs_fs";
-            options = {
-              mountpoint = "/var/lib/arr";
-              sync = "disabled"; # arr DBs are fully rebuildable — safe to skip fsync for speed
-            };
-          };
-
           "services/vaultwarden" = {
             type = "zfs_fs";
             options.mountpoint = "/var/lib/vaultwarden";
@@ -196,10 +188,80 @@
             };
           };
 
+          "services/jellyseer" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/var/lib/private/jellyseer";
+            };
+          };
+
           "services/acme" = {
             type = "zfs_fs";
             options = {
               mountpoint = "/var/lib/acme";
+            };
+          };
+
+          "services/sonarr" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/var/lib/sonarr";
+            };
+          };
+
+          "services/radarr" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/var/lib/radarr";
+            };
+          };
+
+          "services/prowlarr" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/var/lib/private/prowlarr";
+            };
+          };
+
+          "services/bazarr" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/var/lib/bazarr";
+            };
+          };
+
+          "services/readarr" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/var/lib/readarr";
+            };
+          };
+
+          "services/lidarr" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/var/lib/lidarr";
+            };
+          };
+
+          "services/qbittorrent" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/var/lib/qbittorrent";
+            };
+          };
+
+          "services/downloads" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/var/lib/downloads";
+            };
+          };
+
+          "services/downloads/.incomplete" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/var/lib/downloads/.incomplete";
             };
           };
 
@@ -249,6 +311,13 @@
             };
           };
 
+          "data/series" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/data/series";
+            };
+          };
+
           "data/music" = {
             type = "zfs_fs";
             options = {
@@ -292,6 +361,13 @@
             type = "zfs_fs";
             options = {
               mountpoint = "/data/documents";
+            };
+          };
+
+          "data/downloads" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/data/downloads";
             };
           };
 

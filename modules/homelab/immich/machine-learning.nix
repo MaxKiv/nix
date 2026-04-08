@@ -5,8 +5,8 @@
   lib,
   ...
 }: let
-  mlPort = 3003;
-  mlCacheDir = "/var/cache/immich-ml";
+  machineLearningPort = 3003;
+  machineLearningCacheDir = "/var/cache/immich-ml";
   # Update this to your server's IP/hostname
   # so Immich knows to query this machine for ML
   # Set in Immich admin UI: Settings → Machine Learning → URL
@@ -28,7 +28,7 @@ in {
   # Persistent cache directory for downloaded ML models (~4–8 GB)
   # ---------------------------------------------------------------------------
   systemd.tmpfiles.rules = [
-    "d ${mlCacheDir} 0755 root root -"
+    "d ${machineLearningCacheDir} 0755 root root -"
   ];
 
   # ---------------------------------------------------------------------------
@@ -64,15 +64,15 @@ in {
         # GPU passthrough
         "--gpus=all"
         # Port
-        "-p ${toString mlPort}:${toString mlPort}"
+        "-p ${toString machineLearningPort}:${toString machineLearningPort}"
         # Model cache volume
-        "-v ${mlCacheDir}:/cache:rw"
+        "-v ${machineLearningCacheDir}:/cache:rw"
         # Environment
         "-e MACHINE_LEARNING_WORKERS=1"
         "-e MACHINE_LEARNING_WORKER_TIMEOUT=120"
         "-e MACHINE_LEARNING_CACHE_FOLDER=/cache"
         "-e IMMICH_HOST=0.0.0.0"
-        "-e IMMICH_PORT=${toString mlPort}"
+        "-e IMMICH_PORT=${toString machineLearningPort}"
         "ghcr.io/immich-app/immich-machine-learning:release-cuda"
       ];
 
@@ -91,7 +91,7 @@ in {
   #     iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport ${toString mlPort} -j ACCEPT
   #   '';
   # ---------------------------------------------------------------------------
-  networking.firewall.allowedTCPPorts = [mlPort];
+  networking.firewall.allowedTCPPorts = [machineLearningPort];
 
   # ---------------------------------------------------------------------------
   # Wake-on-LAN stub (TODO: wire up to Immich server side)

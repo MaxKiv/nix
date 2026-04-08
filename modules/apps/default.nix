@@ -17,6 +17,7 @@
     ./obsidian
     ./signal
     ./slack
+    ./protonvpn
     ./spicetify
     # ./ventoy
     ./vlc

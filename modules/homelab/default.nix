@@ -18,7 +18,11 @@
     ./nextcloud
     # ./onlyoffice
     ./zfs
+    ./jellyfin
     ./backup
+    ./security
+    ./arr
+    ./vpn
   ];
 
   environment.systemPackages = with pkgs; [

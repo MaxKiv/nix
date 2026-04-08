@@ -94,6 +94,8 @@
         zma = "${pkgs.zellij}/bin/zellij attach";
         zms = "${pkgs.zellij}/bin/zellij -s";
 
+        ts = "${pkgs.tailscale}/bin/tailscale status";
+
         # xclip
         # clip = "${pkgs.xclip}/bin/xclip -sel clip";
       };
