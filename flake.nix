@@ -117,6 +117,7 @@
           ./modules/virtualisation
           ./modules/homelab/nfs/client.nix
           ./modules/homelab/samba/client.nix
+          ./modules/homelab/immich/machine-learning.nix
         ];
       };
 

@@ -3,7 +3,6 @@
   username,
   ...
 }: let
-  mountUser = username;
   server = "100.91.14.3";
   dataDir = "/data";
 in {

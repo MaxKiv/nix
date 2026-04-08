@@ -1,6 +1,5 @@
 # Nextcloud: The selfhosted GSuite (drive, calendar, whatever)
 {
-  self,
   config,
   pkgs,
   ...
