@@ -208,10 +208,10 @@ with lib; {
             url = "https://web.whatsapp.com";
           }
           {
-            name = "Gmail";
-            tags = ["gmail"];
-            keyword = "gmail";
-            url = "https://mail.google.com";
+            name = "Mail";
+            tags = ["mail"];
+            keyword = "mail";
+            url = "https://app.tuta.com/mail";
           }
           {
             name = "Calendar";

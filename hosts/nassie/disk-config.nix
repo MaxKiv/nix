@@ -357,6 +357,20 @@
             };
           };
 
+          "data/audiobooks" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/data/audiobooks";
+            };
+          };
+
+          "data/youtube" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/data/youtube";
+            };
+          };
+
           "data/documents" = {
             type = "zfs_fs";
             options = {

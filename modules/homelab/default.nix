@@ -23,6 +23,7 @@
     ./security
     ./arr
     ./vpn
+    ./calibre-web
     ./navidrome
   ];
 
