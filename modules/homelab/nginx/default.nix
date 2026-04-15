@@ -43,6 +43,6 @@ in {
   # Configure ACME
   security.acme = {
     acceptTerms = true;
-    defaults.email = "maxkivits42@gmail.com";
+    defaults.email = "max@kivits.top";
   };
 }
