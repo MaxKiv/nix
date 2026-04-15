@@ -6,9 +6,73 @@
 
     datasets = {
       # Hourly snapshots, keep a week's worth. For fast-changing service state
-      "fast/services" = {
+      "fast/services/adguard" = {
         useTemplate = ["service"];
-        recursive = true; # applies to all children: gitea, postgres, vaultwarden, etc.
+        recursive = true;
+      };
+      "fast/services/bazarr" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/calibre-web" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/gitea" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/hass" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/immich" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/jellyfin" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/jellyseerr" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/lidarr" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/mealie" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/postgresql" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/prowlarr" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/qbittorrent" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/radarr" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/readarr" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/sonarr" = {
+        useTemplate = ["service"];
+        recursive = true;
+      };
+      "fast/services/vaultwarden" = {
+        useTemplate = ["service"];
+        recursive = true;
       };
 
       "slow/data/books" = {

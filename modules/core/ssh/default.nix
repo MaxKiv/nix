@@ -51,7 +51,7 @@
         enable = true;
         matchBlocks = let
           myMachineSettings = {
-            user = "root";
+            user = "max";
             port = 22;
             identityFile = personalKey;
             identitiesOnly = true;
@@ -101,6 +101,7 @@
           "192.168.1.2" = myMachineSettings;
           "192.168.1.3" = myMachineSettings;
           "*.demtah.top" = myMachineSettings;
+          "100.*" = myMachineSettings;
         };
       };
 

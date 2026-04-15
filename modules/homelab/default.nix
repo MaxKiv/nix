@@ -23,6 +23,7 @@
     ./security
     ./arr
     ./vpn
+    ./navidrome
   ];
 
   environment.systemPackages = with pkgs; [
