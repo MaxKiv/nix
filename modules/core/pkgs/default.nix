@@ -4,7 +4,7 @@
     home-manager # manage my home dir/programs
     sops # manage my nixos secrets
     cowsay # very important
-    neofetch # very important
+    fastfetch # very important
     eza # better ls
     duf # better df (file system tool)
     jq # sed for JSON

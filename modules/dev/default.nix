@@ -30,7 +30,6 @@
     codespell
     prettierd
     sshfs
-    nodePackages_latest.prettier
     bash-language-server
     harper # grammar lsp
     asciinema # record terminal

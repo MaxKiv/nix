@@ -45,7 +45,7 @@
             forwardX11Trusted = true;
             forwardAgent = true;
             extraOptions = {
-              "XAuthLocation" = "${pkgs.xorg.xauth}/bin/xauth";
+              "XAuthLocation" = "${pkgs.xauth}/bin/xauth";
             };
           };
         };

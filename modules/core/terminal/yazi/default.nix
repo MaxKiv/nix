@@ -6,5 +6,6 @@
   }: {
     programs.yazi.enable = true;
     stylix.targets.yazi.enable = true;
+    programs.yazi.shellWrapperName = "y";
   };
 }

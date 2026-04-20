@@ -8,7 +8,7 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    xorg.xauth
+    xauth
   ];
 
   services.openssh = {
@@ -46,7 +46,7 @@
       pkgs,
       ...
     }: {
-      services.ssh-agent.enable = true;
+      # services.ssh-agent.enable = true;
       programs.ssh = {
         enable = true;
         matchBlocks = let

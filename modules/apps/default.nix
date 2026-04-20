@@ -19,6 +19,7 @@
     ./slack
     ./protonvpn
     ./spicetify
+    ./mumble
     # ./ventoy
     ./vlc
   ];
