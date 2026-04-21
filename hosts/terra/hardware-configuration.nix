@@ -23,7 +23,7 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/5CA7-654F";
+    device = "/dev/disk/by-uuid/EC28-BA05";
     fsType = "vfat";
     options = ["fmask=0022" "dmask=0022"];
   };
@@ -45,3 +45,4 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
+
