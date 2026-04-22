@@ -39,6 +39,7 @@ in {
 
   # Bind mount adguards private state dir to the correct zfs dataset
   fileSystems."/var/lib/private/AdGuardHome" = {
+    fsType = "auto";
     device = "/var/lib/adguardhome";
     options = ["bind"];
   };

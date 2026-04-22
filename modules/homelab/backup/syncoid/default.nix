@@ -12,11 +12,21 @@
         source = "fast/services";
         target = "slow/backup/local/services";
         recursive = true;
-        extraArgs = ["--no-privilege-elevation" "--skip-parent"];
+        extraArgs = [
+          "--no-privilege-elevation"
+          "--skip-parent"
+          "--exclude=fast/services/downloads"
+          "--exclude=fast/services/downloads/.incomplete"
+        ];
         localTargetAllow = [
-          "change-key" "compression" "create" "mount" "mountpoint"
-          "receive" "rollback"
-          "destroy"  # <-- this is the missing piece
+          "change-key"
+          "compression"
+          "create"
+          "mount"
+          "mountpoint"
+          "receive"
+          "rollback"
+          "destroy"
         ];
       };
     };

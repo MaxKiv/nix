@@ -7,6 +7,11 @@ in {
     port = mealiePort;
   };
 
+  # Override the systemd unit to add HOME, fixes ValueError: Could not find a default download directory
+  systemd.services.mealie.environment = {
+    HOME = "/var/lib/mealie";
+  };
+
   services.nginx = {
     virtualHosts = {
       "${fqdn}" = {
