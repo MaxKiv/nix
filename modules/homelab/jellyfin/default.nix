@@ -17,7 +17,7 @@ in {
   };
 
   # Media Request Manager. Overseerr fork for jellyfin
-  services.jellyseerr = {
+  services.seerr = {
     enable = true;
     port = seerPort;
     configDir = "${dataDirSSD}/jellyseerr/config";

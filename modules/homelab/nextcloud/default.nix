@@ -31,10 +31,10 @@ in {
       default_phone_region = "NL";
     };
 
-    package = pkgs.nextcloud32;
+    package = pkgs.nextcloud33;
     extraAppsEnable = true;
     extraApps = {
-      inherit (config.services.nextcloud.package.packages.apps) contacts calendar tasks; #onlyoffice;
+      inherit (config.services.nextcloud.package.packages.apps) contacts calendar tasks onlyoffice;
     };
   };
 

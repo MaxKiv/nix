@@ -19,7 +19,7 @@
 
   # Set appropriate ACL default on the /data dirs
   system.activationScripts.dataPermissions.text = ''
-    for dir in /data/books /data/documents /data/movies /data/music /data/photos; do
+    for dir in /data/books /data/documents /data/movies /data/music /data/photos /data/series /data/audiobooks /data/youtube /data/downloads; do
       chmod g+s "$dir"
       ${pkgs.acl}/bin/setfacl -R -d -m u::rwx,g::rwx,o::rwx "$dir"
     done

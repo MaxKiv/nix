@@ -1,11 +1,12 @@
 {
+  config,
   username,
   lib,
   sshKeys,
   pkgs,
   ...
 }: let
-  port = 7999;
+  port = 8000;
   fqdn = "listen.demtah.top";
 in {
   services.audiobookshelf = {
@@ -15,7 +16,12 @@ in {
     openFirewall = false;
     user = "audiobook";
     group = "data";
-    dataDir = "/data/audiobook";
+    dataDir = "/data/audiobooks";
+  };
+
+  users.users.audiobook = {
+    isSystemUser = true;
+    group = "data";
   };
 
   services.nginx = {

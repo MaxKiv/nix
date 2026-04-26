@@ -6,25 +6,27 @@
   ...
 }: {
   imports = [
-    ./hass
-    ./gitea
-    ./nginx
     ./adguard
-    ./mealie
-    ./immich
-    ./samba/server.nix
-    ./database/postgresql.nix
-    ./nfs/server.nix
-    ./nextcloud
-    # ./onlyoffice
-    ./zfs
-    ./jellyfin
-    ./backup
-    ./security
     ./arr
-    ./vpn
+    ./audiobookshelf
+    ./backup
     ./calibre-web
+    ./database/postgresql.nix
+    ./gitea
+    ./hass
+    ./immich
+    ./jellyfin
+    ./mealie
     ./navidrome
+    ./nextcloud
+    ./nfs/server.nix
+    ./nginx
+    ./onlyoffice
+    ./pinchflat
+    ./samba/server.nix
+    ./security
+    ./vpn
+    ./zfs
   ];
 
   environment.systemPackages = with pkgs; [

@@ -17,6 +17,7 @@
           "--skip-parent"
           "--exclude=fast/services/downloads"
           "--exclude=fast/services/downloads/.incomplete"
+          "--force-delete"
         ];
         localTargetAllow = [
           "change-key"
