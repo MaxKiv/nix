@@ -59,8 +59,8 @@
         gc = "${pkgs.git}/bin/git commit";
         gcs = "${pkgs.git}/bin/git commit --gpg-sign=\"Max Kivits\"";
         gf = "${pkgs.git}/bin/git fetch -p -t --all";
-        gl = "${pkgs.git}/bin/git log --oneline --decorate --graph";
-        glu = "${pkgs.git}/bin/git log --oneline --decorate --graph \"@{u}\"";
+        gl = "${pkgs.git}/bin/git log --all --oneline --decorate --graph";
+        glu = "${pkgs.git}/bin/git log --all --oneline --decorate --graph \"@{u}\"";
         glp = "${pkgs.git}/bin/git log -p";
         gp = "${pkgs.git}/bin/git push";
         gpa = "${pkgs.git}/bin/git remote | ${pkgs.findutils}/bin/xargs -I R ${pkgs.git}/bin/git push R";
