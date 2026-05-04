@@ -18,6 +18,11 @@
   };
 
   #----Host specific config ----
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50; # uses ~50% of RAM as compressed swap
+  };
+
   my.powerManager = "auto-cpufreq";
 
   my.firefox = {

@@ -40,8 +40,7 @@
     chafa # show images in terminal
     zip # zip stuff
     unzip # unzip stuff
-    yt-dlp # youtube-dl fork
-    inkscape # wish I was smart enough for this
+    #yt-dlp # youtube-dl fork
     nethogs # network monitor tool
     sniffnet # network monitor tool
     imagemagick # a classic

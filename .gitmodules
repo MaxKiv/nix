@@ -1,4 +1,4 @@
 [submodule "dotfiles"]
 	path = dotfiles
-	url = git@github.com:MaxKiv/dotfiles.git
+	url = git@git.demtah.top:maxkiv/dotfiles.git
 	branch = main

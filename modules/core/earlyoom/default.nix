@@ -17,5 +17,8 @@
     # Send notifications about killed processes via the system d-bus.
 
     enableNotifications = role != "server";
+
+    # Yeah lets not kill rebuilds
+    extraArgs = ["--avoid" "nix"];
   };
 }
