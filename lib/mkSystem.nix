@@ -4,7 +4,7 @@
 }: {
   hostname,
   username ? "max",
-  email ? "maxkivits42@gmail.com",
+  email ? "max@kivits.top",
   system ? "x86_64-linux",
   modules ? [],
   role ? "generic",

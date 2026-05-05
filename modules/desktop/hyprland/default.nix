@@ -16,6 +16,8 @@
     ../components/mako
     ../components/waybar
     ../components/kanshi/kanshi_hyprland.nix
+    ../components/walker
+    ../components/rbw
   ];
 
   environment.systemPackages = with pkgs; [
@@ -153,7 +155,8 @@
         "$term" = "alacritty";
         "$browser" = "firefox";
         "$menu" = "wofi --show drun --prompt search";
-        "$emoji" = "wofi-emoji";
+        "$walker" = "nc -U /run/user/1000/walker/walker.sock";
+        "$emoji" = "walker -m symbols";
         "$diacritics" = "sh -c 'echo -n \"$(wofi --dmenu -p \"Pick a symbol\" < ~/.config/wofi/diacritics.txt | cut -d \" \" -f 1)\" | wl-copy'";
         "$file" = "alacritty -e yazi";
         "$explorer" = "dolphin";
@@ -261,7 +264,9 @@
         bind = [
           # Launchers
           "$mod,Return,exec,$term"
-          "$mod,D,exec,$menu"
+          # "$mod,D,exec,$menu"
+          "$mod,D,exec,$walker"
+          "$mod,Space,exec,walker -m providerlist"
           "$mod,E,exec,$file"
           "$mod,A,exec,$explorer"
           "$mod,B,exec,$browser"

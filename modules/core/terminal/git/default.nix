@@ -3,9 +3,9 @@
   pkgs,
   home-manager,
   username,
+  email,
   ...
 }: let
-  email = "maxkivits42@gmail.com";
   gitName = "MaxKiv";
 in {
   home-manager.users.${username} = {
