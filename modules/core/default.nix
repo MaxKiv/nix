@@ -19,5 +19,6 @@
     ++ lib.optionals (role != "server") [
       ./fonts
       ./pkgs
+      ./notes
     ];
 }

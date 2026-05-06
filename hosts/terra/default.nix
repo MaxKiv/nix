@@ -20,6 +20,11 @@
     nodeType = "client";
   };
 
+  my.programs.pasteImage = {
+    enable = true;
+    enableWlClipboard = true; # or enableXClip for X11
+  };
+
   networking = {
     networkmanager = {
       enable = true;

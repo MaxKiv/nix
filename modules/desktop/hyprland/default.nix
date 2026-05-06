@@ -266,7 +266,6 @@
           "$mod,Return,exec,$term"
           # "$mod,D,exec,$menu"
           "$mod,D,exec,$walker"
-          "$mod,Space,exec,walker -m providerlist"
           "$mod,E,exec,$file"
           "$mod,A,exec,$explorer"
           "$mod,B,exec,$browser"
