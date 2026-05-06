@@ -15,6 +15,11 @@
     nodeType = "client";
   };
 
+  # Disable ASPM for the nassie NIC
+  boot.extraModprobeConfig = ''
+    options r8169 aspm=0
+  '';
+
   networking = {
     networkmanager = {
       enable = true;
