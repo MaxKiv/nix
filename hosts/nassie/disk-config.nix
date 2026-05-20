@@ -401,17 +401,14 @@
 
           "backup/local" = {
             type = "zfs_fs";
-            options.mountpoint = "/backup/local";
           };
 
           "backup/local/services" = {
             type = "zfs_fs";
-            options.mountpoint = "/backup/local/services";
           };
 
           "backup/timon" = {
             type = "zfs_fs";
-            options.mountpoint = "/backup/timon";
           };
         };
       };

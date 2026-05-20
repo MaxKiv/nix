@@ -58,8 +58,8 @@ in {
     forceSSL = true;
   };
 
-  security.acme.certs."${fqdn}" = {
-    dnsProvider = "acme-dns";
-    environmentFile = config.sops.secrets.acme-dns-env.path;
-  };
+  # security.acme.certs."${fqdn}" = {
+  #   dnsProvider = "acme-dns";
+  #   environmentFile = config.sops.secrets.acme-dns-env.path;
+  # };
 }
