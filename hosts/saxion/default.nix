@@ -23,6 +23,11 @@
     memoryPercent = 50; # uses ~50% of RAM as compressed swap
   };
 
+  my.programs.pasteImage = {
+    enable = true;
+    enableWlClipboard = true; # or enableXClip for X11
+  };
+
   my.powerManager = "auto-cpufreq";
 
   my.firefox = {
