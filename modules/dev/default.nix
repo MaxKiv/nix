@@ -19,6 +19,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    tree-sitter
     lua
     gdb
     cmake
