@@ -474,11 +474,16 @@ with lib; {
 
           "Stackoverflow" = {
             # https://stackoverflow.com/search?q=test+123&
-            template = "https://stackoverflow.com/search";
-            params = [
+
+            urls = [
               {
-                name = "q";
-                value = "{searchTerms}";
+                template = "https://stackoverflow.com/search";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                ];
               }
             ];
 
@@ -486,8 +491,13 @@ with lib; {
           };
 
           "Maps" = {
-            # https://www.google.com/maps/place/Curio+Bay
-            template = "https://www.google.com/maps/place/{searchTerms}";
+            urls = [
+              {
+                # https://www.google.com/maps/place/Curio+Bay
+                template = "https://www.google.com/maps/place/{searchTerms}";
+              }
+            ];
+
             definedAliases = ["@m"];
           };
 
@@ -503,8 +513,13 @@ with lib; {
           };
 
           "Confluence" = {
-            # https://www.google.com/maps/place/Curio+Bay
-            template = "https://mechatronica.atlassian.net/wiki/search?text={searchTerms}";
+            urls = [
+              {
+                # https://www.google.com/maps/place/Curio+Bay
+                template = "https://mechatronica.atlassian.net/wiki/search?text={searchTerms}";
+              }
+            ];
+
             definedAliases = ["@j"];
           };
         };

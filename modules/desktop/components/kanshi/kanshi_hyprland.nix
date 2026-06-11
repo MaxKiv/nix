@@ -20,16 +20,6 @@
 
       # hyprctl monitors all
       profiles = {
-        work_undocked = {
-          outputs = [
-            {
-              criteria = "eDP-1";
-              scale = 1.3;
-              status = "enable";
-            }
-          ];
-        };
-
         undocked = {
           outputs = [
             {
@@ -45,11 +35,25 @@
             {
               criteria = "*";
               position = "0,0";
-              mode = "2560x1440@59.951Hz";
+              # mode = "2560x1440@59.951Hz";
             }
             {
               criteria = "eDP-1";
               status = "disable";
+            }
+          ];
+        };
+
+        work_presentation = {
+          outputs = [
+            {
+              criteria = "*";
+              position = "0,0";
+              # mode = "2560x1440@59.951Hz";
+            }
+            {
+              criteria = "eDP-1";
+              status = "enable";
             }
           ];
         };
