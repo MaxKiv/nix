@@ -30,7 +30,6 @@
 
     hyprland = {
       url = "github:hyprwm/hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprpicker = {
@@ -67,20 +66,17 @@
     stylix.url = "github:danth/stylix";
 
     # Declaratively manage plasma using home-manager
-    plasma-manager = {
-      url = "github:pjones/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
+    # plasma-manager = {
+    #   url = "github:pjones/plasma-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.home-manager.follows = "home-manager";
+    # };
 
     # Declaratively style the spotify client
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Overlay to fix dolphin's "open with" menu not working under sway/hyprland
-    dolphin-overlay.url = "github:rumboon/dolphin-overlay";
 
     niri = {
       url = "github:sodiboo/niri-flake";
@@ -103,6 +99,10 @@
       url = "github:abenz1267/walker";
       inputs.elephant.follows = "elephant";
     };
+
+    yazi = {
+      url = "github:sxyazi/yazi";
+    };
   };
 
   outputs = {
@@ -115,7 +115,6 @@
   in {
     # Overlays
     overlays.default = import ./overlays {inherit inputs;};
-    overlays.dolphin = inputs.dolphin-overlay.overlays.default;
 
     # NixOS Configurations
     nixosConfigurations = {

@@ -2,7 +2,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     gparted # manage disk partitions
-    inkscape # wish I was smart enough for this
+    # inkscape # wish I was smart enough for this
     sniffnet # network monitor tool
     qimgv # image viewer
     picard # GUI to edit music metadata

@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./aoc
+    # ./aoc
     ./c
     ./cpp
     ./embedded
@@ -26,7 +26,6 @@
     gnumake
     python3
     ruby
-    nodejs_20
     git-open
     codespell
     prettierd

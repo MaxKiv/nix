@@ -1,10 +1,10 @@
 {...}: {
   imports = [
-    ./bitwarden
+    # ./bitwarden
     ./chromium
     ./deluge
     ./discord
-    ./dolphin
+    # ./dolphin
     ./element
     ./firefox
     ./freecad
@@ -13,13 +13,14 @@
     ./libreoffice
     ./ltspice
     ./mpd
+    ./mumble
+    ./nautilus
     # ./nordvpn
     ./obsidian
+    ./protonvpn
     ./signal
     ./slack
-    ./protonvpn
     ./spicetify
-    ./mumble
     # ./ventoy
     ./vlc
   ];

@@ -4,6 +4,8 @@
     pkgs,
     ...
   }: {
+    xdg.configHome = "/home/${username}/.config";
+
     xdg.userDirs = {
       enable = true;
       setSessionVariables = false;

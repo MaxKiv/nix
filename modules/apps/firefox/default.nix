@@ -526,6 +526,12 @@ with lib; {
       };
     in {
       home-manager.users.${username} = {
+        config,
+        pkgs,
+        inputs,
+        osConfig,
+        ...
+      }: {
         home.sessionVariables.BROWSER = "firefox";
 
         stylix.targets.firefox.profileNames = [
@@ -540,6 +546,8 @@ with lib; {
 
         programs.firefox = {
           enable = true;
+
+          # configPath = "${config.xdg.configHome}/mozilla/firefox";
 
           package =
             if pkgs.stdenv.isLinux

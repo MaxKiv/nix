@@ -17,7 +17,7 @@
     overlays = [
       self.overlays.default.modifications
       self.overlays.default.additions
-      self.overlays.dolphin
+      # self.overlays.dolphin
     ];
   };
 
@@ -59,9 +59,6 @@ in
             useUserPackages = true;
             backupFileExtension = "backup";
             extraSpecialArgs = {inherit inputs;};
-            sharedModules = [
-              inputs.plasma-manager.homeModules.plasma-manager
-            ];
           };
         }
       ]
