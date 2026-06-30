@@ -25,6 +25,7 @@
     cmake
     gnumake
     python3
+    nodejs
     ruby
     git-open
     codespell
